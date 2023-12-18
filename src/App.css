@@ -2,37 +2,70 @@
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.Klassenzimmer {
+  background-color: lightskyblue;
+  width: 100%;
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+.Reihe {
+  background-color: darkolivegreen;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.Tisch {
+  background-color: darkred;
+  display: flex;
+  flex-grow: 1;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  padding: 1%;
+  height: 15vh;
+}
+
+.Schueler {
+  background-color: goldenrod;
+  display: flex;
+  justify-content: space-evenly;
+  flex-grow: 1;
+  border: 2px solid black;
+  flex-wrap: wrap;
+  height: 100%;
+}
+
+.schuelerName {
+  flex-grow: 1;
+  width: 100%;
+}
+
+.schuelerBild {
+  flex-grow: 1;
+  width: 100%;
+}
+
+.schuelerHinzufuegen {
+  text-align: center;
+  align-self: center;
+  font-size: 3em;
+}
+
+.Lehrkraft {
+  background-color: darkolivegreen;
+  width: 100%;
+  height: 15vh;
+  padding-top: 2%;
+  display: flex;
+  justify-content: flex-end;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.Lehrer {
+  margin-right: 10%;
+  height: 80%;
+  background-color: cornflowerblue;
+  width: 25%;
 }
