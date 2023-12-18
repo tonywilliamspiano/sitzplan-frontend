@@ -69,3 +69,61 @@
   background-color: cornflowerblue;
   width: 25%;
 }
+
+.webcamContainer{
+  background-color: #282828;
+  height: 100vh;
+}
+
+.WebcamComponent {
+  width: 100%;
+  height: 75vh;
+  overflow: hidden;
+  position: relative;
+  object-fit: cover;
+  margin-top: 5%;
+  box-sizing: border-box;
+}
+
+.photoButtonContainer {
+  display: flex;
+  width: 100%;
+  margin-top: 5%;
+  justify-content: center;
+  align-items: center;
+}
+
+.photoButton {
+  background-color: whitesmoke;
+  border-radius: 50%;
+  height: 100px;
+  width: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.insidePhotoButton {
+  background-color: whitesmoke;
+  border-radius: 50%;
+  border: 2px solid darkgray;
+  height: 85px;
+  width: 85px;
+}
+
+.retakeButton {
+  background-color: goldenrod;
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
+  font-size: 1.5em;
+}
+
+.submit-button {
+  margin-left: 5%;
+  background-color: lightgreen;
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
+  font-size: 1.5em;
+}

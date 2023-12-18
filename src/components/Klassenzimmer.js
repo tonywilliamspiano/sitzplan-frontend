@@ -32,9 +32,9 @@ function Tisch() {
 function Schueler() {
     return (
         <div className="Schueler">
-            {/*<p className="schuelerBild">Bild</p>*/}
-            {/*<p className="schuelerName">Name</p>*/}
-            <p className="schuelerHinzufuegen">+</p>
+            <p className="schuelerBild">Bild</p>
+            <p className="schuelerName">Name</p>
+            {/*<p className="schuelerHinzufuegen">+</p>*/}
         </div>
     )
 }
