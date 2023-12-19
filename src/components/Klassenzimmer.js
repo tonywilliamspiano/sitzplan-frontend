@@ -1,4 +1,6 @@
 export default function Klassenzimmer() {
+
+
     return (
         <div className="Klassenzimmer">
             <Reihe></Reihe>
@@ -30,12 +32,23 @@ function Tisch() {
     )
 }
 
-function Schueler() {
+function Schueler(schueler) {
+
+    // TODO - Pass in either a schueler object or null - conditionally rendering the image and
+    // schueler = {
+    //     name: "tony",
+    //     image: "hello"
+    // }
     return (
         <div className="Schueler">
-            {/*<p className="schuelerBild">Bild</p>*/}
-            {/*<p className="schuelerName">Name</p>*/}
-            <p className="schuelerHinzufuegen">+</p>
+            {schueler.image !== null && schueler.image !== undefined && schueler.image !== '' ? (
+                <>
+                    <img src="test.png" className="schuelerBild" alt="EMPTY"/>
+                    <p className="schuelerName">{schueler.name}</p>
+                </>
+            ) : (
+                <p className="schuelerHinzufuegen">+</p>
+            )}
         </div>
     )
 }
