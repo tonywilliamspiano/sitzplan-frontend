@@ -1,8 +1,6 @@
 import './App.css';
 import Klassenzimmer from "./components/Klassenzimmer";
-import Kamera from "./components/Kamera";
-
-
+import Kamera from "./components/Kamera/Kamera";
 
 function App() {
   return (
