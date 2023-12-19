@@ -1,17 +1,21 @@
 import Webcam from "react-webcam";
-import {useCallback, useRef, useState} from "react";
+import {React, useCallback, useRef, useState} from "react";
 import axios from "axios";
 import './Kamera.css'
+import {useCurrentStudent} from "../CurrentStudentContext";
 
 export default function Kamera(props) {
     const [img, setImg] = useState(null);
     const webcamRef = useRef(null);
+    const { currentStudent, setCurrentStudent } = useCurrentStudent();
 
     const videoConstraints = {
         width: 420,
         height: 420,
         facingMode: "user",
     };
+
+    console.log(currentStudent);
 
     const fotoMachen = useCallback(() => {
         const imageSrc = webcamRef.current.getScreenshot();
@@ -31,6 +35,7 @@ export default function Kamera(props) {
         // Create a FormData object to send the image as a file
         const formData = new FormData();
         formData.append('image', blob, 'captured_image.png');
+        formData.append('name', currentStudent.name);
 
         try {
             const response = await axios.post('http://localhost:8080/sitzplan/foto', formData, {

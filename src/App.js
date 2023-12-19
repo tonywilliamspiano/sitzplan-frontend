@@ -1,22 +1,17 @@
 import './App.css';
 import Klassenzimmer from "./components/Klassenzimmer";
-import Kamera from "./components/Kamera/Kamera";
-import {useState} from "react";
+import {CurrentStudentProvider} from "./components/CurrentStudentContext";
+import {KameraViewProvider, useKameraContext} from "./components/Kamera/KameraViewContext";
 
 function App() {
-    const [kameraView, setKameraView] = useState(false);
-
     return (
-        <div className="App">
-            {kameraView ? (
-                <Kamera setKameraView={setKameraView}></Kamera>
-            ) : (
-                <>
-                    <h1 className="titel" onClick={() => setKameraView(!kameraView)}>Mein Klassenzimmer</h1>
+        <KameraViewProvider>
+            <CurrentStudentProvider>
+                <div className="App">
                     <Klassenzimmer></Klassenzimmer>
-                </>
-            )}
-        </div>
+                </div>
+            </CurrentStudentProvider>
+        </KameraViewProvider>
     );
 }
 
