@@ -6,16 +6,21 @@ import Modal from "./Modal";
 export default function Schueler() {
     const {currentStudent, setCurrentStudent} = useCurrentStudent();
     const [kameraView, setKameraView] = useKameraContext();
+    const [modal, setModal] = useState(false);
 
     // TODO - Pass in either a schueler object or null - conditionally rendering the image and
     const [testSchueler, setTestSchueler] = useState({
         name: "Tony",
-        bild: "irgendwas"
+        bild: null
     })
 
     const [name, setName] = useState("")
-    const nameAuswaelen = (neuname) => {
+    const nameAuswaehlen = (neuname) => {
         setName(neuname)
+        testSchueler.bild = "etwas";
+        setTestSchueler(testSchueler);
+        // setCurrentStudent(testSchueler);
+        // setKameraView(true);
     }
     return (
 
@@ -28,12 +33,11 @@ export default function Schueler() {
             ) : (
                 <p className="schuelerHinzufuegen" onClick={
                     () => {
-                        setCurrentStudent(testSchueler);
-                        setKameraView(true);
+                        setModal(true);
                     }
                 }>+</p>
             )}
-            <Modal nameAuswaelen={nameAuswaelen}/>
+            <Modal modal={modal} setModal={setModal} nameAuswaehlen={nameAuswaehlen}/>
         </div>
     )
 }
