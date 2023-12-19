@@ -1,3 +1,4 @@
+import Modal from "./Modal";
 import {useState} from "react";
 import {useCurrentStudent} from "./CurrentStudentContext";
 import Kamera from "./Kamera/Kamera";
@@ -48,21 +49,23 @@ function Tisch() {
     )
 }
 
-function Schueler(schueler) {
+function Schueler() {
     const {currentStudent, setCurrentStudent} = useCurrentStudent();
     const [kameraView, setKameraView] = useKameraContext();
 
+    // TODO - Pass in either a schueler object or null - conditionally rendering the image and
     const [testSchueler, setTestSchueler] = useState({
         name: "Tony",
         bild: null
     })
 
-    // TODO - Pass in either a schueler object or null - conditionally rendering the image and
-    // schueler = {
-    //     name: "tony",
-    //     image: "hello"
-    // }
+    const [name, setName] = useState("fares")
+    const nameAuswaelen = (neuname) => {
+
+        setName(neuname)
+    }
     return (
+
         <div className="Schueler">
             {testSchueler.bild !== null && testSchueler.bild !== undefined && testSchueler.bild !== '' ? (
                 <>
@@ -77,6 +80,7 @@ function Schueler(schueler) {
                     }
                 }>+</p>
             )}
+            <Modal nameAuswaelen={nameAuswaelen}/>
         </div>
     )
 }
