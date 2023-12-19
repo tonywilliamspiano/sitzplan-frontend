@@ -3,7 +3,7 @@ import {useCallback, useRef, useState} from "react";
 import axios from "axios";
 import './Kamera.css'
 
-export default function Kamera() {
+export default function Kamera(props) {
     const [img, setImg] = useState(null);
     const webcamRef = useRef(null);
 
@@ -44,6 +44,7 @@ export default function Kamera() {
             // Handle errors
             console.error('Error uploading image:', error);
         }
+        props.setKameraView(false);
     };
 
     return (
