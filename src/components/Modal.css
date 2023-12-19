@@ -3,10 +3,11 @@ body.active-modal {
 }
 
 .btn-modal {
-    padding: 10px 20px;
+    padding: 1px 8px;
     display: block;
+  background: beige;
     /*margin: 100px auto 0;*/
-    font-size: 18px;
+    font-size: 25px;
     /*z-index: 999;*/
 }
 
@@ -25,15 +26,16 @@ body.active-modal {
 }
 .modal-content {
     position: absolute;
-    top: 70%;
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     line-height: 1.4;
     background: #f1f1f1;
-    padding: 14px 28px;
+    padding: 80px 28px;
     border-radius: 3px;
-    max-width: 600px;
+    max-width: 900px;
     min-width: 300px;
+
 }
 
 .close-modal {
@@ -41,4 +43,31 @@ body.active-modal {
     top: 10px;
     right: 10px;
     padding: 5px 7px;
+}
+.btn-NameListe{
+
+    background: deepskyblue;
+    border-collapse: collapse;
+    width: 100%;
+    margin: 15px 0;
+    right: 50%;
+
+}
+
+.nameListe-Container{
+    border: solid rebeccapurple;
+    display: flex ;
+    flex-wrap: wrap ;
+
+  height: 650px;
+    justify-content: start;
+ align-content: space-between;
+
+
+
+
+    
+
+
+
 }

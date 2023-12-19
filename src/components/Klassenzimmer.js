@@ -35,21 +35,19 @@ function Tisch() {
 function Schueler() {
 
 
-    const [name,setName] = useState("fares")
-    const nameAuswaelen = ( neuname)=> {
+    const [name, setName] = useState("fares")
+    const nameAuswaelen = (neuname) => {
 
-        setName(neuname)     }
+        setName(neuname)
+    }
     return (
 
         <div className="Schueler">
-            {/*<p className="schuelerBild">Bild</p>*/}
             <p className="schuelerName">{name}</p>
             <Modal nameAuswaelen={nameAuswaelen}/>
-            {/*<p className="schuelerHinzufuegen">+</p>*/}
         </div>
     )
 }
-
 
 
 function Lehrer() {
