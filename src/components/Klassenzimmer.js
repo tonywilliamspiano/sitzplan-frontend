@@ -26,7 +26,6 @@ export default function Klassenzimmer(props) {
         for (let i = 0; i < klassenzimmer.schuelerListe.length; i++) {
             let schueler = klassenzimmer.schuelerListe[i];
             if (schueler.position === position) {
-                console.log(schueler)
                 return schueler;
             }
         }

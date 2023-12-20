@@ -1,7 +1,8 @@
 import {useCurrentStudent} from "./CurrentStudentContext";
 import {useKameraContext} from "./Kamera/KameraViewContext";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import Modal from "./Modal";
+import axios from "axios";
 
 export default function Schueler(props) {
     const {currentStudent, setCurrentStudent} = useCurrentStudent();
@@ -9,24 +10,43 @@ export default function Schueler(props) {
     const [modal, setModal] = useState(false);
 
     // TODO - Pass in either a schueler object or null - conditionally rendering the image and
-    const [testSchueler, setTestSchueler] = useState(
+    const [schueler, setSchueler] = useState(
         props.getSchuelerByPosition(props.position)
     )
 
+    useEffect(() => {
+        if (currentStudent !== null) {
+            setKameraView(true);
+        }
+    }, [currentStudent]); // This effect runs whenever schueler changes
+
     const [name, setName] = useState("")
     const nameAuswaehlen = (neuname) => {
-        setName(neuname)
-        setTestSchueler(testSchueler);
-        // setCurrentStudent(testSchueler);
-        // setKameraView(true);
+        const requestData = {
+            name: neuname,
+            position: props.position
+        };
+
+        axios.post("http://localhost:8080/sitzplan/schueler", requestData, {
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
+            .then(response => {
+                setSchueler(response.data)
+                setCurrentStudent(response.data);
+            })
+            .catch(error => {
+                console.error("Error:", error);
+            });
     }
     return (
 
         <div className="Schueler">
-            {testSchueler !== null ? (
+            {schueler !== null ? (
                 <>
-                    <img src="https://media.gq.com/photos/5cd0a78cb41d092460cd73bf/1:1/w_1125,h_1125,c_limit/Keanu-Con-GQ-2019-050619.jpg" className="schuelerBild" alt="EMPTY"/>
-                    <p className="schuelerName">{props.position}. {testSchueler.name}</p>
+                    <img src={"http://localhost:8080/sitzplan/foto/" + schueler.id} className="schuelerBild"/>
+                    <p className="schuelerName">{props.position}. {schueler.name}</p>
                 </>
             ) : (
                 <p className="schuelerHinzufuegen" onClick={
