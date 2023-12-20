@@ -5,28 +5,16 @@ import {useEffect, useState} from "react";
 import axios from "axios";
 import {useCurrentStudent} from "./CurrentStudentContext";
 
-function fetchKlassenzimmer(setKlassenzimmer) {
-    axios.get("http://localhost:8080/sitzplan/klassenzimmer/1")
-        .then(response => {
-            setKlassenzimmer(response.data);
-        })
-        .catch(error => {
-            console.error("Error fetching klassenzimmer:", error);
-        });
-}
-
 export default function Klassenzimmer(props) {
+    // Erlaube Zugriff auf KameraView
     const [kameraView, setKameraView] = useKameraContext();
+
     const [klassenzimmer, setKlassenzimmer] = useState(null);
     const {currentStudent, setCurrentStudent} = useCurrentStudent();
 
     useEffect(() => {
             fetchKlassenzimmer(setKlassenzimmer);
     }, [currentStudent]);
-
-    if (klassenzimmer === null) {
-        return <p></p>;
-    }
 
     let getSchuelerByPosition = (position) => {
         for (let i = 0; i < klassenzimmer.schuelerListe.length; i++) {
@@ -38,6 +26,10 @@ export default function Klassenzimmer(props) {
         return null;
     }
 
+    // Return Body
+    if (klassenzimmer === null) {
+        return <p></p>;
+    }
     return (
         <>
             {
@@ -91,4 +83,14 @@ function Lehrkraft() {
             <Lehrer></Lehrer>
         </div>
     );
+}
+
+function fetchKlassenzimmer(setKlassenzimmer) {
+    axios.get("http://localhost:8080/sitzplan/klassenzimmer/1")
+        .then(response => {
+            setKlassenzimmer(response.data);
+        })
+        .catch(error => {
+            console.error("Error fetching klassenzimmer:", error);
+        });
 }
