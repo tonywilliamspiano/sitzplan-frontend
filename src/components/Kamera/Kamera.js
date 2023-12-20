@@ -38,7 +38,7 @@ export default function Kamera(props) {
         formData.append('name', currentStudent.name);
 
         try {
-            const response = await axios.post('http://localhost:8080/sitzplan/foto', formData, {
+            const response = await axios.post('http://localhost:8080/sitzplan/foto/' + currentStudent.id, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },
@@ -49,6 +49,7 @@ export default function Kamera(props) {
             // Handle errors
             console.error('Error uploading image:', error);
         }
+        setCurrentStudent(null);
         props.setKameraView(false);
     };
 
