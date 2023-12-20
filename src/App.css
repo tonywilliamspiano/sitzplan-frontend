@@ -10,20 +10,37 @@
 }
 
 .Klassenzimmer {
-  width: 80vw;
-  max-height: 90vh;
+
+  /*width: 80vw;*/
+  /*max-height: 90vh;*/
   display: flex;
   flex-wrap: wrap;
+  width: 290mm;
+  height: 205mm;
+  page-break-after: always; /* Seitenumbruch nach jeder Seite */
 }
 
+/* Querformat */
+@page {
+  size: A4 landscape;
+  margin: 20mm;
+}
+
+@page :first  {
+               size: 297mm 210mm;
+               margin: 0; /* Rand auf 0 setzen oder nach Bedarf anpassen */
+             }
+
 .Reihe {
+
   width: 100%;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-evenly;
+  justify-content: space-between;
 }
 
 .Tisch {
+
   display: flex;
   flex-grow: 1;
   flex-wrap: wrap;
@@ -33,12 +50,14 @@
 }
 
 .Schueler {
+
   display: flex;
   justify-content: space-evenly;
   flex-grow: 1;
-  border: 2px solid black;
+  border: 2px solid crimson;
   flex-wrap: wrap;
   height: 100%;
+  max-width: 100px;
 }
 
 .schuelerName {
