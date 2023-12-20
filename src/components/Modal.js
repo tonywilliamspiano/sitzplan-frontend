@@ -8,6 +8,8 @@ import "./Modal.css";
      let setModal = props.setModal;
      let nameAuswaehlen = props.nameAuswaehlen;
 
+
+
      const schuelerList = ["Timo Engler", "Jakob Harsch", "Noah Hitzler", "Lukas Hoffmann", "Marius Karch"
          , "Michael Kratzer", "Juri Till Krauß", "Justin Mack ", "Tim Mader", "Felix Mayer "
          , "Jochen Müller", "Christian Quint", " Hagen Johannes Reinbold ", "Sara Doris Sachs", "Jakob Steck "
