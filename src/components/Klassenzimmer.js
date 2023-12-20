@@ -3,20 +3,26 @@ import {useKameraContext} from "./Kamera/KameraViewContext";
 import Schueler from "./Schueler";
 import {useEffect, useState} from "react";
 import axios from "axios";
+import {useCurrentStudent} from "./CurrentStudentContext";
+
+function fetchKlassenzimmer(setKlassenzimmer) {
+    axios.get("http://localhost:8080/sitzplan/klassenzimmer/1")
+        .then(response => {
+            setKlassenzimmer(response.data);
+        })
+        .catch(error => {
+            console.error("Error fetching klassenzimmer:", error);
+        });
+}
 
 export default function Klassenzimmer(props) {
     const [kameraView, setKameraView] = useKameraContext();
     const [klassenzimmer, setKlassenzimmer] = useState(null);
+    const {currentStudent, setCurrentStudent} = useCurrentStudent();
 
     useEffect(() => {
-        axios.get("http://localhost:8080/sitzplan/klassenzimmer/1").then((response) => {
-            setKlassenzimmer(response.data);
-        });
-    }, []);
-
-    useEffect(() => {
-        console.log(klassenzimmer);
-    }, [klassenzimmer]);
+            fetchKlassenzimmer(setKlassenzimmer);
+    }, [currentStudent]);
 
     if (klassenzimmer === null) {
         return <p></p>;
