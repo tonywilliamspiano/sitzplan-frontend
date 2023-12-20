@@ -53,7 +53,7 @@ export default function Schueler(props) {
                     () => {
                         setModal(true);
                     }
-                }>{props.position}</p>
+                }>+</p>
             )}
             <Modal modal={modal} setModal={setModal} nameAuswaehlen={nameAuswaehlen}/>
         </div>
