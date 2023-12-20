@@ -25,7 +25,7 @@ export default function Schueler(props) {
         <div className="Schueler">
             {testSchueler !== null ? (
                 <>
-                    <img src={testSchueler.image} className="schuelerBild" alt="EMPTY"/>
+                    <img src="https://media.gq.com/photos/5cd0a78cb41d092460cd73bf/1:1/w_1125,h_1125,c_limit/Keanu-Con-GQ-2019-050619.jpg" className="schuelerBild" alt="EMPTY"/>
                     <p className="schuelerName">{props.position}. {testSchueler.name}</p>
                 </>
             ) : (

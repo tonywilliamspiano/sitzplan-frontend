@@ -40,7 +40,6 @@ export default function Klassenzimmer(props) {
                     <Kamera setKameraView={setKameraView}></Kamera>
                 ) : (
                     <>
-
                         <div className="Klassenzimmer">
                             <Reihe id={1} getSchuelerByPosition={getSchuelerByPosition}></Reihe>
                             <Reihe id={2} getSchuelerByPosition={getSchuelerByPosition}></Reihe>
