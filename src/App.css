@@ -23,7 +23,7 @@
 /* Querformat */
 @page {
   size: A4 landscape;
-  margin: 20mm;
+  margin: 25mm;
 }
 
 @page :first  {
@@ -95,4 +95,32 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+/* Responsive */
+@media screen and (min-width: 1200px) {
+
+  .Klassenzimmer {
+    width: 600mm;
+    height: 300mm;
+
+    flex-direction: row;
+  }
+
+  .Tisch {
+
+    padding: 10px;
+    height: 15vh;
+  }
+
+  .Schueler {
+
+    max-width: 200px;
+    margin: 0px;
+  }
+
+  .Lehrkraft {
+
+    padding-top: 3%;
+  }
 }
