@@ -21,17 +21,14 @@ import "./Modal.css";
                 <div className="modal">
                     <div  className="overlay"></div>
                     <div className="modal-content">
-                        <h2>Name auswählen</h2>
+                        <h2 className="modal-title">Name auswählen</h2>
                         <div className= "nameListe-Container">
                             {
                                 schuelerList.map((name, index) => (
-                                     <ul key={index}>
-
-                                            <button className="btn-NameListe" onClick={() =>{
-                                                nameAuswaehlen(name)
-                                                setModal(!modal)
-                                            }}> {name} </button>
-                                        </ul>
+                                     <div className="btn-NameListe" key={index} onClick={() =>{
+                                         nameAuswaehlen(name)
+                                         setModal(!modal)
+                                     }}>{name}</div>
                                 )
                                 )
                             }
