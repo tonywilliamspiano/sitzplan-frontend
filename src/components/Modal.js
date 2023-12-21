@@ -10,12 +10,6 @@ import axios from "axios";
      let nameAuswaehlen = props.nameAuswaehlen;
      const [schuelerListe, setSchuelerListe] =useState([])
 
-     // const schuelerList = ["Timo Engler", "Jakob Harsch", "Noah Hitzler", "Lukas Hoffmann", "Marius Karch"
-     //     , "Michael Kratzer", "Juri Till Krauß", "Justin Mack ", "Tim Mader", "Felix Mayer "
-     //     , "Jochen Müller", "Christian Quint", " Hagen Johannes Reinbold ", "Sara Doris Sachs", "Jakob Steck "
-     //     , "Pauline Straub", "Luca  Weller "
-     // ]
-
      useEffect(() => {
          axios.get("http://localhost:8080/sitzplan/klassenliste")
              .then(respose=> {
@@ -37,11 +31,11 @@ import axios from "axios";
                         <h2 className="modal-title">Name auswählen</h2>
                         <div className= "nameListe-Container">
                             {
-                                schuelerListe.map((name, index) => (
+                                schuelerListe.map((schueler, index) => (
                                      <div className="btn-NameListe" key={index} onClick={() =>{
-                                         nameAuswaehlen(name)
+                                         nameAuswaehlen(schueler)
                                          setModal(!modal)
-                                     }}>{name}</div>
+                                     }}>{schueler.name}</div>
                                 )
                                 )
                             }
