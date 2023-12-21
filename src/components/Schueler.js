@@ -46,7 +46,7 @@ export default function Schueler(props) {
             {schueler !== null ? (
                 <>
                     <img src={"http://localhost:8080/sitzplan/foto/" + schueler.id} className="schuelerBild"/>
-                    <p className="schuelerName">{props.position}. {schueler.name}</p>
+                    <p className="schuelerName">{schueler.name}</p>
                 </>
             ) : (
                 <p className="schuelerHinzufuegen" onClick={
