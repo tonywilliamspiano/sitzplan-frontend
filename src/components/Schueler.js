@@ -21,13 +21,9 @@ export default function Schueler(props) {
     }, [currentStudent]); // This effect runs whenever schueler changes
 
     const [name, setName] = useState("")
-    const nameAuswaehlen = (neuname) => {
-        const requestData = {
-            name: neuname,
-            position: props.position
-        };
+    const nameAuswaehlen = (schueler) => {
 
-        axios.post("http://localhost:8080/sitzplan/schueler", requestData, {
+        axios.post("http://localhost:8080/sitzplan/positionieren/" + props.position, schueler, {
             headers: {
                 "Content-Type": "application/json"
             }

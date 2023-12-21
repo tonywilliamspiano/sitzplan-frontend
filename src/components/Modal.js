@@ -14,7 +14,6 @@ import "./Modal.css";
          , "Pauline Straub", "Luca  Weller "
      ]
 
-
      return (
         <>
             {modal && (
