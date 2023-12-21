@@ -5,6 +5,11 @@ import {useEffect, useState} from "react";
 import axios from "axios";
 import {useCurrentStudent} from "./CurrentStudentContext";
 
+const TISCHE = 4;
+const REIHEN = 3;
+const SCHUELER_PRO_TISCH = 2;
+
+
 export default function Klassenzimmer(props) {
     // Erlaube Zugriff auf KameraView
     const [kameraView, setKameraView] = useKameraContext();
@@ -30,6 +35,20 @@ export default function Klassenzimmer(props) {
     if (klassenzimmer === null) {
         return <p></p>;
     }
+
+    const reihenKomponente = [];
+
+    for (let index = 1; index <= REIHEN; index++) {
+        reihenKomponente.push(
+            <Reihe
+                id={index}
+                getSchuelerByPosition={getSchuelerByPosition}
+            >
+                Tisch
+            </Reihe>
+        );
+    }
+
     return (
         <>
             {
@@ -38,10 +57,7 @@ export default function Klassenzimmer(props) {
                 ) : (
                     <>
                         <div className="Klassenzimmer">
-                            <Reihe id={1} getSchuelerByPosition={getSchuelerByPosition}></Reihe>
-                            <Reihe id={2} getSchuelerByPosition={getSchuelerByPosition}></Reihe>
-                            <Reihe id={3} getSchuelerByPosition={getSchuelerByPosition}></Reihe>
-                            <Reihe id={4} getSchuelerByPosition={getSchuelerByPosition}></Reihe>
+                            {reihenKomponente}
                             <Lehrkraft></Lehrkraft>
                         </div>
                     </>
@@ -52,21 +68,44 @@ export default function Klassenzimmer(props) {
 }
 
 function Reihe(props) {
+    const tischKomponenten = [];
+
+    for (let index = 1; index <= TISCHE; index++) {
+        tischKomponenten.push(
+            <Tisch
+                key={index}
+                id={(props.id - 1) * TISCHE + index}
+                getSchuelerByPosition={props.getSchuelerByPosition}
+            >
+                Tisch
+            </Tisch>
+        );
+    }
+
     return (
         <div className="Reihe">
-            <Tisch id={(props.id - 1) * 4 + 1} getSchuelerByPosition={props.getSchuelerByPosition}>Tisch</Tisch>
-            <Tisch id={(props.id - 1) * 4 + 2} getSchuelerByPosition={props.getSchuelerByPosition}>Tisch</Tisch>
-            <Tisch id={(props.id - 1) * 4 + 3} getSchuelerByPosition={props.getSchuelerByPosition}>Tisch</Tisch>
-            <Tisch id={(props.id - 1) * 4 + 4} getSchuelerByPosition={props.getSchuelerByPosition}>Tisch</Tisch>
+            {tischKomponenten}
         </div>
     )
 }
 
 function Tisch(props) {
+    const schuelerKomponenten = []
+
+    for (let index = 1; index <= SCHUELER_PRO_TISCH; index++) {
+        schuelerKomponenten.push(
+            <Schueler
+                id={(props.id - 1) * SCHUELER_PRO_TISCH + index}
+                getSchuelerByPosition={props.getSchuelerByPosition}
+            >
+                Tisch
+            </Schueler>
+        );
+    }
+
     return (
         <div className="Tisch">
-            <Schueler position={(props.id - 1) * 2 + 1} getSchuelerByPosition={props.getSchuelerByPosition}>Schüler</Schueler>
-            <Schueler position={(props.id - 1) * 2 + 2} getSchuelerByPosition={props.getSchuelerByPosition}>Schüler</Schueler>
+            {schuelerKomponenten}
         </div>
     )
 }
