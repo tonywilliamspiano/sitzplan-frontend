@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 
 import "./Modal.css";
 
@@ -7,6 +7,10 @@ import "./Modal.css";
      let modal = props.modal;
      let setModal = props.setModal;
      let nameAuswaehlen = props.nameAuswaehlen;
+
+
+
+
 
      const schuelerList = ["Timo Engler", "Jakob Harsch", "Noah Hitzler", "Lukas Hoffmann", "Marius Karch"
          , "Michael Kratzer", "Juri Till Krauß", "Justin Mack ", "Tim Mader", "Felix Mayer "
@@ -17,11 +21,14 @@ import "./Modal.css";
 
      return (
         <>
-            {modal && (
+            {modal &&  (
                 <div className="modal">
-                    <div  className="overlay"></div>
+                    <div  className="overlay" onClick={()=> setModal(!modal)} ></div>
+
                     <div className="modal-content">
+                        <button className="btn-close" onClick={()=> setModal(!modal)}> ❌ </button>
                         <h2>Name auswählen</h2>
+
                         <div className= "nameListe-Container">
                             {
                                 schuelerList.map((name, index) => (
@@ -31,11 +38,16 @@ import "./Modal.css";
                                                 nameAuswaehlen(name)
                                                 setModal(!modal)
                                             }}> {name} </button>
+
+
                                         </ul>
                                 )
+
                                 )
+
                             }
                         </div>
+
 
                     </div>
                 </div>
