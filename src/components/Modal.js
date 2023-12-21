@@ -1,18 +1,30 @@
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 
 import "./Modal.css";
+import axios from "axios";
 
  function Modal(props) {
 
      let modal = props.modal;
      let setModal = props.setModal;
      let nameAuswaehlen = props.nameAuswaehlen;
+     const [schuelerListe, setSchuelerListe] =useState([])
 
-     const schuelerList = ["Timo Engler", "Jakob Harsch", "Noah Hitzler", "Lukas Hoffmann", "Marius Karch"
-         , "Michael Kratzer", "Juri Till Krauß", "Justin Mack ", "Tim Mader", "Felix Mayer "
-         , "Jochen Müller", "Christian Quint", " Hagen Johannes Reinbold ", "Sara Doris Sachs", "Jakob Steck "
-         , "Pauline Straub", "Luca  Weller "
-     ]
+     // const schuelerList = ["Timo Engler", "Jakob Harsch", "Noah Hitzler", "Lukas Hoffmann", "Marius Karch"
+     //     , "Michael Kratzer", "Juri Till Krauß", "Justin Mack ", "Tim Mader", "Felix Mayer "
+     //     , "Jochen Müller", "Christian Quint", " Hagen Johannes Reinbold ", "Sara Doris Sachs", "Jakob Steck "
+     //     , "Pauline Straub", "Luca  Weller "
+     // ]
+
+     useEffect(() => {
+         axios.get("http://localhost:8080/sitzplan/klassenliste")
+             .then(respose=> {
+                 setSchuelerListe(respose.data)
+             })
+             .catch(error => {
+                 console.error("erorr",error)
+             })
+     }, []);
 
 
      return (
@@ -26,7 +38,7 @@ import "./Modal.css";
                         <h2 className="modal-title">Name auswählen</h2>
                         <div className= "nameListe-Container">
                             {
-                                schuelerList.map((name, index) => (
+                                schuelerListe.map((name, index) => (
                                      <div className="btn-NameListe" key={index} onClick={() =>{
                                          nameAuswaehlen(name)
                                          setModal(!modal)
@@ -43,4 +55,4 @@ import "./Modal.css";
         </>
     );
 }
-export default Modal
+export default Modal;
