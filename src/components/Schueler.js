@@ -38,7 +38,7 @@ export default function Schueler(props) {
     }
     return (
 
-        <div className="Schueler">
+        <div className="Schueler" style={props.style}>
             {schueler !== null ? (
                 <>
                     <img src={"http://localhost:8080/sitzplan/foto/" + schueler.id} className="schuelerBild"/>

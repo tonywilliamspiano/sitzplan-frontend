@@ -92,9 +92,18 @@ function Reihe(props) {
 function Tisch(props) {
     const schuelerKomponenten = []
 
+    const schuelerStyle = {
+        width: (100 / SCHUELER_PRO_TISCH) + ("%")
+    }
+
+    const tischStyle = {
+        width: (90 / TISCHE) + ("%"),
+        height: (30 / REIHEN) + "vw"
+    }
+
     for (let index = 1; index <= SCHUELER_PRO_TISCH; index++) {
         schuelerKomponenten.push(
-            <Schueler
+            <Schueler style={schuelerStyle}
                 id={(props.id - 1) * SCHUELER_PRO_TISCH + index}
                 getSchuelerByPosition={props.getSchuelerByPosition}
             >
@@ -104,7 +113,7 @@ function Tisch(props) {
     }
 
     return (
-        <div className="Tisch">
+        <div className="Tisch" style={tischStyle}>
             {schuelerKomponenten}
         </div>
     )
