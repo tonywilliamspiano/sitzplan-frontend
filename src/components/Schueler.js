@@ -9,10 +9,14 @@ export default function Schueler(props) {
     const {currentStudent, setCurrentStudent} = useCurrentStudent();
     const [kameraView, setKameraView] = useKameraContext();
     const [modal, setModal] = useState(false);
+    const [update, setupdate] = useState(0)
 
-    const [schueler, setSchueler] = useState(
-        props.getSchuelerByPosition(props.position)
-    )
+    const [schueler, setSchueler] = useState(null)
+
+    useEffect(() => {
+        setSchueler(props.getSchuelerByPosition(props.position))
+        console.log("SETTING NEW position!")
+    }, [props.update]);
 
     useEffect(() => {
         if (currentStudent !== null) {
