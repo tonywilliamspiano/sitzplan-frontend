@@ -7,6 +7,7 @@ import {useCurrentStudent} from "./CurrentStudentContext";
 import * as htmlToImage from 'html-to-image';
 import { jsPDF } from "jspdf";
 import { toPng } from 'html-to-image';
+import html2canvas from 'html2canvas';
 
 const TISCHE = 4;
 const REIHEN = 3;
