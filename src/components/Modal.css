@@ -2,15 +2,6 @@ body.active-modal {
     overflow-y: hidden;
 }
 
-.btn-modal {
-    padding: 1px 8px;
-    display: block;
-  background: beige;
-    /*margin: 100px auto 0;*/
-    font-size: 25px;
-    /*z-index: 999;*/
-}
-
 .modal, .overlay {
     width: 100vw;
     height: 100vh;
@@ -21,9 +12,14 @@ body.active-modal {
     position: fixed;
 }
 
-.overlay {
-    background: rgba(49,49,49,0.8);
+.modal-title {
+    font-size: 3em;
 }
+
+.overlay {
+    background: rgba(49, 49, 49, 0.8);
+}
+
 .modal-content {
     position: absolute;
     top: 50%;
@@ -31,11 +27,13 @@ body.active-modal {
     transform: translate(-50%, -50%);
     line-height: 1.4;
     background: #f1f1f1;
-    padding: 80px 28px;
+    padding: 0 28px 80px;
     border-radius: 3px;
-    max-width: 900px;
+    max-width: 1000px;
     min-width: 300px;
-
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 .close-modal {
@@ -44,30 +42,40 @@ body.active-modal {
     right: 10px;
     padding: 5px 7px;
 }
-.btn-NameListe{
 
-    background: deepskyblue;
-    border-collapse: collapse;
-    width: 100%;
-    margin: 15px 0;
-    right: 50%;
-
+.btn-NameListe {
+    font-size: 2vw;
+    border-radius: 15%;
+    padding: 10px;
+    margin: 1%;
+    flex-grow: 1;
+    border: 1px solid grey;
 }
 
-.nameListe-Container{
-    border: solid rebeccapurple;
-    display: flex ;
-    flex-wrap: wrap ;
+.nameListe-ul {
+    display: flex;
+}
 
-  height: 650px;
-    justify-content: start;
- align-content: space-between;
+.btn-NameListe:hover {
+    background-color: darkgray;
+}
 
+.btn-close {
+    text-align: left;
+    border: none;
+    margin-left: -25px;
+    margin-top: 3px;
+}
 
+.dummy-div {
+    flex-grow: 1;
+    width: 90%;
+}
 
+.nameListe-Container {
+    display: flex;
+    flex-wrap: wrap;
 
-    
-
-
-
+    justify-content: space-evenly;
+    align-content: space-evenly
 }
