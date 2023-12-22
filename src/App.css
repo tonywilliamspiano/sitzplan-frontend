@@ -70,10 +70,15 @@
   max-height: 70%;
 }
 
+.selected {
+  border: 3px solid orange;
+}
+
 .schuelerHinzufuegen {
   text-align: center;
   align-self: center;
   font-size: 2.6vw;
+  width: 100%;
 }
 
 .Lehrkraft {
