@@ -21,9 +21,13 @@ export default function Schueler(props) {
     }, [currentStudent]); // This effect runs whenever schueler changes
 
     const [name, setName] = useState("")
-    const nameAuswaehlen = (schueler) => {
+    const nameAuswaehlen = (neuname) => {
+        const requestData = {
+            name: neuname,
+            position: props.position
+        };
 
-        axios.post("http://localhost:8080/sitzplan/positionieren/" + props.position, schueler, {
+        axios.post("http://localhost:8080/sitzplan/schueler", requestData, {
             headers: {
                 "Content-Type": "application/json"
             }
@@ -38,18 +42,18 @@ export default function Schueler(props) {
     }
     return (
 
-        <div className="Schueler" style={props.style}>
+        <div className="Schueler">
             {schueler !== null ? (
                 <>
                     <img src={"http://localhost:8080/sitzplan/foto/" + schueler.id} className="schuelerBild"/>
-                    <p className="schuelerName">{schueler.name}</p>
+                    <p className="schuelerName">{props.position}. {schueler.name}</p>
                 </>
             ) : (
                 <p className="schuelerHinzufuegen" onClick={
                     () => {
                         setModal(true);
                     }
-                }>+</p>
+                }>{props.position}</p>
             )}
             <Modal modal={modal} setModal={setModal} nameAuswaehlen={nameAuswaehlen}/>
         </div>
