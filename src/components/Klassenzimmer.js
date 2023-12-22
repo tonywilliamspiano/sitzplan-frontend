@@ -37,40 +37,36 @@ export default function Klassenzimmer(props) {
         return null;
     }
 
-    const selectPosition = (position) => {
+    const selectPosition = async (position) => {
         if (selectedPosition === NONE_SELECTED) {
             setSelectedPosition(position);
-        }
-        else if (selectedPosition === position) {
+        } else if (selectedPosition === position) {
             setSelectedPosition(NONE_SELECTED);
-        }
-        else {
+        } else {
             let schuelerDerGetauschtWird = getSchuelerByPosition(selectedPosition)
-            console.log("SWITCHING POSITIONS: " + selectedPosition + " and " + position)
-            console.log("FOLGENDER SCHUELER WIRD GETAUSCHT: " + schuelerDerGetauschtWird.name)
 
-            setSelectedPosition(NONE_SELECTED);
-
-
-            axios.post("http://localhost:8080/sitzplan/tauschen/" + position, schuelerDerGetauschtWird, {
+            await axios.post("http://localhost:8080/sitzplan/tauschen/" + position, schuelerDerGetauschtWird, {
                 headers: {
                     "Content-Type": "application/json"
                 }
             })
+                .then((response) => {
+                    console.log(response.data)
+                })
                 .catch(error => {
                     console.error("Error:", error);
                 });
+            setSelectedPosition(NONE_SELECTED)
         }
+        fetchKlassenzimmer(setKlassenzimmer)
     }
 
     const isSelected = (position) => {
         if (position === selectedPosition) {
             return IS_SELECTED;
-        }
-        else if (selectedPosition !== NONE_SELECTED) {
+        } else if (selectedPosition !== NONE_SELECTED) {
             return OTHER_SELECTED;
-        }
-        else {
+        } else {
             return NONE_SELECTED;
         }
     }
@@ -152,15 +148,15 @@ function Tisch(props) {
 
     for (let index = 1; index <= SCHUELER_PRO_TISCH; index++) {
         schuelerKomponenten.push(
-                <Schueler style={schuelerStyle}
-                          key={index}
-                          position={(props.id - 1) * SCHUELER_PRO_TISCH + index}
-                          getSchuelerByPosition={props.getSchuelerByPosition}
-                          selectPosition={props.selectPosition}
-                          isSelected={props.isSelected}
-                >
-                    Tisch
-                </Schueler>
+            <Schueler style={schuelerStyle}
+                      key={index}
+                      position={(props.id - 1) * SCHUELER_PRO_TISCH + index}
+                      getSchuelerByPosition={props.getSchuelerByPosition}
+                      selectPosition={props.selectPosition}
+                      isSelected={props.isSelected}
+            >
+                Tisch
+            </Schueler>
         );
     }
 
@@ -188,6 +184,7 @@ function Lehrkraft() {
 function fetchKlassenzimmer(setKlassenzimmer) {
     axios.get("http://localhost:8080/sitzplan/klassenzimmer/1")
         .then(response => {
+            console.log(response.data)
             setKlassenzimmer(response.data);
         })
         .catch(error => {
