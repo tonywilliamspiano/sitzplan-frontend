@@ -1,6 +1,7 @@
 import Kamera from "./Kamera/Kamera";
 import {useKameraContext} from "./Kamera/KameraViewContext";
 import Schueler from "./Schueler";
+import Mobile from "./Mobile";
 import {useEffect, useState} from "react";
 import axios from "axios";
 import {useCurrentStudent} from "./CurrentStudentContext";
@@ -17,7 +18,6 @@ const SCHUELER_PRO_TISCH = 2;
 export default function Klassenzimmer(props) {
     // Erlaube Zugriff auf KameraView
     const [kameraView, setKameraView] = useKameraContext();
-
     const [klassenzimmer, setKlassenzimmer] = useState(null);
     const {currentStudent, setCurrentStudent} = useCurrentStudent();
 
@@ -65,9 +65,13 @@ export default function Klassenzimmer(props) {
                             {reihenKomponente}
                             <Lehrkraft></Lehrkraft>
                         </div>
-                        <div className={"downloadButton"}>
+                        <div className={"DownloadButton"}>
                             <button onClick={downloadPDF}>Download Pdf</button>
                         </div>
+                        <Mobile key="1"
+                                position="2"
+                                getSchuelerByPosition={getSchuelerByPosition}>
+                        </Mobile>
                     </>
                 )
             }

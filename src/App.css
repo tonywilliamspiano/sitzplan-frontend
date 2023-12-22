@@ -94,3 +94,21 @@
   justify-content: center;
 }
 
+.KlassenzimmerRoute{
+  display: none;
+}
+
+@media only screen and (max-width: 600px) {
+  .Klassenzimmer{
+    display: none;
+  }
+
+  .DownloadButton{
+    display: none;
+  }
+
+  .KlassenzimmerRoute{
+    display: block;
+  }
+
+}
