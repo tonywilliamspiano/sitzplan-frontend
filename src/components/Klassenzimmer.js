@@ -18,7 +18,7 @@ export default function Klassenzimmer(props) {
     const {currentStudent, setCurrentStudent} = useCurrentStudent();
 
     useEffect(() => {
-            fetchKlassenzimmer(setKlassenzimmer);
+        fetchKlassenzimmer(setKlassenzimmer);
     }, [currentStudent]);
 
     let getSchuelerByPosition = (position) => {
@@ -41,6 +41,7 @@ export default function Klassenzimmer(props) {
     for (let index = 1; index <= REIHEN; index++) {
         reihenKomponente.push(
             <Reihe
+                key={index}
                 id={index}
                 getSchuelerByPosition={getSchuelerByPosition}
             >
@@ -103,12 +104,13 @@ function Tisch(props) {
 
     for (let index = 1; index <= SCHUELER_PRO_TISCH; index++) {
         schuelerKomponenten.push(
-            <Schueler style={schuelerStyle}
-                id={(props.id - 1) * SCHUELER_PRO_TISCH + index}
-                getSchuelerByPosition={props.getSchuelerByPosition}
-            >
-                Tisch
-            </Schueler>
+                <Schueler style={schuelerStyle}
+                          key={index}
+                          position={(props.id - 1) * SCHUELER_PRO_TISCH + index}
+                          getSchuelerByPosition={props.getSchuelerByPosition}
+                >
+                    Tisch
+                </Schueler>
         );
     }
 
