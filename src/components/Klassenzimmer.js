@@ -20,11 +20,12 @@ export default function Klassenzimmer(props) {
 
     const [klassenzimmer, setKlassenzimmer] = useState(null);
     const {currentStudent, setCurrentStudent} = useCurrentStudent();
+    const [update, setUpdate] = useState(0)
 
     const [selectedPosition, setSelectedPosition] = useState(NONE_SELECTED)
 
     useEffect(() => {
-        fetchKlassenzimmer(setKlassenzimmer);
+        fetchKlassenzimmer(setKlassenzimmer, setUpdate);
     }, [currentStudent]);
 
     const getSchuelerByPosition = (position) => {
@@ -57,8 +58,8 @@ export default function Klassenzimmer(props) {
                     console.error("Error:", error);
                 });
             setSelectedPosition(NONE_SELECTED)
+            fetchKlassenzimmer(setKlassenzimmer, setUpdate)
         }
-        fetchKlassenzimmer(setKlassenzimmer)
     }
 
     const isSelected = (position) => {
@@ -86,6 +87,7 @@ export default function Klassenzimmer(props) {
                 getSchuelerByPosition={getSchuelerByPosition}
                 selectPosition={selectPosition}
                 isSelected={isSelected}
+                update={update}
             >
                 Tisch
             </Reihe>
@@ -121,6 +123,7 @@ function Reihe(props) {
                 getSchuelerByPosition={props.getSchuelerByPosition}
                 selectPosition={props.selectPosition}
                 isSelected={props.isSelected}
+                update={props.update}
             >
                 Tisch
             </Tisch>
@@ -154,6 +157,7 @@ function Tisch(props) {
                       getSchuelerByPosition={props.getSchuelerByPosition}
                       selectPosition={props.selectPosition}
                       isSelected={props.isSelected}
+                      update={props.update}
             >
                 Tisch
             </Schueler>
@@ -181,11 +185,14 @@ function Lehrkraft() {
     );
 }
 
-function fetchKlassenzimmer(setKlassenzimmer) {
+function fetchKlassenzimmer(setKlassenzimmer, setUpdate) {
     axios.get("http://localhost:8080/sitzplan/klassenzimmer/1")
         .then(response => {
             console.log(response.data)
             setKlassenzimmer(response.data);
+            if (setUpdate !== null) {
+                setUpdate((update) => update + 1);
+            }
         })
         .catch(error => {
             console.error("Error fetching klassenzimmer:", error);
