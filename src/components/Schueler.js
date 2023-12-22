@@ -3,13 +3,13 @@ import {useKameraContext} from "./Kamera/KameraViewContext";
 import {useEffect, useState} from "react";
 import Modal from "./Modal";
 import axios from "axios";
+import {IS_SELECTED, NONE_SELECTED} from "./Klassenzimmer";
 
 export default function Schueler(props) {
     const {currentStudent, setCurrentStudent} = useCurrentStudent();
     const [kameraView, setKameraView] = useKameraContext();
     const [modal, setModal] = useState(false);
 
-    // TODO - Pass in either a schueler object or null - conditionally rendering the image and
     const [schueler, setSchueler] = useState(
         props.getSchuelerByPosition(props.position)
     )
@@ -36,20 +36,28 @@ export default function Schueler(props) {
                 console.error("Error:", error);
             });
     }
+
     return (
 
-        <div className="Schueler" style={props.style}>
+        <div className={`Schueler ${props.isSelected(props.position) === IS_SELECTED ? 'selected' : ''}`} style={props.style}>
             {schueler !== null ? (
-                <>
+                <div onClick={() => props.selectPosition(props.position)}>
                     <img src={"http://localhost:8080/sitzplan/foto/" + schueler.id} className="schuelerBild"/>
                     <p className="schuelerName">{schueler.name}</p>
-                </>
+                </div>
             ) : (
-                <p className="schuelerHinzufuegen" onClick={
+                <div className="schuelerHinzufuegen" onClick={
                     () => {
-                        setModal(true);
+                        if (props.isSelected(props.position) === NONE_SELECTED) {
+                            setModal(true);
+                        }
+                        else {
+                            props.selectPosition(props.position)
+                        }
                     }
-                }>+</p>
+                }>
+                <p >+</p>
+                </div>
             )}
             <Modal modal={modal} setModal={setModal} nameAuswaehlen={nameAuswaehlen}/>
         </div>
