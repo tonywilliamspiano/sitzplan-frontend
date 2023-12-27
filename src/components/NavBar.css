@@ -33,7 +33,13 @@
 }
 
 /* When you mouse over the navigation links, change their color */
-.sidenav div:hover {
+.sidenav .navItem:hover {
+    color: #f1f1f1;
+    cursor: pointer;
+}
+
+/* When you mouse over the navigation links, change their color */
+.sidenav .subItem:hover {
     color: #f1f1f1;
     cursor: pointer;
 }

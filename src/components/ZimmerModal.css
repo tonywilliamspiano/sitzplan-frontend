@@ -1,0 +1,24 @@
+
+.form-container {
+    width: 100%;
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.label {
+    text-align: center;
+    width: 100%;
+}
+
+.input {
+    text-align: center;
+    width: 70%;
+    margin-bottom: 3%;
+}
+
+.form-submit {
+    width: 30%;
+    font-size: 1.5em;
+}
