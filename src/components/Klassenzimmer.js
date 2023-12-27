@@ -5,10 +5,6 @@ import {useEffect, useState} from "react";
 import axios from "axios";
 import {useCurrentStudent} from "./CurrentStudentContext";
 
-const TISCHE = 4;
-const REIHEN = 3;
-const SCHUELER_PRO_TISCH = 2;
-
 export const NONE_SELECTED = -1;
 export const OTHER_SELECTED = 0;
 export const IS_SELECTED = 1;
@@ -89,22 +85,24 @@ export default function Klassenzimmer(props) {
     }
 
     const reihenKomponente = [];
-
-    for (let index = 1; index <= REIHEN; index++) {
-        reihenKomponente.push(
-            <Reihe
-                key={index}
-                id={index}
-                getSchuelerByPosition={getSchuelerByPosition}
-                selectPosition={selectPosition}
-                isSelected={isSelected}
-                update={update}
-            >
-            </Reihe>
-        );
+    if (klassenzimmer !== null) {
+        for (let index = 1; index <= klassenzimmer.anzahlDerReihe; index++) {
+            reihenKomponente.push(
+                <Reihe
+                    key={index}
+                    id={index}
+                    getSchuelerByPosition={getSchuelerByPosition}
+                    selectPosition={selectPosition}
+                    isSelected={isSelected}
+                    update={update}
+                    REIHEN={klassenzimmer.anzahlDerReihe}
+                    TISCHE={klassenzimmer.anzahlDerTischeProReihe}
+                    SCHUELER={klassenzimmer.anzahlDerSchuelerProTisch}
+                >
+                </Reihe>
+            );
+        }
     }
-
-    console.log(klassenzimmer)
 
     return (
         <>
@@ -136,15 +134,18 @@ export default function Klassenzimmer(props) {
 function Reihe(props) {
     const tischKomponenten = [];
 
-    for (let index = 1; index <= TISCHE; index++) {
+    for (let index = 1; index <= props.TISCHE; index++) {
         tischKomponenten.push(
             <Tisch
                 key={index}
-                id={(props.id - 1) * TISCHE + index}
+                id={(props.id - 1) * props.TISCHE + index}
                 getSchuelerByPosition={props.getSchuelerByPosition}
                 selectPosition={props.selectPosition}
                 isSelected={props.isSelected}
                 update={props.update}
+                SCHUELER={props.SCHUELER}
+                TISCHE={props.TISCHE}
+                REIHEN={props.REIHEN}
             >
             </Tisch>
         );
@@ -161,19 +162,19 @@ function Tisch(props) {
     const schuelerKomponenten = []
 
     const schuelerStyle = {
-        width: (100 / SCHUELER_PRO_TISCH) + ("%")
+        width: (100 / props.SCHUELER) + ("%")
     }
 
     const tischStyle = {
-        width: (90 / TISCHE) + ("%"),
-        height: (30 / REIHEN) + "vw"
+        width: (90 / props.TISCHE) + ("%"),
+        height: (30 / props.REIHEN) + "vw"
     }
 
-    for (let index = 1; index <= SCHUELER_PRO_TISCH; index++) {
+    for (let index = 1; index <= props.SCHUELER; index++) {
         schuelerKomponenten.push(
             <Schueler style={schuelerStyle}
                       key={index}
-                      position={(props.id - 1) * SCHUELER_PRO_TISCH + index}
+                      position={(props.id - 1) * props.SCHUELER + index}
                       getSchuelerByPosition={props.getSchuelerByPosition}
                       selectPosition={props.selectPosition}
                       isSelected={props.isSelected}
