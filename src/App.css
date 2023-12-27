@@ -21,6 +21,15 @@
   flex-wrap: wrap;
   page-break-after: always;
   border: 1px solid black;
+  justify-content: center;
+}
+
+.klassenzimmer-titel {
+  text-align: center;
+  border: 1px solid darkgray;
+  box-shadow: 0 0 5px darkgray;
+  border-radius: 5px;
+  padding: 10px;
 }
 
 .nicht-vorhanden {

@@ -1,46 +1,48 @@
 import './NavBar.css';
+import axios from "axios";
+import {useEffect, useState} from "react";
+import ZimmerModal from "./ZimmerModal";
 
 export default function Navbar(props) {
-
     let setKlassenzimmerId = props.setKlassenzimmerId;
 
-    let mockKlassenzimmer = [
-        {
-            name: "Klazi 1",
-            id: 1
-        },
-        {
-            name: "Klazi 2",
-            id: 2
-        },
-        {
-            name: "Klazi 3",
-            id: 3
-        }
-    ]
+    const [klassenzimmerListe, setKlassenzimmerListe] = useState([]);
+    const [zimmerHinzufuegen, setZimmerHinzufuegen] = useState(false);
+
+    useEffect(() => {
+        axios.get("http://localhost:8080/sitzplan/meinklassenzimmer")
+            .then(response => {
+                setKlassenzimmerListe(response.data);
+            })
+    }, [props.klassenzimmerId]);
 
     let getKlassenZimmer = (
         <>
-            {mockKlassenzimmer.map((klassenZimmer) => (
-                <div key={klassenZimmer.id} onClick={() => setKlassenzimmerId(klassenZimmer.id)} className="subItem">
+            {klassenzimmerListe.map((klassenZimmer) => (
+                <div key={klassenZimmer.id} onClick={() => setKlassenzimmerId(klassenZimmer.id)} className="subItem ">
                     {klassenZimmer.name}
                 </div>
             ))}
         </>
     );
 
+    function klassenzimmerHinzufuegen() {
+        setZimmerHinzufuegen(true);
+    }
+
     return (
         <>
             <div id="mySidenav" className="sidenav">
                 <div>
-                    <div className="navItem">
+                    <div className="navItem" onClick={() => setKlassenzimmerId(-1)}>
                         Meine Klassenzimmer
                     </div>
                     {getKlassenZimmer}
+                    <ZimmerModal modal={zimmerHinzufuegen} setModal={setZimmerHinzufuegen}></ZimmerModal>
 
                 </div>
 
-                <div className="navItem">Neues Klassenzimmer</div>
+                <div className="navItem" onClick={() => klassenzimmerHinzufuegen()}>Neues Klassenzimmer</div>
             </div>
         </>
     )

@@ -12,7 +12,7 @@ function App() {
 
         <KameraViewProvider>
             <CurrentStudentProvider>
-                <NavBar setKlassenzimmerId={setKlassenzimmerId}></NavBar>
+                <NavBar setKlassenzimmerId={setKlassenzimmerId} klassenzimmerId={klassenzimmerId}></NavBar>
                 <div className="App">
                     <Klassenzimmer id={klassenzimmerId}></Klassenzimmer>
                 </div>

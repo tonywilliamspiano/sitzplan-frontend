@@ -104,6 +104,8 @@ export default function Klassenzimmer(props) {
         );
     }
 
+    console.log(klassenzimmer)
+
     return (
         <>
             {
@@ -115,6 +117,7 @@ export default function Klassenzimmer(props) {
                             {
                                 klassenzimmer !== null ? (
                                     <>
+                                        <h2 className="klassenzimmer-titel">{klassenzimmer.raumnummer}</h2>
                                         {reihenKomponente}
                                         <Lehrkraft></Lehrkraft>
                                     </>
