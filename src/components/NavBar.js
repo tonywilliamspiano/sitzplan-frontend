@@ -34,6 +34,7 @@ export default function Navbar(props) {
     return (
         <>
             <div id="mySidenav" className="sidenav">
+                <div className="navItem" onClick={() => klassenzimmerHinzufuegen()}>Neues Klassenzimmer</div>
                 <div>
                     <div className="navItem" onClick={() => setKlassenzimmerId(-1)}>
                         Meine Klassenzimmer
@@ -43,7 +44,13 @@ export default function Navbar(props) {
 
                 </div>
 
-                <div className="navItem" onClick={() => klassenzimmerHinzufuegen()}>Neues Klassenzimmer</div>
+
+                <div className="navItem" onClick={() => {}}>Klassenliste Bearbeiten</div>
+                <div className="navItem" onClick={() => {}}>Klassenliste Hochladen</div>
+
+                <div className="navItem"></div>
+                <div className="navItem"></div>
+                <div className="navItem"></div>
 
                 <div className="navItem" onClick={() => downloadPDF()}>PDF Runterladen</div>
             </div>

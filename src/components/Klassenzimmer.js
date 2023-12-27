@@ -131,9 +131,6 @@ export default function Klassenzimmer(props) {
                                 </div>)
                             }
                         </div>
-                        <div className={"DownloadButton"}>
-                            <button onClick={downloadPDF}>Download Pdf</button>
-                        </div>
                         { clickCount <= 30 && ( <>
                         <Mobile //key="1"
                                 clickCount={clickCount}
