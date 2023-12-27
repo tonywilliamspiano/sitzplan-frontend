@@ -21,6 +21,23 @@
   flex-wrap: wrap;
   page-break-after: always;
   border: 1px solid black;
+  justify-content: center;
+}
+
+.klassenzimmer-titel {
+  text-align: center;
+  border: 1px solid darkgray;
+  box-shadow: 0 0 5px darkgray;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.nicht-vorhanden {
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  font-size: 2.5em;
+  padding-top: 15%;
 }
 
 .Reihe {
@@ -99,3 +116,16 @@
   justify-content: center;
 }
 
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.trigger-animation {
+  opacity: 1;
+  animation: fadeIn 1s ease-in-out;
+}

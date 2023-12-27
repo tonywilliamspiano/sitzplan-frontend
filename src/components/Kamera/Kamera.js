@@ -60,10 +60,19 @@ export default function Kamera(props) {
                     <Webcam className="WebcamComponent"
                             ref={webcamRef}
                             videoConstraints={videoConstraints}/>
-                    <div className="photoButtonContainer">
-                        <button onClick={fotoMachen} className="photoButton">
-                            <div className="insidePhotoButton"></div>
+                    <div className="takePhotoButtonContainer">
+                        <button onClick={() => {
+                            setCurrentStudent(null);
+                            props.setKameraView(false);
+                        }} className="zurueckButton">
+                            Kein Foto
                         </button>
+                        <div onClick={fotoMachen} className="photoButton">
+                            <div className="insidePhotoButton"></div>
+                        </div>
+                        <div className="dummyButton">
+                            <div></div>
+                        </div>
                     </div>
                 </>
             ) : (

@@ -21,6 +21,14 @@
     align-items: center;
 }
 
+.takePhotoButtonContainer {
+    display: flex;
+    width: 100%;
+    margin-top: 5%;
+    justify-content: space-between;
+    align-items: center;
+}
+
 .photoButton {
     background-color: whitesmoke;
     border-radius: 50%;
@@ -29,6 +37,15 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.dummyButton {
+    background-color: transparent;
+    /*border-radius: 50%;*/
+    height: 100px;
+    width: 100px;
+    display: flex;
+
 }
 
 .insidePhotoButton {
@@ -45,6 +62,16 @@
     width: 100px;
     border-radius: 50%;
     font-size: 1.5em;
+    border: none;
+}
+
+.zurueckButton {
+    background-color: #c24040;
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+    font-size: 1.5em;
+    margin-left: 0.25vw;
 }
 
 .submit-button {
