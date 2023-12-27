@@ -51,6 +51,7 @@ export default function Kamera(props) {
         }
         setCurrentStudent(null);
         props.setKameraView(false);
+        
     };
 
     return (

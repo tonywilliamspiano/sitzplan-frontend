@@ -117,15 +117,34 @@
 }
 
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
 
 .trigger-animation {
-  opacity: 1;
-  animation: fadeIn 1s ease-in-out;
+    opacity: 1;
+    animation: fadeIn 1s ease-in-out;
+}
+
+.KlassenzimmerRoute{
+  display: none;
+}
+
+@media only screen and (max-width: 600px) {
+  .Klassenzimmer{
+    display: none;
+  }
+
+  .DownloadButton{
+    display: none;
+  }
+
+  .KlassenzimmerRoute{
+    display: block;
+  }
+
 }

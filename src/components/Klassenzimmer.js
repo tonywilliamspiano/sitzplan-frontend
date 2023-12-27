@@ -1,9 +1,14 @@
 import Kamera from "./Kamera/Kamera";
 import {useKameraContext} from "./Kamera/KameraViewContext";
 import Schueler from "./Schueler";
+import Mobile from "./Mobile";
 import {useEffect, useState} from "react";
 import axios from "axios";
 import {useCurrentStudent} from "./CurrentStudentContext";
+import * as htmlToImage from 'html-to-image';
+import { jsPDF } from "jspdf";
+import { toPng } from 'html-to-image';
+import html2canvas from 'html2canvas';
 
 export const NONE_SELECTED = -1;
 export const OTHER_SELECTED = 0;
@@ -14,10 +19,10 @@ export default function Klassenzimmer(props) {
     let id = props.id;
     // Erlaube Zugriff auf KameraView
     const [kameraView, setKameraView] = useKameraContext();
-
     const [klassenzimmer, setKlassenzimmer] = useState(null);
     const {currentStudent, setCurrentStudent} = useCurrentStudent();
     const [update, setUpdate] = useState(0)
+    const [clickCount, setClickCount] = useState(0);
 
     const [selectedPosition, setSelectedPosition] = useState(NONE_SELECTED)
 
@@ -124,6 +129,17 @@ export default function Klassenzimmer(props) {
                                 </div>)
                             }
                         </div>
+                        <div className={"DownloadButton"}>
+                            <button onClick={downloadPDF}>Download Pdf</button>
+                        </div>
+                        { clickCount <= 30 && ( <>
+                        <Mobile //key="1"
+                                clickCount={clickCount}
+                                nextPos
+                                setClickCount={setClickCount}
+                                getSchuelerByPosition={getSchuelerByPosition}>
+                        </Mobile>
+                                </> )}
                     </>
                 )
             }
@@ -218,5 +234,39 @@ function fetchKlassenzimmer(setKlassenzimmer, setUpdate, id) {
         .catch(error => {
             setKlassenzimmer(null);
             console.error("Error fetching klassenzimmer:", error);
+        });
+}
+
+function downloadPDF() {
+    const klassenzimmer = document.getElementsByClassName('Klassenzimmer')[0];
+    if (klassenzimmer) {
+        console.log("Klassenzimmer ist da.")
+    }
+    const {offsetWidth, offsetHeight} = klassenzimmer;
+    htmlToImage.toPng(klassenzimmer, {
+        width: offsetWidth,
+        height: offsetHeight,
+        canvasWidth: 1125,
+        canvasHeight: 800,
+        skipAutoScale: false,
+        style: {
+            margin: 0,
+            padding: 0,
+        },
+        quality: 0.95
+    })
+        .then(function (dataUrl) {
+            var link = document.createElement('a');
+            link.download = 'my-image-name.jpeg';
+            const options = {orientation: 'l', format: 'a4'}
+            const pdf = new jsPDF(options);
+            const imgProps = pdf.getImageProperties(dataUrl);
+            const pdfWidth = pdf.internal.pageSize.getWidth();
+            const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+            pdf.addImage(dataUrl, 'PNG', 0, 0);
+            pdf.save("download.pdf");
+        })
+        .catch(function (error) {
+            console.error("Error in htmlToPng", error);
         });
 }

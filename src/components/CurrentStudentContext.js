@@ -15,7 +15,7 @@ export const useCurrentStudent = () => {
 // Provider component to wrap your app
 export const CurrentStudentProvider = ({ children }) => {
     const [currentStudent, setCurrentStudent] = useState(null);
-
+        
     return (
         <CurrentStudentContext.Provider value={{ currentStudent, setCurrentStudent }}>
             {children}
