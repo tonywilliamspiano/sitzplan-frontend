@@ -2,6 +2,7 @@ import './NavBar.css';
 import axios from "axios";
 import {useEffect, useState} from "react";
 import ZimmerModal from "./ZimmerModal";
+import {downloadPDF} from "./Klassenzimmer";
 
 export default function Navbar(props) {
     let setKlassenzimmerId = props.setKlassenzimmerId;
@@ -43,6 +44,8 @@ export default function Navbar(props) {
                 </div>
 
                 <div className="navItem" onClick={() => klassenzimmerHinzufuegen()}>Neues Klassenzimmer</div>
+
+                <div className="navItem" onClick={() => downloadPDF()}>PDF Runterladen</div>
             </div>
         </>
     )

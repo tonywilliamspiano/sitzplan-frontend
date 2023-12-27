@@ -8,7 +8,6 @@ import {useCurrentStudent} from "./CurrentStudentContext";
 import * as htmlToImage from 'html-to-image';
 import { jsPDF } from "jspdf";
 import { toPng } from 'html-to-image';
-import html2canvas from 'html2canvas';
 
 export const NONE_SELECTED = -1;
 export const OTHER_SELECTED = 0;
@@ -46,6 +45,9 @@ export default function Klassenzimmer(props) {
     }, [currentStudent, props.id]);
 
     const getSchuelerByPosition = (position) => {
+        if (klassenzimmer === null) {
+            return null;
+        }
         for (let i = 0; i < klassenzimmer.schuelerListe.length; i++) {
             let schueler = klassenzimmer.schuelerListe[i];
             if (schueler.position === position) {
@@ -237,7 +239,7 @@ function fetchKlassenzimmer(setKlassenzimmer, setUpdate, id) {
         });
 }
 
-function downloadPDF() {
+export function downloadPDF() {
     const klassenzimmer = document.getElementsByClassName('Klassenzimmer')[0];
     if (klassenzimmer) {
         console.log("Klassenzimmer ist da.")
