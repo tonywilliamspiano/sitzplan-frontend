@@ -10,9 +10,9 @@ import { jsPDF } from "jspdf";
 import { toPng } from 'html-to-image';
 import html2canvas from 'html2canvas';
 
-const TISCHE = 4;
-const REIHEN = 3;
-const SCHUELER_PRO_TISCH = 2;
+const TISCHE = 2;
+const REIHEN = 2;
+const SCHUELER_PRO_TISCH = 1;
 
 
 export default function Klassenzimmer(props) {
@@ -20,6 +20,7 @@ export default function Klassenzimmer(props) {
     const [kameraView, setKameraView] = useKameraContext();
     const [klassenzimmer, setKlassenzimmer] = useState(null);
     const {currentStudent, setCurrentStudent} = useCurrentStudent();
+    const [clickCount, setClickCount] = useState(0);
 
     useEffect(() => {
         fetchKlassenzimmer(setKlassenzimmer);
@@ -68,10 +69,13 @@ export default function Klassenzimmer(props) {
                         <div className={"DownloadButton"}>
                             <button onClick={downloadPDF}>Download Pdf</button>
                         </div>
-                        <Mobile key="1"
-                                position="2"
+                        { clickCount <= REIHEN * TISCHE * SCHUELER_PRO_TISCH && ( <>
+                        <Mobile //key="1"
+                                clickCount={clickCount}
+                                setClickCount={setClickCount}
                                 getSchuelerByPosition={getSchuelerByPosition}>
                         </Mobile>
+                                </> )}
                     </>
                 )
             }

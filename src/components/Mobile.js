@@ -8,11 +8,13 @@ export default function Mobile(props) {
     const {currentStudent, setCurrentStudent} = useCurrentStudent();
     const [kameraView, setKameraView] = useKameraContext();
     const [modal, setModal] = useState(false);
+    const clickCount = props.clickCount;
+    const setClickCount = props.setClickCount;
 
     // TODO - Pass in either a schueler object or null - conditionally rendering the image and
     const [schueler, setSchueler] = useState(
-        props.getSchuelerByPosition(props.position)
-    )
+        props.getSchuelerByPosition(1)
+    );
 
     useEffect(() => {
         if (currentStudent !== null) {
@@ -23,7 +25,7 @@ export default function Mobile(props) {
     const [name, setName] = useState("")
     const nameAuswaehlen = (schueler) => {
 
-        axios.post("http://localhost:8080/sitzplan/positionieren/" + props.position, schueler, {
+        axios.post("http://localhost:8080/sitzplan/positionieren/" + clickCount, schueler, {
             headers: {
                 "Content-Type": "application/json"
             }
@@ -36,13 +38,16 @@ export default function Mobile(props) {
                 console.error("Error:", error);
             });
     }
+
     return (
         <div className={"KlassenzimmerRoute"}>
             <p> Der Weg durch das Klassenzimmer....</p>
             <button onClick={ () => {
                setModal(true);
+               setClickCount(clickCount + 1);
+               console.log(clickCount);
             }}
-            > Schüler anlegen beginnen!</button>
+            > Schüler anlegen!</button>
 
             <Modal modal={modal} setModal={setModal} nameAuswaehlen={nameAuswaehlen}/>
         </div>
