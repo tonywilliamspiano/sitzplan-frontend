@@ -9,19 +9,18 @@ function ZimmerModal(props) {
         <>
             {modal && (
                 <div className="modal">
-                    <div  className="overlay" onClick={()=> setModal(!modal)} ></div>
+                    <div className="overlay" onClick={() => setModal(!modal)}></div>
                     <div className="modal-content">
-                        <button className="btn-close" onClick={()=> setModal(!modal)}> ❌ </button>
+                        <button className="btn-close" onClick={() => setModal(!modal)}> ❌</button>
                         <div className="dummy-div"></div>
-                        <h2 className="modal-title">Name auswählen</h2>
-                        <div className= "nameListe-Container">
+                        <h2 className="zimmer-titel">Felder bitte ausfüllen</h2>
+                        <div className="nameListe-Container">
                         </div>
-
                     </div>
                 </div>
-            )}
+                )}
 
         </>
-    );
+);
 }
 export default ZimmerModal;
