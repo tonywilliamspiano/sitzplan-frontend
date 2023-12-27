@@ -15,6 +15,7 @@ export const IS_SELECTED = 1;
 
 export default function Klassenzimmer(props) {
 
+    let id = props.id;
     // Erlaube Zugriff auf KameraView
     const [kameraView, setKameraView] = useKameraContext();
 
@@ -24,9 +25,24 @@ export default function Klassenzimmer(props) {
 
     const [selectedPosition, setSelectedPosition] = useState(NONE_SELECTED)
 
+    const [isAnimating, setIsAnimating] = useState(false);
+
     useEffect(() => {
-        fetchKlassenzimmer(setKlassenzimmer, setUpdate);
-    }, [currentStudent]);
+        setIsAnimating(true);
+
+        console.log("ANIMATING!")
+        // Reset the animation state after a short delay (adjust as needed)
+        const timeoutId = setTimeout(() => {
+            setIsAnimating(false);
+        }, 1000); // 1000 milliseconds (1 second) in this example
+
+        // Clean up the timeout to avoid memory leaks
+        return () => clearTimeout(timeoutId);
+    }, [props.id]);
+
+    useEffect(() => {
+        fetchKlassenzimmer(setKlassenzimmer, setUpdate, id);
+    }, [currentStudent, props.id]);
 
     const getSchuelerByPosition = (position) => {
         for (let i = 0; i < klassenzimmer.schuelerListe.length; i++) {
@@ -58,7 +74,7 @@ export default function Klassenzimmer(props) {
                     console.error("Error:", error);
                 });
             setSelectedPosition(NONE_SELECTED)
-            fetchKlassenzimmer(setKlassenzimmer, setUpdate)
+            fetchKlassenzimmer(setKlassenzimmer, setUpdate, id)
         }
     }
 
@@ -70,11 +86,6 @@ export default function Klassenzimmer(props) {
         } else {
             return NONE_SELECTED;
         }
-    }
-
-    // Return Body
-    if (klassenzimmer === null) {
-        return <p></p>;
     }
 
     const reihenKomponente = [];
@@ -89,7 +100,6 @@ export default function Klassenzimmer(props) {
                 isSelected={isSelected}
                 update={update}
             >
-                Tisch
             </Reihe>
         );
     }
@@ -101,9 +111,17 @@ export default function Klassenzimmer(props) {
                     <Kamera setKameraView={setKameraView}></Kamera>
                 ) : (
                     <>
-                        <div className="Klassenzimmer">
-                            {reihenKomponente}
-                            <Lehrkraft></Lehrkraft>
+                        <div className={`Klassenzimmer ${isAnimating ? 'trigger-animation' : ''}`}>
+                            {
+                                klassenzimmer !== null ? (
+                                    <>
+                                        {reihenKomponente}
+                                        <Lehrkraft></Lehrkraft>
+                                    </>
+                                ) : (<div className="nicht-vorhanden">
+                                    Kein Klassenzimmer ausgewählt
+                                </div>)
+                            }
                         </div>
                     </>
                 )
@@ -125,7 +143,6 @@ function Reihe(props) {
                 isSelected={props.isSelected}
                 update={props.update}
             >
-                Tisch
             </Tisch>
         );
     }
@@ -185,8 +202,8 @@ function Lehrkraft() {
     );
 }
 
-function fetchKlassenzimmer(setKlassenzimmer, setUpdate) {
-    axios.get("http://localhost:8080/sitzplan/klassenzimmer/1")
+function fetchKlassenzimmer(setKlassenzimmer, setUpdate, id) {
+    axios.get("http://localhost:8080/sitzplan/klassenzimmer/" + id)
         .then(response => {
             console.log(response.data)
             setKlassenzimmer(response.data);
@@ -195,6 +212,7 @@ function fetchKlassenzimmer(setKlassenzimmer, setUpdate) {
             }
         })
         .catch(error => {
+            setKlassenzimmer(null);
             console.error("Error fetching klassenzimmer:", error);
         });
 }
