@@ -40,7 +40,7 @@ export default function Mobile(props) {
         <div className={"KlassenzimmerRoute"}>
             <p> Der Weg durch das Klassenzimmer....</p>
             <button onClick={ () => {
-                setModal(true);
+               setModal(true);
             }}
             > Schüler anlegen beginnen!</button>
 
