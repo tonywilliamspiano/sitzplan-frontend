@@ -72,6 +72,7 @@ export default function Klassenzimmer(props) {
                         { clickCount <= REIHEN * TISCHE * SCHUELER_PRO_TISCH && ( <>
                         <Mobile //key="1"
                                 clickCount={clickCount}
+                                nextPos 
                                 setClickCount={setClickCount}
                                 getSchuelerByPosition={getSchuelerByPosition}>
                         </Mobile>
