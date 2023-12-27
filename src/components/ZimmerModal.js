@@ -1,4 +1,5 @@
 import "./Modal.css";
+import "./ZimmerModal.css";
 import {useState} from "react";
 import axios from "axios";
 
@@ -7,45 +8,46 @@ function ZimmerModal(props) {
     let modal = props.modal;
     let setModal = props.setModal;
 
-    const[neuKlassenZimmer,setNeuKlassenZimmer] = useState({
-        name:"",
-        anzahlDerReihe:0,
-        anzahlDerTischProReihe:0,
-        anzahlDerSchuelerProTisch:0
+    const [neuKlassenZimmer, setNeuKlassenZimmer] = useState({
+        name: "",
+        anzahlDerReihe: 0,
+        anzahlDerTischeProReihe: 0,
+        anzahlDerSchuelerProTisch: 0
 
     })
 
-    function handelInputInfo(event) {
-
-        const{name, value} = event.target;
-
-        if(name !== "name"){
-            value = parseInt()
-        }
-
-        setNeuKlassenZimmer({...neuKlassenZimmer,[name]:value})
-
-        // console.log(event.target.value)
-        //
-        // setNeuKlassenZimmer(event.target.value)
-
-    }
-
-    async function handelsubmet(event) {
-       event.preventDefault();
-
-        try {
-            const response = await axios.post('http://localhost:8080/sitzplan/klassenzimmer', neuKlassenZimmer, {
-                headers: {
-                    'Content-Type': 'application/json',
-                },
+    function handleSubmit() {
+        axios.post("http://localhost:8080/sitzplan/klassenzimmer", neuKlassenZimmer, {
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
+            .then((response) => {
+                console.log(response.data)
+            })
+            .catch(error => {
+                console.error("Error:", error);
             });
-        } catch (error) {
-            console.error( error);
-        }
 
+        setNeuKlassenZimmer({
+            name: "",
+            anzahlDerReihe: 0,
+            anzahlDerTischeProReihe: 0,
+            anzahlDerSchuelerProTisch: 0
+        })
     }
 
+    function handleInputInfo(event) {
+        let {name, value} = event.target;
+
+        if (name !== "name") {
+            value = parseInt(value, 10);
+        }
+        setNeuKlassenZimmer(prevState => ({
+            ...prevState,
+            [name]: value,
+        }));
+    }
 
 
     return (
@@ -59,29 +61,32 @@ function ZimmerModal(props) {
                         </div>
                         <h2 className="zimmer-titel">Felder bitte ausfüllen</h2>
                         <div className="nameListe-Container">
-                          <form onSubmit={handelsubmet}>
-                              <label>KlassenZimmer Name :</label>
-                              <input type={"text"} value={neuKlassenZimmer.name} onChange={handelInputInfo}/>
+                            <form className="form-container" onSubmit={handleSubmit}>
+                                <label className="label">KlassenZimmer Name :</label>
+                                <input className="input" type={"text"} required={true} minLength={1} name="name" value={neuKlassenZimmer.name}
+                                       onChange={handleInputInfo}/>
 
-                              <label>Anzahl der Reihe :</label>
-                              <input type={"number"} value={neuKlassenZimmer.anzahlDerReihe} onChange={handelInputInfo}/>
+                                <label className="label">Anzahl der Reihe :</label>
+                                <input className="input" type={"number"} required={true} min={1} name="anzahlDerReihe" value={neuKlassenZimmer.anzahlDerReihe}
+                                       onChange={handleInputInfo}/>
 
-                              <label>Anzahl Der Tische Pro Reihe :</label>
-                              <input type={"number"} value={neuKlassenZimmer.anzahlDerTischProReihe} onChange={handelInputInfo}/>
+                                <label className="label">Anzahl Der Tische Pro Reihe :</label>
+                                <input className="input" type={"number"} required={true} min={1} name="anzahlDerTischeProReihe"
+                                       value={neuKlassenZimmer.anzahlDerTischeProReihe} onChange={handleInputInfo}/>
 
-                              <label>Anzahl Der Schüler Pro Tisch :</label>
-                              <input type={"number"} value={neuKlassenZimmer.anzahlDerSchuelerProTisch} onChange={handelInputInfo}/>
+                                <label className="label">Anzahl Der Schüler Pro Tisch :</label>
+                                <input className="input" type={"number"} required={true} min={1} name="anzahlDerSchuelerProTisch"
+                                       value={neuKlassenZimmer.anzahlDerSchuelerProTisch} onChange={handleInputInfo}/>
 
-                              <button type={"submit"}> Submit</button>
-
-
-                          </form>
+                                <button class="form-submit" type={"submit"}> Submit</button>
+                            </form>
                         </div>
                     </div>
                 </div>
-                )}
+            )}
 
         </>
-);
+    );
 }
+
 export default ZimmerModal;

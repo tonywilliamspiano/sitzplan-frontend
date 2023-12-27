@@ -1,13 +1,13 @@
 import Kamera from "./Kamera/Kamera";
 import {useKameraContext} from "./Kamera/KameraViewContext";
 import Schueler from "./Schueler";
+import Mobile from "./Mobile";
 import {useEffect, useState} from "react";
 import axios from "axios";
 import {useCurrentStudent} from "./CurrentStudentContext";
-
-const TISCHE = 4;
-const REIHEN = 3;
-const SCHUELER_PRO_TISCH = 2;
+import * as htmlToImage from 'html-to-image';
+import { jsPDF } from "jspdf";
+import { toPng } from 'html-to-image';
 
 export const NONE_SELECTED = -1;
 export const OTHER_SELECTED = 0;
@@ -18,10 +18,10 @@ export default function Klassenzimmer(props) {
     let id = props.id;
     // Erlaube Zugriff auf KameraView
     const [kameraView, setKameraView] = useKameraContext();
-
     const [klassenzimmer, setKlassenzimmer] = useState(null);
     const {currentStudent, setCurrentStudent} = useCurrentStudent();
     const [update, setUpdate] = useState(0)
+    const [clickCount, setClickCount] = useState(0);
 
     const [selectedPosition, setSelectedPosition] = useState(NONE_SELECTED)
 
@@ -45,6 +45,9 @@ export default function Klassenzimmer(props) {
     }, [currentStudent, props.id]);
 
     const getSchuelerByPosition = (position) => {
+        if (klassenzimmer === null) {
+            return null;
+        }
         for (let i = 0; i < klassenzimmer.schuelerListe.length; i++) {
             let schueler = klassenzimmer.schuelerListe[i];
             if (schueler.position === position) {
@@ -89,22 +92,24 @@ export default function Klassenzimmer(props) {
     }
 
     const reihenKomponente = [];
-
-    for (let index = 1; index <= REIHEN; index++) {
-        reihenKomponente.push(
-            <Reihe
-                key={index}
-                id={index}
-                getSchuelerByPosition={getSchuelerByPosition}
-                selectPosition={selectPosition}
-                isSelected={isSelected}
-                update={update}
-            >
-            </Reihe>
-        );
+    if (klassenzimmer !== null) {
+        for (let index = 1; index <= klassenzimmer.anzahlDerReihe; index++) {
+            reihenKomponente.push(
+                <Reihe
+                    key={index}
+                    id={index}
+                    getSchuelerByPosition={getSchuelerByPosition}
+                    selectPosition={selectPosition}
+                    isSelected={isSelected}
+                    update={update}
+                    REIHEN={klassenzimmer.anzahlDerReihe}
+                    TISCHE={klassenzimmer.anzahlDerTischeProReihe}
+                    SCHUELER={klassenzimmer.anzahlDerSchuelerProTisch}
+                >
+                </Reihe>
+            );
+        }
     }
-
-    console.log(klassenzimmer)
 
     return (
         <>
@@ -126,6 +131,14 @@ export default function Klassenzimmer(props) {
                                 </div>)
                             }
                         </div>
+                        { clickCount <= 30 && ( <>
+                        <Mobile //key="1"
+                                clickCount={clickCount}
+                                nextPos
+                                setClickCount={setClickCount}
+                                getSchuelerByPosition={getSchuelerByPosition}>
+                        </Mobile>
+                                </> )}
                     </>
                 )
             }
@@ -136,15 +149,18 @@ export default function Klassenzimmer(props) {
 function Reihe(props) {
     const tischKomponenten = [];
 
-    for (let index = 1; index <= TISCHE; index++) {
+    for (let index = 1; index <= props.TISCHE; index++) {
         tischKomponenten.push(
             <Tisch
                 key={index}
-                id={(props.id - 1) * TISCHE + index}
+                id={(props.id - 1) * props.TISCHE + index}
                 getSchuelerByPosition={props.getSchuelerByPosition}
                 selectPosition={props.selectPosition}
                 isSelected={props.isSelected}
                 update={props.update}
+                SCHUELER={props.SCHUELER}
+                TISCHE={props.TISCHE}
+                REIHEN={props.REIHEN}
             >
             </Tisch>
         );
@@ -161,19 +177,19 @@ function Tisch(props) {
     const schuelerKomponenten = []
 
     const schuelerStyle = {
-        width: (100 / SCHUELER_PRO_TISCH) + ("%")
+        width: (100 / props.SCHUELER) + ("%")
     }
 
     const tischStyle = {
-        width: (90 / TISCHE) + ("%"),
-        height: (30 / REIHEN) + "vw"
+        width: (90 / props.TISCHE) + ("%"),
+        height: (30 / props.REIHEN) + "vw"
     }
 
-    for (let index = 1; index <= SCHUELER_PRO_TISCH; index++) {
+    for (let index = 1; index <= props.SCHUELER; index++) {
         schuelerKomponenten.push(
             <Schueler style={schuelerStyle}
                       key={index}
-                      position={(props.id - 1) * SCHUELER_PRO_TISCH + index}
+                      position={(props.id - 1) * props.SCHUELER + index}
                       getSchuelerByPosition={props.getSchuelerByPosition}
                       selectPosition={props.selectPosition}
                       isSelected={props.isSelected}
@@ -217,5 +233,39 @@ function fetchKlassenzimmer(setKlassenzimmer, setUpdate, id) {
         .catch(error => {
             setKlassenzimmer(null);
             console.error("Error fetching klassenzimmer:", error);
+        });
+}
+
+export function downloadPDF() {
+    const klassenzimmer = document.getElementsByClassName('Klassenzimmer')[0];
+    if (klassenzimmer) {
+        console.log("Klassenzimmer ist da.")
+    }
+    const {offsetWidth, offsetHeight} = klassenzimmer;
+    htmlToImage.toPng(klassenzimmer, {
+        width: offsetWidth,
+        height: offsetHeight,
+        canvasWidth: 1125,
+        canvasHeight: 800,
+        skipAutoScale: false,
+        style: {
+            margin: 0,
+            padding: 0,
+        },
+        quality: 0.95
+    })
+        .then(function (dataUrl) {
+            var link = document.createElement('a');
+            link.download = 'my-image-name.jpeg';
+            const options = {orientation: 'l', format: 'a4'}
+            const pdf = new jsPDF(options);
+            const imgProps = pdf.getImageProperties(dataUrl);
+            const pdfWidth = pdf.internal.pageSize.getWidth();
+            const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+            pdf.addImage(dataUrl, 'PNG', 0, 0);
+            pdf.save("download.pdf");
+        })
+        .catch(function (error) {
+            console.error("Error in htmlToPng", error);
         });
 }

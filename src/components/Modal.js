@@ -10,6 +10,10 @@ import axios from "axios";
      let nameAuswaehlen = props.nameAuswaehlen;
      const [schuelerListe, setSchuelerListe] =useState([])
 
+     function hasNoPosition(schueler){
+         return schueler.position === -1;
+     }
+
      useEffect(() => {
          axios.get("http://localhost:8080/sitzplan/klassenliste")
              .then(respose=> {
@@ -31,7 +35,7 @@ import axios from "axios";
                         <h2 className="modal-title">Name auswählen</h2>
                         <div className= "nameListe-Container">
                             {
-                                schuelerListe.map((schueler, index) => (
+                                schuelerListe.filter(hasNoPosition).map((schueler, index) => (
                                      <div className="btn-NameListe" key={index} onClick={() =>{
                                          nameAuswaehlen(schueler)
                                          setModal(!modal)
