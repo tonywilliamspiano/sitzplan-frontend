@@ -10,9 +10,9 @@ function ZimmerModal(props) {
 
     const [neuKlassenZimmer, setNeuKlassenZimmer] = useState({
         name: "",
-        anzahlDerReihe: 0,
-        anzahlDerTischeProReihe: 0,
-        anzahlDerSchuelerProTisch: 0
+        anzahlDerReihe: 1,
+        anzahlDerTischeProReihe: 1,
+        anzahlDerSchuelerProTisch: 1
 
     })
 
@@ -62,20 +62,20 @@ function ZimmerModal(props) {
                         <h2 className="zimmer-titel">Felder bitte ausfüllen</h2>
                         <div className="nameListe-Container">
                             <form className="form-container" onSubmit={handleSubmit}>
-                                <label className="label">KlassenZimmer Name :</label>
+                                <label className="label">Klassenzimmer Name :</label>
                                 <input className="input" type={"text"} required={true} minLength={1} name="name" value={neuKlassenZimmer.name}
                                        onChange={handleInputInfo}/>
 
                                 <label className="label">Anzahl der Reihe :</label>
-                                <input className="input" type={"number"} required={true} min={1} name="anzahlDerReihe" value={neuKlassenZimmer.anzahlDerReihe}
+                                <input className="input" type={"number"} required={true} min={1} max={5} name="anzahlDerReihe" value={neuKlassenZimmer.anzahlDerReihe}
                                        onChange={handleInputInfo}/>
 
-                                <label className="label">Anzahl Der Tische Pro Reihe :</label>
-                                <input className="input" type={"number"} required={true} min={1} name="anzahlDerTischeProReihe"
+                                <label className="label">Anzahl der Tische Pro Reihe :</label>
+                                <input className="input" type={"number"} required={true} min={1} max={5} name="anzahlDerTischeProReihe"
                                        value={neuKlassenZimmer.anzahlDerTischeProReihe} onChange={handleInputInfo}/>
 
-                                <label className="label">Anzahl Der Schüler Pro Tisch :</label>
-                                <input className="input" type={"number"} required={true} min={1} name="anzahlDerSchuelerProTisch"
+                                <label className="label">Anzahl der Schüler Pro Tisch :</label>
+                                <input className="input" type={"number"} required={true} min={1} max={3} name="anzahlDerSchuelerProTisch"
                                        value={neuKlassenZimmer.anzahlDerSchuelerProTisch} onChange={handleInputInfo}/>
 
                                 <button className="form-submit" type={"submit"}> Submit</button>

@@ -42,7 +42,7 @@ export default function Navbar(props) {
         setZimmerHinzufuegen(true);
     }
 
-    async function klassenlisteHochladen(){
+    async function klassenlisteHochladen() {
         // Optionen setzen sodass nur die Worddokumente angezeigt werden.
         const pickerOpts = {
             types: [
@@ -77,7 +77,7 @@ export default function Navbar(props) {
                 console.log(name + " " + surname);
             }
 
-        } catch (error){
+        } catch (error) {
             console.error("Error:", error.message);
         }
 
@@ -92,18 +92,33 @@ export default function Navbar(props) {
                         Meine Klassenzimmer
                     </div>
                     {getKlassenZimmer}
-                    <ZimmerModal modal={zimmerHinzufuegen} setModal={setZimmerHinzufuegen} setKlassenzimmerId={setKlassenzimmerId}></ZimmerModal>
-                    <KlassenListePopup modal={klassenPopup} setModal={setKlassenPopup} klassenzimmerId={props.klassenzimmerId} name={getKlassenzimmerName()}></KlassenListePopup>
+                    <ZimmerModal modal={zimmerHinzufuegen} setModal={setZimmerHinzufuegen}
+                                 setKlassenzimmerId={setKlassenzimmerId}></ZimmerModal>
+                    <KlassenListePopup modal={klassenPopup} setModal={setKlassenPopup}
+                                       klassenzimmerId={props.klassenzimmerId}
+                                       name={getKlassenzimmerName()}></KlassenListePopup>
 
                 </div>
 
+                {props.klassenzimmerId > 0 ? (
+                    <div className="navItem" onClick={() => {
+                        setKlassenPopup(true)
+                    }}>Klassenliste Bearbeiten</div>
+                ) : (<></>)
+                }
 
-                <div className="navItem" onClick={() => {setKlassenPopup(true)}}>Klassenliste Bearbeiten</div>
-                <div className="navItem"
-                     onClick={klassenlisteHochladen}>Klassenliste Hochladen</div>
 
                 <div className="navItem flex-grow"></div>
-                <div className="navItem bottomBtn" onClick={() => downloadPDF()}>PDF Runterladen</div>
+
+                {props.klassenzimmerId > 0 ? (
+                    <>
+                        <div className="navItem"
+                             onClick={klassenlisteHochladen}>Klassenliste Hochladen
+                        </div>
+                        <div className="navItem bottomBtn" onClick={() => downloadPDF()}>PDF Runterladen</div>
+                    </>
+                ) : (<></>)
+                }
             </div>
         </>
     )
