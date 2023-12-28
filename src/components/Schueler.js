@@ -16,7 +16,7 @@ export default function Schueler(props) {
 
     useEffect(() => {
         setSchueler(props.getSchuelerByPosition(props.position))
-        console.log("SETTING NEW position!")
+        setImageLoaded(true)
     }, [props.update]);
 
     useEffect(() => {
@@ -67,12 +67,34 @@ export default function Schueler(props) {
         }
     getSize();
 
+    const [imageLoaded, setImageLoaded] = useState(true);
+    const handleImageError = () => {     setImageLoaded(false);};
+    const handleImageLoad = () => {     setImageLoaded(true);};
+
+
+
     return (
 
         <div ref={myElementRef} className={`Schueler ${props.isSelected(props.position) === IS_SELECTED ? 'selected' : ''}`} style={props.style}>
             {schueler !== null ? (
                 <div className="schuelerContainer" onClick={() => props.selectPosition(props.position)}>
-                    <img src={"http://localhost:8080/sitzplan/foto/" + schueler.id} className="schuelerBild" style={schuelerBildStyle}/>
+
+                    {imageLoaded ? (
+                        <img
+                            src={"http://localhost:8080/sitzplan/foto/" + schueler.id}
+                            alt="foto vom schueler"
+                            onLoad={handleImageLoad}
+                            onError={handleImageError}
+                            className="schuelerBild" style={schuelerBildStyle}
+
+                        />
+                    ) : (
+                        <img
+                            src={process.env.PUBLIC_URL + '/defaultfoto.png'}
+                            alt="default"
+                            className="schuelerBild" style={schuelerBildStyle}
+                        />
+                    )}
                     <p className="schuelerName" style={schuelerNameStyle}>{schueler.name}</p>
                 </div>
             ) : (

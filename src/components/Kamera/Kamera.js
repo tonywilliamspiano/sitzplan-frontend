@@ -88,6 +88,14 @@ export default function Kamera(props) {
                 </>
             )
             }
+
+            {/*{img == null && (*/}
+            {/*    <div className="defaultPhotoContainer">*/}
+            {/*        <img  src={process.env.PUBLIC_URL + '/defaultfoto.png'} alt="default" />*/}
+
+            {/*       */}
+            {/*    </div>*/}
+            {/*)}*/}
         </div>
     );
 }
