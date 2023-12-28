@@ -134,6 +134,7 @@
   display: none;
 }
 
+/* Mobile mode */
 @media only screen and (max-width: 600px) {
   .Klassenzimmer{
     display: none;
@@ -145,6 +146,10 @@
 
   .KlassenzimmerRoute{
     display: block;
+  }
+
+  .sidenav{
+    display: none;
   }
 
 }
