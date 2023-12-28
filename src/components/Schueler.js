@@ -71,7 +71,10 @@ export default function Schueler(props) {
         <div ref={myElementRef} className={`Schueler ${props.isSelected(props.position) === IS_SELECTED ? 'selected' : ''}`} style={props.style}>
             {schueler !== null ? (
                 <div className="schuelerContainer" onClick={() => props.selectPosition(props.position)}>
-                    <img src={"http://localhost:8080/sitzplan/foto/" + schueler.id} className="schuelerBild" style={schuelerBildStyle}/>
+
+
+                    <img src={process.env.PUBLIC_URL + '/defaultfoto.png'} className="schuelerBild" style={schuelerBildStyle}/>
+                    {/*<img src={"http://localhost:8080/sitzplan/foto/" + schueler.id} className="schuelerBild" style={schuelerBildStyle}/>*/}
                     <p className="schuelerName" style={schuelerNameStyle}>{schueler.name}</p>
                 </div>
             ) : (
