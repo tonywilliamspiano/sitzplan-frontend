@@ -1,4 +1,4 @@
-import "./Modal.css";
+import "../Modal.css";
 import "./ZimmerModal.css";
 import {useState} from "react";
 import axios from "axios";

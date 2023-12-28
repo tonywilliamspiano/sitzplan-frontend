@@ -2,13 +2,15 @@ import './NavBar.css';
 import axios from "axios";
 import {useEffect, useState} from "react";
 import ZimmerModal from "./ZimmerModal";
-import {downloadPDF} from "./Klassenzimmer";
+import {downloadPDF} from "../Klassenzimmer";
+import KlassenListePopup from "./KlassenListePopup";
 
 export default function Navbar(props) {
     let setKlassenzimmerId = props.setKlassenzimmerId;
 
     const [klassenzimmerListe, setKlassenzimmerListe] = useState([]);
     const [zimmerHinzufuegen, setZimmerHinzufuegen] = useState(false);
+    const [klassenPopup, setKlassenPopup] = useState(false);
 
     useEffect(() => {
         axios.get("http://localhost:8080/sitzplan/meinklassenzimmer")
@@ -27,6 +29,15 @@ export default function Navbar(props) {
         </>
     );
 
+    const getKlassenzimmerName = () => {
+        for (let klassenzimmer of klassenzimmerListe) {
+            if (klassenzimmer.id === props.klassenzimmerId) {
+                return klassenzimmer.name;
+            }
+        }
+        return "Kein Zimmer ausgewählt"
+    }
+
     function klassenzimmerHinzufuegen() {
         setZimmerHinzufuegen(true);
     }
@@ -41,11 +52,12 @@ export default function Navbar(props) {
                     </div>
                     {getKlassenZimmer}
                     <ZimmerModal modal={zimmerHinzufuegen} setModal={setZimmerHinzufuegen}></ZimmerModal>
+                    <KlassenListePopup modal={klassenPopup} setModal={setKlassenPopup} klassenzimmerId={props.klassenzimmerId} name={getKlassenzimmerName()}></KlassenListePopup>
 
                 </div>
 
 
-                <div className="navItem" onClick={() => {}}>Klassenliste Bearbeiten</div>
+                <div className="navItem" onClick={() => {setKlassenPopup(true)}}>Klassenliste Bearbeiten</div>
                 <div className="navItem" onClick={() => {}}>Klassenliste Hochladen</div>
 
                 <div className="navItem" onClick={() => downloadPDF()}>PDF Runterladen</div>
