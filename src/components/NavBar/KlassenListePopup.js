@@ -75,15 +75,16 @@ function KlassenListePopup(props) {
                                 schuelerListe.filter(hasNoPosition).map((schueler, index) => (
                                         <div className="klassenliste-namen" key={index} onClick={() =>{
                                             setModal(!modal)
-                                        }  }>{schueler.name}   <button className="name-loeschen"> ❎ </button>  </div>
+                                        }  }>{schueler.name}        <div className= "loeschen-btn" ><button className="name-loeschen"> ❎ </button> </div>  </div>
                                     )
                                 )
                             }
-                            <form className="neuer-name">
+                            <form className="neuer-name" >
                                 <textarea
                                     id="nameTextArea"
                                     name="name"
                                     value={name}
+                                    placeholder="gib den Name ein...."
                                     onChange={handleChange}
                                     onKeyDown={handleKeyDown}
                                 />

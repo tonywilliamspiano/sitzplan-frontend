@@ -1,17 +1,24 @@
 
 .neuer-name{
 
-    margin: 4%;
+    margin: 5%;
+    margin-right: -5%;
     align-items: center;
 
 }
 .klassenliste-namen{
 
-    border: solid #f1f1f1;
+    border: solid gainsboro;
+    padding: 1%;
 
 }
 .name-loeschen{
 border: none;
 
+}
+.loeschen-btn{
+
+    margin-left: 80%;
+    margin-top: -9%;
 }
 
