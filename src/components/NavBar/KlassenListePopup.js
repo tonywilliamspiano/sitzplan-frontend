@@ -3,6 +3,7 @@ import "./ZimmerModal.css";
 import React, {useEffect, useState} from "react";
 import axios from "axios";
 import {useKlassenListeContext} from "../KlassenListeContext";
+import "./KlassenListePopup.css"
 
 function KlassenListePopup(props) {
 
@@ -75,15 +76,17 @@ function KlassenListePopup(props) {
                                 schuelerListe.filter(hasNoPosition).map((schueler, index) => (
                                         <div className="klassenliste-namen" key={index} onClick={() =>{
                                             setModal(!modal)
-                                        }}>{schueler.name}</div>
+                                        }
+                                        }>{schueler.name}        <div className= "loeschen-btn" ><button className="name-loeschen"> ❎ </button> </div>  </div>
                                     )
                                 )
                             }
-                            <form className="neuer-name">
+                            <form className="neuer-name" >
                                 <textarea
                                     id="nameTextArea"
                                     name="name"
                                     value={name}
+                                    placeholder="gib den Name ein...."
                                     onChange={handleChange}
                                     onKeyDown={handleKeyDown}
                                 />
