@@ -2,7 +2,7 @@ import './App.css';
 import Klassenzimmer from "./components/Klassenzimmer";
 import {CurrentStudentProvider} from "./components/CurrentStudentContext";
 import {KameraViewProvider, useKameraContext} from "./components/Kamera/KameraViewContext";
-import NavBar from "./components/NavBar"
+import NavBar from "./components/NavBar/NavBar"
 import {useState} from "react";
 
 function App() {
