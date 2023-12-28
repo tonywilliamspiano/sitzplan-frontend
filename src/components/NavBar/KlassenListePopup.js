@@ -2,6 +2,7 @@ import "../Modal.css";
 import "./ZimmerModal.css";
 import React, {useEffect, useState} from "react";
 import axios from "axios";
+import "./KlassenListePopup.css"
 
 function KlassenListePopup(props) {
 
@@ -74,7 +75,7 @@ function KlassenListePopup(props) {
                                 schuelerListe.filter(hasNoPosition).map((schueler, index) => (
                                         <div className="klassenliste-namen" key={index} onClick={() =>{
                                             setModal(!modal)
-                                        }}>{schueler.name}</div>
+                                        }  }>{schueler.name}   <button className="name-loeschen"> ❎ </button>  </div>
                                     )
                                 )
                             }
