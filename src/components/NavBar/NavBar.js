@@ -58,7 +58,6 @@ export default function Navbar(props) {
         };
 
         const pizzip = require("pizzip");
-        // const docxtemplater = require("docxtemplater");
         const convert = require('xml-js')
         try {
             // Open file picker and destructure the result the first handle
@@ -71,10 +70,21 @@ export default function Navbar(props) {
             const convertedJSON = JSON.parse(rawJSON);
             console.log(convertedJSON['w:document']['w:body']['w:tbl']['w:tr']);
             const rows = convertedJSON['w:document']['w:body']['w:tbl']['w:tr'];
+            const schuelerListe = [];
             for (let i = 0; i < rows.length; i++) {
                 const surname = rows[i]['w:tc'][1]['w:p']['w:r']['w:t']['_text'];
                 const name = rows[i]['w:tc'][2]['w:p']['w:r']['w:t']['_text'];
-                console.log(name + " " + surname);
+                const schueler = name + " " + surname;
+                console.log(schueler);
+                schuelerListe.push(schueler);
+            }
+
+            const schuelerListeDTO = {"schuelerListe" : schuelerListe };
+            if (props.klassenzimmerId) {
+                axios.post("http://localhost:8080/sitzplan/schueler-liste/" + props.klassenzimmerId, schuelerListeDTO)
+                    .then((response) => {
+                        console.log(response)
+                    })
             }
 
         } catch (error) {
