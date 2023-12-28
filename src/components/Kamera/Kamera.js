@@ -15,8 +15,6 @@ export default function Kamera(props) {
         facingMode: "user",
     };
 
-    console.log(currentStudent);
-
     const fotoMachen = useCallback(() => {
         const imageSrc = webcamRef.current.getScreenshot();
         setImg(imageSrc);
