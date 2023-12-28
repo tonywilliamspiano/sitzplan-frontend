@@ -48,11 +48,12 @@ export default function Navbar(props) {
                 <div className="navItem" onClick={() => {}}>Klassenliste Bearbeiten</div>
                 <div className="navItem" onClick={() => {}}>Klassenliste Hochladen</div>
 
-                <div className="navItem"></div>
-                <div className="navItem"></div>
-                <div className="navItem"></div>
-
                 <div className="navItem" onClick={() => downloadPDF()}>PDF Runterladen</div>
+                <div className="navItem"></div>
+                {/*<div className="navItem"></div>*/}
+                {/*<div className="navItem"></div>*/}
+
+
             </div>
         </>
     )
