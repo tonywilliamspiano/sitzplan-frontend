@@ -4,6 +4,7 @@ import {useEffect, useRef, useState} from "react";
 import Modal from "./Modal";
 import axios from "axios";
 import {IS_SELECTED, NONE_SELECTED} from "./Klassenzimmer";
+import {useKlassenListeContext} from "./KlassenListeContext";
 
 export default function Schueler(props) {
     const {currentStudent, setCurrentStudent} = useCurrentStudent();

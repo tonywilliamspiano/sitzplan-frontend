@@ -2,13 +2,14 @@ import "../Modal.css";
 import "./ZimmerModal.css";
 import React, {useEffect, useState} from "react";
 import axios from "axios";
+import {useKlassenListeContext} from "../KlassenListeContext";
 
 function KlassenListePopup(props) {
 
     let modal = props.modal;
     let setModal = props.setModal;
     const [name, setName] = useState('');
-    const [klassenReload, setKlassenReload] = useState(0);
+    const [klassenListeReload, setKlassenListeReload] = useKlassenListeContext();
 
     const [schuelerListe, setSchuelerListe] = useState([])
 
@@ -28,7 +29,7 @@ function KlassenListePopup(props) {
         }
         axios.post("http://localhost:8080/sitzplan/schueler/" + props.klassenzimmerId, schueler)
             .then((response) => {
-                setKlassenReload(klassenReload + 1)
+                setKlassenListeReload(klassenListeReload + 1)
             })
         setName("")
     };
@@ -57,7 +58,7 @@ function KlassenListePopup(props) {
             .catch(error => {
                 console.error("erorr",error)
             })
-    }, [klassenReload, props.klassenzimmerId]);
+    }, [klassenListeReload, props.klassenzimmerId]);
 
 
     return (

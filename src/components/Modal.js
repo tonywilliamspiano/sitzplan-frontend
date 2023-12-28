@@ -2,8 +2,10 @@ import React, {useEffect, useState} from "react";
 
 import "./Modal.css";
 import axios from "axios";
+import {useKlassenListeContext} from "./KlassenListeContext";
 
  function Modal(props) {
+     const [klassenListeUpdate, setKlassenListeUpdate] = useKlassenListeContext();
 
      let modal = props.modal;
      let setModal = props.setModal;
@@ -22,7 +24,7 @@ import axios from "axios";
              .catch(error => {
                  console.error("erorr",error)
              })
-     }, [props.klassenzimmerId]);
+     }, [props.klassenzimmerId, klassenListeUpdate]);
 
      return (
         <>

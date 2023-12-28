@@ -23,7 +23,7 @@ function ZimmerModal(props) {
             }
         })
             .then((response) => {
-                console.log(response.data)
+                props.setKlassenzimmerId(response.data.id)
             })
             .catch(error => {
                 console.error("Error:", error);
