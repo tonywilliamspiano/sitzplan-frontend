@@ -1,5 +1,5 @@
 
-.neuer-name{
+.neuer-name {
 
     margin: 5%;
     margin-right: -5%;
@@ -14,24 +14,59 @@
     border: solid black;
 }
 
-.klassenliste-namen{
+.klassenliste {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.klassenliste-title {
+    text-align: center;
+}
+
+.klassenliste-modal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    line-height: 1.4;
+    background: #f1f1f1;
+    padding: 0 28px 80px;
+    border-radius: 3px;
+    max-width: 1000px;
+    min-width: 300px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.neuer-name {
+    width: 70%;
+    text-align: center;
+}
+
+.klassenliste-namen {
     flex-grow: 1;
     padding: 2%;
     display: flex;
     align-items: center;
     justify-content: center;
 }
-.name-loeschen{
-border: none;
+
+.name-loeschen {
+    border: none;
 }
 
-.loeschen-btn{
+.loeschen-btn {
     margin-right: 3%;
     display: flex;
     align-items: center;
     justify-content: center;
 }
-.klassenliste-title{
+
+.klassenliste-title {
 
     width: 100%;
 }

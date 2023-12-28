@@ -65,10 +65,9 @@ function KlassenListePopup(props) {
         const userConfirmed = window.confirm('Willst du wirklich ' + schueler.name + 'aus dem Klassenzimmer ' + props.name + 'entfernen?');
 
         if (userConfirmed) {
-            console.log("DELETING!")
-            // axios.delete("http://localhost:8080/sitzplan/schueler/" + schueler.id)
-            //     .then(() =>
-            //         setKlassenListeReload(klassenListeReload + 1));
+            axios.delete("http://localhost:8080/sitzplan/schueler/" + schueler.id)
+                .then(() =>
+                    setKlassenListeReload(klassenListeReload + 1));
         }
     }
 
@@ -77,7 +76,7 @@ function KlassenListePopup(props) {
             {modal && (
                 <div className="modal">
                     <div className="overlay" onClick={() => setModal(!modal)}></div>
-                    <div className="modal-content">
+                    <div className="klassenliste-modal">
                         <button className="btn-close" onClick={() => setModal(!modal)}> ❌</button>
                         <div className="dummy-div"></div>
                         <h2 className="klassenliste-title">Alle Schüler in {props.name}</h2>

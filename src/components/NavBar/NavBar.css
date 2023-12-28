@@ -64,23 +64,3 @@
     font-size: 36px;
     margin-left: 50px;
 }
-
-.klassenliste {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-
-.klassenliste-title {
-    text-align: center;
-}
-
-.klassenliste-namen {
-    width: 50%;
-    text-align: center;
-}
-
-.neuer-name {
-    width: 70%;
-    text-align: center;
-}
