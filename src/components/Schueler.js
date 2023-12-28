@@ -1,6 +1,6 @@
 import {useCurrentStudent} from "./CurrentStudentContext";
 import {useKameraContext} from "./Kamera/KameraViewContext";
-import {useEffect, useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import Modal from "./Modal";
 import axios from "axios";
 import {IS_SELECTED, NONE_SELECTED} from "./Klassenzimmer";
@@ -41,13 +41,38 @@ export default function Schueler(props) {
             });
     }
 
+    let schuelerNameStyle = {};
+    let schuelerBildStyle = {};
+
+            const myElementRef = useRef(null);
+        const getSize = () => {
+
+            const myElement = myElementRef.current;
+
+            if (myElement) {
+                const styles = window.getComputedStyle(myElement);
+                const width = parseFloat(styles.width);
+                const height = parseFloat(styles.height);
+
+                if (width > (height * 2)) {
+                    schuelerBildStyle.width = "35%";
+                    schuelerNameStyle.width = "50%"
+                }
+                else if (width > height) {
+                    schuelerBildStyle.width = "50%";
+                    schuelerNameStyle.width = "40%"
+                }
+            }
+        }
+    getSize();
+
     return (
 
-        <div className={`Schueler ${props.isSelected(props.position) === IS_SELECTED ? 'selected' : ''}`} style={props.style}>
+        <div ref={myElementRef} className={`Schueler ${props.isSelected(props.position) === IS_SELECTED ? 'selected' : ''}`} style={props.style}>
             {schueler !== null ? (
-                <div onClick={() => props.selectPosition(props.position)}>
-                    <img src={"http://localhost:8080/sitzplan/foto/" + schueler.id} className="schuelerBild"/>
-                    <p className="schuelerName">{schueler.name}</p>
+                <div className="schuelerContainer" onClick={() => props.selectPosition(props.position)}>
+                    <img src={"http://localhost:8080/sitzplan/foto/" + schueler.id} className="schuelerBild" style={schuelerBildStyle}/>
+                    <p className="schuelerName" style={schuelerNameStyle}>{schueler.name}</p>
                 </div>
             ) : (
                 <div className="schuelerHinzufuegen" onClick={
@@ -59,9 +84,7 @@ export default function Schueler(props) {
                             props.selectPosition(props.position)
                         }
                     }
-                }>
-                <p >+</p>
-                </div>
+                }>+</div>
             )}
             <Modal modal={modal} setModal={setModal} nameAuswaehlen={nameAuswaehlen}/>
         </div>
