@@ -17,6 +17,9 @@ import {useKlassenListeContext} from "./KlassenListeContext";
      }
 
      useEffect(() => {
+         if (props.klassenzimmerId <= 0 || props.klassenzimmerId === undefined) {
+             return;
+         }
          axios.get("http://localhost:8080/sitzplan/klassenliste/" + props.klassenzimmerId)
              .then(respose=> {
                  setSchuelerListe(respose.data)

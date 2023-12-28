@@ -78,7 +78,7 @@ function ZimmerModal(props) {
                                 <input className="input" type={"number"} required={true} min={1} name="anzahlDerSchuelerProTisch"
                                        value={neuKlassenZimmer.anzahlDerSchuelerProTisch} onChange={handleInputInfo}/>
 
-                                <button class="form-submit" type={"submit"}> Submit</button>
+                                <button className="form-submit" type={"submit"}> Submit</button>
                             </form>
                         </div>
                     </div>

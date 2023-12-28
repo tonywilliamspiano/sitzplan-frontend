@@ -226,6 +226,10 @@ function Lehrkraft() {
 }
 
 function fetchKlassenzimmer(setKlassenzimmer, setUpdate, id) {
+    if (id < 0) {
+        setKlassenzimmer(null);
+        return;
+    }
     axios.get("http://localhost:8080/sitzplan/klassenzimmer/" + id)
         .then(response => {
             setKlassenzimmer(response.data);
