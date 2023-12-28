@@ -105,6 +105,7 @@ export default function Klassenzimmer(props) {
                     REIHEN={klassenzimmer.anzahlDerReihe}
                     TISCHE={klassenzimmer.anzahlDerTischeProReihe}
                     SCHUELER={klassenzimmer.anzahlDerSchuelerProTisch}
+                    klassenzimmerId={props.id}
                 >
                 </Reihe>
             );
@@ -161,6 +162,7 @@ function Reihe(props) {
                 SCHUELER={props.SCHUELER}
                 TISCHE={props.TISCHE}
                 REIHEN={props.REIHEN}
+                klassenzimmerId={props.klassenzimmerId}
             >
             </Tisch>
         );
@@ -176,13 +178,15 @@ function Reihe(props) {
 function Tisch(props) {
     const schuelerKomponenten = []
 
-    const schuelerStyle = {
-        width: (100 / props.SCHUELER) + ("%")
-    }
 
     const tischStyle = {
-        width: (90 / props.TISCHE) + ("%"),
-        height: (30 / props.REIHEN) + "vw"
+        width: Math.floor(90 / props.TISCHE) + ("%"),
+        height: Math.floor(30 / props.REIHEN) + "vw"
+    }
+
+    const schuelerStyle = {
+        width: Math.floor(100 / props.SCHUELER) + ("%"),
+        height: tischStyle.height
     }
 
     for (let index = 1; index <= props.SCHUELER; index++) {
@@ -194,8 +198,8 @@ function Tisch(props) {
                       selectPosition={props.selectPosition}
                       isSelected={props.isSelected}
                       update={props.update}
+                      klassenzimmerId={props.klassenzimmerId}
             >
-                Tisch
             </Schueler>
         );
     }

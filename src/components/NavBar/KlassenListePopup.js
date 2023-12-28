@@ -23,7 +23,10 @@ function KlassenListePopup(props) {
             name: name,
             position: -1
         }
-        axios.post("http://localhost:8080/sitzplan/schueler", schueler)
+        if (props.klassenzimmerId === -1) {
+            return;
+        }
+        axios.post("http://localhost:8080/sitzplan/schueler/" + props.klassenzimmerId, schueler)
             .then((response) => {
                 setKlassenReload(klassenReload + 1)
             })
@@ -43,14 +46,18 @@ function KlassenListePopup(props) {
     };
 
     useEffect(() => {
-        axios.get("http://localhost:8080/sitzplan/klassenliste")
+        if (props.klassenzimmerId === -1) {
+            return;
+        }
+        console.log("klassenzimmer Id = " + props.klassenzimmerId)
+        axios.get("http://localhost:8080/sitzplan/klassenliste/" + props.klassenzimmerId)
             .then(respose=> {
                 setSchuelerListe(respose.data)
             })
             .catch(error => {
                 console.error("erorr",error)
             })
-    }, [klassenReload]);
+    }, [klassenReload, props.klassenzimmerId]);
 
 
     return (
