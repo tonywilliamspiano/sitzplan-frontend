@@ -11,13 +11,14 @@ export default function Schueler(props) {
     const [kameraView, setKameraView] = useKameraContext();
     const [modal, setModal] = useState(false);
     const [update, setupdate] = useState(0)
+    const [klassenListe, setKlassenListe] = useKlassenListeContext();
 
     const [schueler, setSchueler] = useState(null)
 
     useEffect(() => {
         setSchueler(props.getSchuelerByPosition(props.position))
         setImageLoaded(true)
-    }, [props.update]);
+    }, [props.update, klassenListe]);
 
     useEffect(() => {
         if (currentStudent !== null) {

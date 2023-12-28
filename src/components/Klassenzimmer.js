@@ -8,6 +8,7 @@ import {useCurrentStudent} from "./CurrentStudentContext";
 import * as htmlToImage from 'html-to-image';
 import { jsPDF } from "jspdf";
 import { toPng } from 'html-to-image';
+import {useKlassenListeContext} from "./KlassenListeContext";
 
 export const NONE_SELECTED = -1;
 export const OTHER_SELECTED = 0;
@@ -18,6 +19,7 @@ export default function Klassenzimmer(props) {
     let id = props.id;
     // Erlaube Zugriff auf KameraView
     const [kameraView, setKameraView] = useKameraContext();
+    const [klassenListe, setKlassenListe] = useKlassenListeContext();
     const [klassenzimmer, setKlassenzimmer] = useState(null);
     const {currentStudent, setCurrentStudent} = useCurrentStudent();
     const [update, setUpdate] = useState(0)
@@ -40,7 +42,7 @@ export default function Klassenzimmer(props) {
 
     useEffect(() => {
         fetchKlassenzimmer(setKlassenzimmer, setUpdate, id);
-    }, [currentStudent, props.id]);
+    }, [currentStudent, props.id, klassenListe]);
 
     const getSchuelerByPosition = (position) => {
         if (klassenzimmer === null) {
