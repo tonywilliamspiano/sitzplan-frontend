@@ -98,7 +98,7 @@ export default function Navbar(props) {
                 </div>
 
 
-                <div className="navItem" onClick={() => {}}>Klassenliste Bearbeiten</div>
+                <div className="navItem" onClick={() => {setKlassenPopup(true)}}>Klassenliste Bearbeiten</div>
                 <div className="navItem"
                      onClick={klassenlisteHochladen}>Klassenliste Hochladen</div>
 

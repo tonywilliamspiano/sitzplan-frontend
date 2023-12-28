@@ -62,7 +62,7 @@ function KlassenListePopup(props) {
 
 
     function schuelerLoeschen(schueler) {
-        const userConfirmed = window.confirm('Willst du wirklich ' + schueler.name + 'aus dem Klassenzimmer ' + props.name + 'entfernen?');
+        const userConfirmed = window.confirm('Willst du wirklich ' + schueler.name + ' aus dem Klassenzimmer ' + props.name + ' entfernen?');
 
         if (userConfirmed) {
             axios.delete("http://localhost:8080/sitzplan/schueler/" + schueler.id)
