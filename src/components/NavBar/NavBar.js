@@ -4,6 +4,7 @@ import {useEffect, useState} from "react";
 import ZimmerModal from "./ZimmerModal";
 import {downloadPDF} from "../Klassenzimmer";
 import KlassenListePopup from "./KlassenListePopup";
+import {useKlassenListeContext} from "../KlassenListeContext";
 
 export default function Navbar(props) {
     let setKlassenzimmerId = props.setKlassenzimmerId;
@@ -11,6 +12,7 @@ export default function Navbar(props) {
     const [klassenzimmerListe, setKlassenzimmerListe] = useState([]);
     const [zimmerHinzufuegen, setZimmerHinzufuegen] = useState(false);
     const [klassenPopup, setKlassenPopup] = useState(false);
+    const [klassenListe, setKlassenListe] = useKlassenListeContext();
 
     useEffect(() => {
         axios.get("http://localhost:8080/sitzplan/meinklassenzimmer")
@@ -84,6 +86,8 @@ export default function Navbar(props) {
                 axios.post("http://localhost:8080/sitzplan/schueler-liste/" + props.klassenzimmerId, schuelerListeDTO)
                     .then((response) => {
                         console.log(response)
+                        setKlassenListe(klassenListe + 1);
+                        window.alert("Klassenliste erfolgreich hinzugefügt 🎉")
                     })
             }
 
