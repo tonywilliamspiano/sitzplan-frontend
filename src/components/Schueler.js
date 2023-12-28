@@ -86,7 +86,11 @@ export default function Schueler(props) {
                     }
                 }>+</div>
             )}
-            <Modal modal={modal} setModal={setModal} nameAuswaehlen={nameAuswaehlen}/>
+            <Modal modal={modal}
+                   setModal={setModal}
+                   nameAuswaehlen={nameAuswaehlen}
+                   klassenzimmerId={props.klassenzimmerId}
+            />
         </div>
     )
 }

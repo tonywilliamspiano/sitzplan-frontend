@@ -15,14 +15,14 @@ import axios from "axios";
      }
 
      useEffect(() => {
-         axios.get("http://localhost:8080/sitzplan/klassenliste")
+         axios.get("http://localhost:8080/sitzplan/klassenliste/" + props.klassenzimmerId)
              .then(respose=> {
                  setSchuelerListe(respose.data)
              })
              .catch(error => {
                  console.error("erorr",error)
              })
-     }, []);
+     }, [props.klassenzimmerId]);
 
      return (
         <>

@@ -105,6 +105,7 @@ export default function Klassenzimmer(props) {
                     REIHEN={klassenzimmer.anzahlDerReihe}
                     TISCHE={klassenzimmer.anzahlDerTischeProReihe}
                     SCHUELER={klassenzimmer.anzahlDerSchuelerProTisch}
+                    klassenzimmerId={props.id}
                 >
                 </Reihe>
             );
@@ -161,6 +162,7 @@ function Reihe(props) {
                 SCHUELER={props.SCHUELER}
                 TISCHE={props.TISCHE}
                 REIHEN={props.REIHEN}
+                klassenzimmerId={props.klassenzimmerId}
             >
             </Tisch>
         );
@@ -196,6 +198,7 @@ function Tisch(props) {
                       selectPosition={props.selectPosition}
                       isSelected={props.isSelected}
                       update={props.update}
+                      klassenzimmerId={props.klassenzimmerId}
             >
             </Schueler>
         );
