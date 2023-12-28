@@ -37,6 +37,7 @@
 
 .sidenav .flex-grow {
     flex-grow: 1;
+    cursor: auto;
 }
 
 .sidenav .bottomBtn {

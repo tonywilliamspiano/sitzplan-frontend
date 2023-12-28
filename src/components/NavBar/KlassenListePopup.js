@@ -14,7 +14,7 @@ function KlassenListePopup(props) {
 
     const [schuelerListe, setSchuelerListe] = useState([])
 
-    function hasNoPosition(schueler){
+    function hasNoPosition(schueler) {
         return schueler.position === -1;
     }
 
@@ -51,37 +51,52 @@ function KlassenListePopup(props) {
         if (props.klassenzimmerId === -1) {
             return;
         }
-        console.log("klassenzimmer Id = " + props.klassenzimmerId)
-        axios.get("http://localhost:8080/sitzplan/klassenliste/" + props.klassenzimmerId)
-            .then(respose=> {
+        axios.get("http://localhost:8080/sitzplan/klassenliste-komplett/" + props.klassenzimmerId)
+            .then(respose => {
                 setSchuelerListe(respose.data)
             })
             .catch(error => {
-                console.error("erorr",error)
+                console.error("erorr", error)
             })
     }, [klassenListeReload, props.klassenzimmerId]);
 
+
+    function schuelerLoeschen(schueler) {
+        const userConfirmed = window.confirm('Willst du wirklich ' + schueler.name + 'aus dem Klassenzimmer ' + props.name + 'entfernen?');
+
+        if (userConfirmed) {
+            console.log("DELETING!")
+            // axios.delete("http://localhost:8080/sitzplan/schueler/" + schueler.id)
+            //     .then(() =>
+            //         setKlassenListeReload(klassenListeReload + 1));
+        }
+    }
 
     return (
         <>
             {modal && (
                 <div className="modal">
-                    <div  className="overlay" onClick={()=> setModal(!modal)} ></div>
+                    <div className="overlay" onClick={() => setModal(!modal)}></div>
                     <div className="modal-content">
-                        <button className="btn-close" onClick={()=> setModal(!modal)}> ❌ </button>
+                        <button className="btn-close" onClick={() => setModal(!modal)}> ❌</button>
                         <div className="dummy-div"></div>
                         <h2 className="klassenliste-title">Alle Schüler in {props.name}</h2>
-                        <div className= "klassenliste">
+                        <div className="klassenliste">
                             {
                                 schuelerListe.filter(hasNoPosition).map((schueler, index) => (
-                                        <div className="klassenliste-namen" key={index} onClick={() =>{
-                                            setModal(!modal)
-                                        }
-                                        }>{schueler.name}        <div className= "loeschen-btn" ><button className="name-loeschen"> ❎ </button> </div>  </div>
+                                        <div className="namen-container">
+                                            <div className="klassenliste-namen" key={index}>{schueler.name}
+                                            </div>
+                                            <div className="loeschen-btn">
+                                                <button onClick={() => schuelerLoeschen(schueler)}
+                                                        className="name-loeschen"> ❌
+                                                </button>
+                                            </div>
+                                        </div>
                                     )
                                 )
                             }
-                            <form className="neuer-name" >
+                            <form className="neuer-name">
                                 <textarea
                                     id="nameTextArea"
                                     name="name"

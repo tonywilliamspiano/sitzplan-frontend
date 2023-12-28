@@ -30,13 +30,11 @@ export default function Klassenzimmer(props) {
     useEffect(() => {
         setIsAnimating(true);
 
-        console.log("ANIMATING!")
-        // Reset the animation state after a short delay (adjust as needed)
         const timeoutId = setTimeout(() => {
             setIsAnimating(false);
-        }, 1000); // 1000 milliseconds (1 second) in this example
+        }, 1000);
 
-        // Clean up the timeout to avoid memory leaks
+        // Clean up the timeout
         return () => clearTimeout(timeoutId);
     }, [props.id]);
 
@@ -228,7 +226,6 @@ function Lehrkraft() {
 function fetchKlassenzimmer(setKlassenzimmer, setUpdate, id) {
     axios.get("http://localhost:8080/sitzplan/klassenzimmer/" + id)
         .then(response => {
-            console.log(response.data)
             setKlassenzimmer(response.data);
             if (setUpdate !== null) {
                 setUpdate((update) => update + 1);
