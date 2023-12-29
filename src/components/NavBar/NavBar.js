@@ -89,7 +89,7 @@ export default function Navbar(props) {
 
         <>
             <div className={"header"}>
-                <button className={"btn-hamburger"} onClick={() => setShowMenu(!showMenu)}>☰</button>
+                <button className={"btn-hamburger"} onClick={() => setShowMenu(!showMenu)}></button>
             </div>
             <div id="mySidenav" className={`sidenav ${showMenu ? "show" : ""}`}>
 
@@ -104,13 +104,12 @@ export default function Navbar(props) {
 
                 </div>
 
-
                 <div className="navItem" onClick={() => {setKlassenPopup(true)}}>Klassenliste Bearbeiten</div>
                 <div className="navItem"
                      onClick={klassenlisteHochladen}>Klassenliste Hochladen</div>
 
-                <div className="navItem flex-grow"></div>
-                <div className="navItem bottomBtn" onClick={() => downloadPDF()}>PDF Runterladen</div>
+                {/*<div className="navItem flex-grow"></div>*/}
+                <div className="navItem-bottomBtn" onClick={() => downloadPDF()}>PDF Runterladen</div>
             </div>
         </>
     )

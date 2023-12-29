@@ -25,6 +25,16 @@
     transition: 0.3s;
 }
 
+/* Pdf Runterladen*/
+.navItem-bottomBtn{
+    padding: 90% 3% 3% 8%;
+    text-decoration: none;
+    font-size: 1.5em;
+    color: #3d3838;
+    display: block;
+    transition: 0.3s;
+}
+
 /* The navigation menu links */
 .sidenav .subItem {
     padding: 8px 8px 16px 20%;
@@ -127,3 +137,77 @@
 
 
     }}
+
+/* Ipad Air quer */
+@media screen and (max-width:1180px) {
+    .sidenav  {
+        height: 100%;
+        margin-top: 41px;
+        width: 0;
+
+    }
+
+
+    .btn-hamburger {
+        display: inline;
+        top: 2.5%;
+        left: 2.5%;
+        transform: translate(-50%, -50%);
+        position: absolute;
+        width: 50px;
+background-color: dimgrey;
+    }
+
+    .btn-hamburger:before,
+    .btn-hamburger:after,
+    .btn-hamburger div {
+        background: #fff;
+        content: "";
+        display: block;
+        height: 6px;
+        border-radius: 3px;
+        margin: 7px 0;
+        transition: 0.5s;
+    }
+    .btn-hamburger:hover:before {
+        transform: translateY(12px) rotate(135deg);
+    }
+    .btn-hamburger:hover:after {
+        transform: translateY(-12px) rotate(-135deg);
+    }
+    .btn-hamburger:hover div {
+        transform: scale(0);
+    }
+
+
+    .sidenav.show {
+        height: 100%;
+        width: 50%;
+        position: absolute;
+    }
+
+    .sidenav .navItem .navItem-bottomBtn  {
+        padding: 3% 3% 3% 8%;
+        text-decoration: none;
+        font-size: 1.5em;
+        color: #3d3838;
+        display: block;
+        transition: 0.3s;
+
+    }
+
+    .sidenav .subItem{
+        font-size: 1.3em;
+    }
+    /* PDF runterladen in Ipad Quer */
+    .navItem-bottomBtn{
+        padding: 35% 3% 3% 8%;
+        text-decoration: none;
+        font-size: 1.5em;
+        color: #3d3838;
+        display: block;
+        transition: 0.3s;
+    }
+
+
+}
