@@ -14,10 +14,6 @@ function KlassenListePopup(props) {
 
     const [schuelerListe, setSchuelerListe] = useState([])
 
-    function hasNoPosition(schueler) {
-        return schueler.position === -1;
-    }
-
     const handleSubmit = (event) => {
         event.preventDefault();
 
@@ -31,6 +27,7 @@ function KlassenListePopup(props) {
         axios.post("http://localhost:8080/sitzplan/schueler/" + props.klassenzimmerId, schueler)
             .then((response) => {
                 setKlassenListeReload(klassenListeReload + 1)
+                console.log(schuelerListe)
             })
         setName("")
     };
@@ -82,8 +79,8 @@ function KlassenListePopup(props) {
                         <h2 className="klassenliste-title">Alle Schüler in {props.name}</h2>
                         <div className="klassenliste">
                             {
-                                schuelerListe.filter(hasNoPosition).map((schueler, index) => (
-                                        <div className="namen-container">
+                                schuelerListe.filter.map((schueler, index) => (
+                                        <div className="namen-container" key={index}>
                                             <div className="klassenliste-namen" key={index}>{schueler.name}
                                             </div>
                                             <div className="loeschen-btn">
