@@ -1,7 +1,7 @@
 import Kamera from "./Kamera/Kamera";
 import {useKameraContext} from "./Kamera/KameraViewContext";
 import Schueler from "./Schueler";
-import Mobile from "./Mobile";
+import Mobile from "./Mobile/Mobile";
 import {useEffect, useState} from "react";
 import axios from "axios";
 import {useCurrentStudent} from "./CurrentStudentContext";
@@ -17,6 +17,7 @@ export const IS_SELECTED = 1;
 export default function Klassenzimmer(props) {
 
     let id = props.id;
+    const setKlassenzimmerId = props.setKlassenzimmerId;
     // Erlaube Zugriff auf KameraView
     const [kameraView, setKameraView] = useKameraContext();
     const [klassenListe, setKlassenListe] = useKlassenListeContext();
@@ -137,7 +138,11 @@ export default function Klassenzimmer(props) {
                                 clickCount={clickCount}
                                 nextPos
                                 setClickCount={setClickCount}
-                                getSchuelerByPosition={getSchuelerByPosition}>
+                                getSchuelerByPosition={getSchuelerByPosition}
+                                klassenzimmer={klassenzimmer}
+                                setKlassenzimmerId={setKlassenzimmerId}
+                                klassenzimmerId={id}
+                        >
                         </Mobile>
                                 </> )}
                     </>

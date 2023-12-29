@@ -146,16 +146,7 @@
     display: none;
   }
 
-  .DownloadButton{
-    display: none;
-  }
-
   .KlassenzimmerRoute{
     display: block;
   }
-
-  .sidenav{
-    display: none;
-  }
-
 }

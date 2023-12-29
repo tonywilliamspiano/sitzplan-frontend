@@ -16,7 +16,7 @@ function App() {
                 <CurrentStudentProvider>
                     <NavBar setKlassenzimmerId={setKlassenzimmerId} klassenzimmerId={klassenzimmerId}></NavBar>
                     <div className="App">
-                        <Klassenzimmer id={klassenzimmerId}></Klassenzimmer>
+                        <Klassenzimmer id={klassenzimmerId} setKlassenzimmerId={setKlassenzimmerId}></Klassenzimmer>
                     </div>
                 </CurrentStudentProvider>
             </KlassenListeProvider>

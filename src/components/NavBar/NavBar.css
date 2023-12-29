@@ -64,3 +64,9 @@
     font-size: 36px;
     margin-left: 50px;
 }
+
+@media only screen and (max-width: 767px) {
+    .sidenav {
+        display: none;
+    }
+}
