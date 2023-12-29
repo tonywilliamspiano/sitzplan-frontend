@@ -40,6 +40,14 @@
     margin-bottom: 5%;
 }
 
+.kleiner-button {
+    width: 90%;
+    height: 15vh;
+    font-size: 2.5em;
+    border-radius: 15%;
+    margin-bottom: 5%;
+}
+
 .anlegen-button {
     background-color: #c6dff1;
 }
@@ -58,7 +66,7 @@
 }
 
 .mini-klassenzimmer {
-    height: 80vh;
+    height: 60vh;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
@@ -76,9 +84,14 @@
 .minizimmer-schueler {
     border: 1px solid black;
     margin: 1%;
-    flex-grow: 1;
+    flex: 1;
+    flex-basis: 0;
     height: 90%;
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.selected {
+    border: 3px solid orange;
 }
