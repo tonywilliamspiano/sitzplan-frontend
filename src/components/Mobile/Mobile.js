@@ -12,7 +12,7 @@ export default function Mobile(props) {
     const clickCount = props.clickCount;
     const setClickCount = props.setClickCount;
 
-    const [zimmerView, setZimmerView] = useState(false);
+    const [zimmerView, setZimmerView] = useState(true);
     const [miniKlassenzimmer, setMiniKlassenzimmer] = useState(null);
 
     // TODO - Pass in either a schueler object or null - conditionally rendering the image and
@@ -47,6 +47,9 @@ export default function Mobile(props) {
     }
 
     const naechsterFreierPlatz = () => {
+        if (!props.klassenzimmer) {
+            return -1;
+        }
         let ANZAHL_SCHUELER = props.klassenzimmer.anzahlDerReihe
             * props.klassenzimmer.anzahlDerTischeProReihe
             * props.klassenzimmer.anzahlDerSchuelerProTisch;
@@ -59,7 +62,6 @@ export default function Mobile(props) {
                 }
             }
             if (platzIstFrei) {
-                console.log(i);
                 return i;
             }
         }
@@ -72,7 +74,10 @@ export default function Mobile(props) {
         return (
             <div className="zimmer-liste">
                 {klassenzimmerListe.map((zimmer, index) => (
-                    <div className="zimmer-namen" key={index} onClick={() => props.setKlassenzimmerId(zimmer.id)}>
+                    <div className="zimmer-namen" key={index} onClick={() => {
+                        props.setKlassenzimmerId(zimmer.id)
+                        setZimmerView(true)
+                    }}>
                         {zimmer.name}
                     </div>
                 ))}
@@ -100,10 +105,14 @@ export default function Mobile(props) {
         if (props.klassenzimmer !== null) {
             miniKlassenzimmerBauen()
         }
-    }, [selectedPosition, props.klassenzimmerId, props.klassenzimmer])
+    }, [zimmerView, selectedPosition, props.klassenzimmerId, props.klassenzimmer])
 
     const miniKlassenzimmerBauen = () => {
-
+        console.log('wird neu gebaut...')
+        if (selectedPosition === -1) {
+            setSelectedPosition(naechsterFreierPlatz());
+            console.log("Naechsten platz nehmen...")
+        }
         const reihen = Array.from(Array(props.klassenzimmer.anzahlDerReihe).keys()).map(x => x + 1);
         const schuelerProReihe = Array.from(Array(props.klassenzimmer.anzahlDerTischeProReihe
             * props.klassenzimmer.anzahlDerSchuelerProTisch).keys()).map(x => x + 1);
@@ -111,8 +120,7 @@ export default function Mobile(props) {
         const select = (position) => {
             if (selectedPosition === position) {
                 setSelectedPosition(-1);
-            }
-            else {
+            } else {
                 setSelectedPosition(position);
             }
         }
@@ -126,7 +134,7 @@ export default function Mobile(props) {
                                schuelerProReihe={schuelerProReihe}
                                getSchuelerByPosition={props.getSchuelerByPosition}
                                reihenIndex={index}
-                                selectedPosition={selectedPosition}
+                               selectedPosition={selectedPosition}
                                select={select}>
                     </MiniReihe>
                 ))}
@@ -136,24 +144,31 @@ export default function Mobile(props) {
         setMiniKlassenzimmer(miniZimmer);
     }
 
+    useEffect(() => {
+        setSelectedPosition(naechsterFreierPlatz)
+    }, [props.klassenzimmer])
+
     return (
         <div className="mobile-ansicht">
 
-            {zimmerView ? (
+            {zimmerView && props.klassenzimmer ? (
                 <>
+                    <h2> Klassenzimmer {getKlassenzimmerName()}</h2>
                     {miniKlassenzimmer}
                     <button className="kleiner-button anlegen-button" onClick={() => {
-                        // setModal(true);
+                        setModal(true);
                         console.log("Setting modal...")
                     }}
                     > Schüler anlegen
                     </button>
                     <button className="mobile-button zurueck-button" onClick={() => {
-                        setZimmerView(false);
+                        props.setKlassenzimmerId(-1);
+                        setZimmerView(false)
                     }}
-                    > Zurück
+                    > Anderes Zimmer
                     </button>
-
+                    <Modal modal={modal} setModal={setModal} nameAuswaehlen={nameAuswaehlen}
+                           klassenzimmerId={props.klassenzimmerId}/>
                 </>
             ) : (
                 <>
@@ -167,7 +182,6 @@ export default function Mobile(props) {
                             <h2> Klassenzimmer {getKlassenzimmerName()}</h2>
                             <button className="mobile-button anlegen-button" onClick={() => {
                                 setZimmerView(true);
-                                setSelectedPosition(naechsterFreierPlatz());
                             }}
                             > Schüler anlegen
                             </button>
@@ -177,10 +191,6 @@ export default function Mobile(props) {
                             }}
                             > Anderes Zimmer auswählen
                             </button>
-
-
-                            <Modal modal={modal} setModal={setModal} nameAuswaehlen={nameAuswaehlen}
-                                   klassenzimmerId={props.klassenzimmerId}/>
                         </div>
                     )
                     }
@@ -196,23 +206,25 @@ function MiniReihe(props) {
     return (
         <div className="minizimmer-reihe">
             {props.schuelerProReihe.map((index) => {
-                let position = (props.reihenIndex - 1) * props.schuelerProReihe.length + (index);
-                let schueler = props.getSchuelerByPosition(position);
-                let initials = "";
-                if (schueler) {
-                    const fullName = schueler.name;
-                    const words = fullName.split(' ');
+                    let position = (props.reihenIndex - 1) * props.schuelerProReihe.length + (index);
+                    let schueler = props.getSchuelerByPosition(position);
+                    let initials = "";
+                    if (schueler) {
+                        const fullName = schueler.name;
+                        const words = fullName.split(' ');
 
-                    const initial = words.map(word => word.charAt(0) + '.');
-                    initials = initial.join(' ');
-                }
+                        const initial = words.map(word => word.charAt(0) + '.');
+                        initials = initial.join(' ');
+                    }
                     return (
                         <div key={index}
                              className={`minizimmer-schueler ${props.selectedPosition === position ? 'selected' : ''}`}
                              onClick={() => {
-                            props.select(position);
-                            setReload(reload + 1);
-                        }}>
+                                 if (!schueler) {
+                                     props.select(position);
+                                 }
+                                 setReload(reload + 1);
+                             }}>
                             {schueler ? (
                                 <>{initials}</>
                             ) : (
