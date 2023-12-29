@@ -64,3 +64,66 @@
     font-size: 36px;
     margin-left: 50px;
 }
+
+.header{
+    width: 100%;
+    height: 50px;
+    margin-top:-20px;
+}
+.btn-hamburger{
+    display: none;
+
+}
+
+@media screen and (max-width: 768px) {
+    .sidenav  {
+        height: 0;
+        margin-top: 30px;
+        width: 0;
+
+    }
+    .btn-hamburger{
+        display: inline;
+        margin-top: 20px;
+    }
+
+    .sidenav.show {
+        height: 100%;
+        width: 40%;
+    }
+
+
+
+    @media screen and (max-width:415px) {
+        .sidenav  {
+            height: 0;
+            margin-top: 30px;
+            width: 0;
+
+        }
+        .btn-hamburger{
+            display: inline;
+            margin-top: 20px;
+        }
+
+        .sidenav.show {
+            height: 100%;
+            width: 100%;
+        }
+
+        .sidenav .navItem {
+            padding: 8% 3% 3% 8%;
+            text-decoration: none;
+            font-size: 1.5em;
+            color: #3d3838;
+            display: block;
+            transition: 0.3s;
+        }
+
+        .sidenav .subItem{
+            font-size: 1.5em;
+        }
+
+
+
+    }}

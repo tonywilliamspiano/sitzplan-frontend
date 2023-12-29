@@ -11,6 +11,7 @@ export default function Navbar(props) {
     const [klassenzimmerListe, setKlassenzimmerListe] = useState([]);
     const [zimmerHinzufuegen, setZimmerHinzufuegen] = useState(false);
     const [klassenPopup, setKlassenPopup] = useState(false);
+    const [showMenu, setShowMenu] = useState(false);
 
     useEffect(() => {
         axios.get("http://localhost:8080/sitzplan/meinklassenzimmer")
@@ -84,8 +85,14 @@ export default function Navbar(props) {
     }
 
     return (
+
+
         <>
-            <div id="mySidenav" className="sidenav">
+            <div className={"header"}>
+                <button className={"btn-hamburger"} onClick={() => setShowMenu(!showMenu)}>☰</button>
+            </div>
+            <div id="mySidenav" className={`sidenav ${showMenu ? "show" : ""}`}>
+
                 <div className="navItem" onClick={() => klassenzimmerHinzufuegen()}>Neues Klassenzimmer</div>
                 <div>
                     <div className="navItem" onClick={() => setKlassenzimmerId(-1)}>
