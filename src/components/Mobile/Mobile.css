@@ -82,7 +82,7 @@
 }
 
 .minizimmer-schueler {
-    border: 1px solid black;
+    border: 2px solid black;
     margin: 1%;
     flex: 1;
     flex-basis: 0;
@@ -90,8 +90,16 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    box-sizing: border-box;
 }
 
 .selected {
-    border: 3px solid orange;
+    border: 2px solid orange;
+    box-sizing: border-box;
+}
+
+@media only screen and (min-width: 600px) {
+    .mobile-ansicht {
+        display: none;
+    }
 }
