@@ -103,6 +103,7 @@ export default function Navbar(props) {
 
     return (
         <>
+            {/* Hide and show hamburger */}
             <div className={"header"}>
                 <button className={"btn-hamburger"} onClick={() => setShowMenu(!showMenu)}>  {showMenu ? "X" : "☰"} </button>
             </div>
