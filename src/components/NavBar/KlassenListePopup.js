@@ -79,7 +79,7 @@ function KlassenListePopup(props) {
                         <h2 className="klassenliste-title">Alle Schüler in {props.name}</h2>
                         <div className="klassenliste">
                             {
-                                schuelerListe.filter.map((schueler, index) => (
+                                schuelerListe.map((schueler, index) => (
                                         <div className="namen-container" key={index}>
                                             <div className="klassenliste-namen" key={index}>{schueler.name}
                                             </div>
