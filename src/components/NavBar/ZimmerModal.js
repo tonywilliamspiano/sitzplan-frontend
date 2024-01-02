@@ -65,7 +65,7 @@ function ZimmerModal(props) {
                         <div className="nameListe-Container">
                             <form className="form-container" onSubmit={handleSubmit}>
                                 <label className="label">Klassenzimmer Name :</label>
-                                <input className="name-input" placeholder="Mein Klassenzimmer" type={"text"} required={true} minLength={1} name="name" value={neuKlassenZimmer.name}
+                                <input className="input" placeholder="Mein Klassenzimmer" type={"text"} required={true} minLength={1} name="name" value={neuKlassenZimmer.name}
                                        onChange={handleInputInfo}/>
 
                                 <label className="label">Reihen:</label>
@@ -96,7 +96,7 @@ function ZimmerModal(props) {
                                 </select>
 
                                 <label className="label">Lehrer Name:</label>
-                                <input className="name-input" placeholder="Mein Klassenzimmer" type={"text"} required={true} minLength={1} name="lehrerName" value={neuKlassenZimmer.lehrerName}
+                                <input className="input" placeholder="Mein Klassenzimmer" type={"text"} required={true} minLength={1} name="lehrerName" value={neuKlassenZimmer.lehrerName}
                                        onChange={handleInputInfo}/>
 
                                 <button className="form-submit" type={"submit"}>Klassenzimmer anlegen</button>
