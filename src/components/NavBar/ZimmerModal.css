@@ -4,10 +4,11 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    background-color: #f5f5f5;
+    background-color:  #f5f5f5;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
 }
 
 /* Label style */
@@ -28,6 +29,7 @@
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 1em;
+
 }
 
 /* Submit button style */
@@ -43,8 +45,22 @@
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+
 }
 
 .form-submit:hover {
     background-color: #45a049;
+}
+
+.labelName{
+margin-left: 11em;
+
+}
+
+@media screen and (max-width: 415px){
+  .form-submit{
+      width: 50%;
+      font-size: 0.9em;
+  }
+
 }
