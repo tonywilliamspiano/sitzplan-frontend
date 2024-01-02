@@ -48,23 +48,44 @@ export default function Mobile(props) {
             });
     }
 
+    // Entschuldige bitte den verwirrenden Code -> Diese Funktion dient nur dazu, den nächsten freien Platz zu finden, wenn man
+    // von vorne Links bis hinten Rechts durch das Klassenzimmer läuft.
     const naechsterFreierPlatz = () => {
+
         if (!props.klassenzimmer) {
             return -1;
         }
-        let ANZAHL_SCHUELER = props.klassenzimmer.anzahlDerReihe
-            * props.klassenzimmer.anzahlDerTischeProReihe
-            * props.klassenzimmer.anzahlDerSchuelerProTisch;
 
-        for (let i = 1; i < ANZAHL_SCHUELER; i++) {
+        let reihen = props.klassenzimmer.anzahlDerReihe;
+        let schuelerProReihe = props.klassenzimmer.anzahlDerTischeProReihe * props.klassenzimmer.anzahlDerSchuelerProTisch;
+        let ANZAHL_SCHUELER = reihen * schuelerProReihe;
+
+        let reihenfolge = [];
+        let switchDirections = true;
+
+        for (let i = reihen; i > 0; i--) {
+            if (switchDirections) {
+                for (let j = schuelerProReihe - 1; j >= 0; j--) {
+                    reihenfolge.push(((i - 1) * schuelerProReihe) + schuelerProReihe - j);
+                }
+            } else {
+                for (let j = schuelerProReihe; j > 0; j--) {
+                    reihenfolge.push(((i - 1) * schuelerProReihe) + j);
+                }
+            }
+            switchDirections = !switchDirections;
+        }
+        console.log("REIHENFOLGE:" + reihenfolge)
+
+        for (let i = 0; i < ANZAHL_SCHUELER; i++) {
             let platzIstFrei = true;
             for (let schueler of props.klassenzimmer.schuelerListe) {
-                if (schueler.position === i) {
+                if (schueler.position === reihenfolge[i]) {
                     platzIstFrei = false;
                 }
             }
             if (platzIstFrei) {
-                return i;
+                return reihenfolge[i];
             }
         }
         return -1;
