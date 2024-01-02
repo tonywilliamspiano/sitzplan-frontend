@@ -260,6 +260,7 @@ function fetchKlassenzimmer(setKlassenzimmer, setUpdate, id) {
 }
 
 export function downloadPDF(schuelerContent, setSchuelerContent) {
+
     const klassenzimmer = document.getElementsByClassName('Klassenzimmer')[0];
 
     if (klassenzimmer) {
@@ -295,7 +296,7 @@ export function downloadPDF(schuelerContent, setSchuelerContent) {
             const imgProps = pdf.getImageProperties(dataUrl);
             const pdfWidth = pdf.internal.pageSize.getWidth();
             const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
-            pdf.addImage(dataUrl, 'PNG', 0, 0);
+            pdf.addImage(dataUrl, 'PNG', 0, 0, pdfWidth, pdfHeight);
             pdf.save("download.pdf");
             setSchuelerContent(tmpSchuelerContent);
         })
