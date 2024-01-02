@@ -272,6 +272,7 @@ export function downloadPDF(schuelerContent, setSchuelerContent) {
     setSchuelerContent("");
 
     const {offsetWidth, offsetHeight} = klassenzimmer;
+
     htmlToImage.toPng(klassenzimmer, {
         width: offsetWidth,
         height: offsetHeight,

@@ -1,18 +1,20 @@
 /* The side navigation menu */
 .sidenav {
-    height: 100%; /* 100% Full-height */
-    width: 20%; /* 0 width - change this with JavaScript */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Stay on top */
-    top: 0; /* Stay at the top */
+    height: 100%;
+    width: 20%;
+    position: fixed;
+    z-index: 1;
+    top: 0;
     left: 0;
-    background-color: #c2bdbd; /* Black*/
+
+    background-color: blue; /* Black*/
     overflow-x: hidden; /* Disable horizontal scroll */
     padding-top: 2%;
-    transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+    transition: transform 0.5s ease-in-out;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
+    /*border-radius: 0.5em;*/
 }
 
 /* The navigation menu links */
@@ -22,28 +24,39 @@
     font-size: 1.5em;
     color: #3d3838;
     display: block;
-    transition: 0.3s;
+    /*transition: 0.3s;*/
+    transition: background-color 0.3s, color 0.3s;
+
+}
+
+.navItemklassen{
+    margin-top: 2em;
+    padding: 0;
 }
 
 /* Pdf Runterladen*/
 .navItem-bottomBtn{
     padding: 90% 3% 3% 8%;
+    margin-top: 70%;
     text-decoration: none;
     font-size: 1.5em;
     color: #3d3838;
     display: block;
-    transition: 0.3s;
+    /*transition: 0.3s;*/
+    transition: background-color 0.3s, color 0.3s;
 }
 
 /* The navigation menu links */
-.sidenav .subItem {
-    padding: 8px 8px 16px 20%;
-    text-decoration: none;
-    font-size: 1.2em;
-    color: #3d3838;
-    display: block;
-    transition: 0.3s;
-}
+/* top | right | bottom | left */
+/*.sidenav .subItem {*/
+/*    padding: 8px 8px 16px 20%;*/
+/*    text-decoration: none;*/
+/*    font-size: 1.2em;*/
+/*    color: #3d3838;*/
+/*    display: block;*/
+/*    transition: background-color 0.3s, color 0.3s;*/
+/*    !*transition: 0.3s;*!*/
+/*}*/
 
 .sidenav .flex-grow {
     flex-grow: 1;
@@ -54,17 +67,77 @@
     padding-bottom: 20%;
 }
 
-/* When you mouse over the navigation links, change their color */
-.sidenav .navItem:hover {
-    color: #f1f1f1;
-    cursor: pointer;
+.sidenav .subItem{
+    padding-left: 40px;
+    padding-bottom: 0.7%;
+    text-decoration: none;
+    font-size: 1.2em;
+    color: #ecf0f1;
+    display: block;
+    transition: background-color 0.3s, color 0.3s;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    position: relative;
+    overflow: hidden;
 }
 
-/* When you mouse over the navigation links, change their color */
-.sidenav .subItem:hover {
-    color: #f1f1f1;
-    cursor: pointer;
+.sidenav .subItem::before {
+    content: '-  ';
 }
+/* Additional Styles for Navbar Items */
+.sidenav .navItem,
+.sidenav .navItem-bottomBtn {
+    padding: 15px;
+    text-decoration: none;
+    font-size: 1.2em;
+    color: #ecf0f1;
+    display: block;
+    transition: background-color 0.3s, color 0.3s;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    position: relative;
+    overflow: hidden;
+}
+
+.sidenav .navItem:after,
+.sidenav .subItem:after,
+.sidenav .navItem-bottomBtn:after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    height: 0.3em;
+    width: 0;
+    background-color: green;
+    transition: width 0.5s, left 0.5s ease;
+}
+
+.sidenav .navItem:hover,
+.sidenav .subItem:hover,
+.sidenav .navItem-bottomBtn:hover {
+
+    color: black;
+    cursor: pointer;
+    background-color: white;
+
+}
+
+.sidenav .navItem:hover:after,
+.sidenav .subItem:hover:after,
+.sidenav .navItem-bottomBtn:hover:after {
+    width: 100%;
+    left: 0;
+}
+
+.sidenav .navItem,
+.sidenav .subItem,
+.sidenav .navItem-bottomBtn,
+.sidenav .navItem:after,
+.sidenav .subItem:after,
+.sidenav .navItem-bottomBtn:after {
+    transition: all 0.3s ease-in-out;
+}
+
 
 /* Position and style the close button (top right corner) */
 .sidenav .closebtn {
@@ -78,134 +151,198 @@
 .header{
     width: 100%;
     height: 50px;
-    margin-top:-20px;
+    /*margin-top:-20px;*/
 }
 .btn-hamburger{
     display: none;
+    height: 100%;
+    cursor: pointer;
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    font-size: 1.2em;
+    padding: 10px 15px;
+    text-align: center;
+    text-decoration: none;
+
+    border-radius: 4px;
 
 }
+.btn-hamburger:hover {
+    background-color: #45a049;
+}
 
+
+/*Anpassung Ipad Air */
+
+@media screen and (max-width: 1180px) {
+    .sidenav  {
+        height: 0;
+        width: 0;
+
+    }
+    .btn-hamburger{
+        display: inline;
+        float: right;
+    }
+
+    .sidenav.show {
+        height: 100%;
+        width: 24%;
+        transform: translateX(0);
+    }
+    .sidenav.hide {
+        transform: translateX(-100%);
+    }}
+
+/*Anpassung */
 @media screen and (max-width: 768px) {
+    .sidenav  {
+        height: 0;
+        width: 0;
+
+    }
+    .btn-hamburger{
+        display: inline;
+        float: right;
+    }
+
+    .sidenav.show {
+        height: 100%;
+        width: 40%;
+        transform: translateX(0);
+    }
+    .sidenav.hide {
+        transform: translateX(-100%);
+    }}
+
+/*Anpassung Handy */
+
+@media screen and (max-width:415px) {
     .sidenav  {
         height: 0;
         margin-top: 30px;
         width: 0;
 
     }
-    .btn-hamburger{
-        display: inline;
-        margin-top: 20px;
+
+    .header{
+        background-color: #3092d0;
+        height: 1.9em;
     }
-
-    .sidenav.show {
-        height: 100%;
-        width: 40%;
-    }
-
-
-
-    @media screen and (max-width:415px) {
-        .sidenav  {
-            height: 0;
-            margin-top: 30px;
-            width: 0;
-
-        }
-        .btn-hamburger{
-            display: inline;
-            margin-top: 20px;
-        }
-
-        .sidenav.show {
-            height: 100%;
-            width: 100%;
-        }
-
-        .sidenav .navItem {
-            padding: 8% 3% 3% 8%;
-            text-decoration: none;
-            font-size: 1.5em;
-            color: #3d3838;
-            display: block;
-            transition: 0.3s;
-        }
-
-        .sidenav .subItem{
-            font-size: 1.5em;
-        }
-
-
-
-    }}
-
-/* Ipad Air quer */
-@media screen and (max-width:1180px) {
-    .sidenav  {
-        height: 100%;
-        margin-top: 41px;
-        width: 0;
-
-    }
-
 
     .btn-hamburger {
-        display: inline;
-        top: 2.5%;
-        left: 2.5%;
-        transform: translate(-50%, -50%);
-        position: absolute;
-        width: 50px;
-background-color: dimgrey;
-    }
-
-    .btn-hamburger:before,
-    .btn-hamburger:after,
-    .btn-hamburger div {
-        background: #fff;
-        content: "";
-        display: block;
-        height: 6px;
-        border-radius: 3px;
-        margin: 7px 0;
-        transition: 0.5s;
-    }
-    .btn-hamburger:hover:before {
-        transform: translateY(12px) rotate(135deg);
-    }
-    .btn-hamburger:hover:after {
-        transform: translateY(-12px) rotate(-135deg);
-    }
-    .btn-hamburger:hover div {
-        transform: scale(0);
+        height: 100%;
+        cursor: pointer;
+        background-color: #4CAF50;
+        border: none;
+        color: white;
+        font-size: 1.2em;
+        padding: 0 15px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        float: left;
+        border-radius: 4px;
     }
 
 
     .sidenav.show {
         height: 100%;
-        width: 50%;
-        position: absolute;
+        width: 100%;
+        transform: translateX(0);
+    }
+    .sidenav.hide {
+        transform: translateX(-100%);
     }
 
-    .sidenav .navItem .navItem-bottomBtn  {
-        padding: 3% 3% 3% 8%;
+
+
+    .sidenav .navItem {
+        padding: 8% 3% 3% 8%;
         text-decoration: none;
         font-size: 1.5em;
-        color: #3d3838;
+        color: #ecf0f1;
         display: block;
         transition: 0.3s;
-
     }
 
     .sidenav .subItem{
-        font-size: 1.3em;
-    }
-    /* PDF runterladen in Ipad Quer */
-    .navItem-bottomBtn{
-        padding: 35% 3% 3% 8%;
-        text-decoration: none;
         font-size: 1.5em;
-        color: #3d3838;
-        display: block;
-        transition: 0.3s;
     }
+
+
+
 }
+
+/*!* Ipad Air quer *!*/
+/*@media screen and (max-width:1180px) {*/
+/*    .sidenav  {*/
+/*        height: 100%;*/
+/*        margin-top: 41px;*/
+/*        width: 0;*/
+
+/*    }*/
+
+
+/*    .btn-hamburger {*/
+/*        display: inline;*/
+/*        top: 2.5%;*/
+/*        left: 2.5%;*/
+/*        transform: translate(-50%, -50%);*/
+/*        position: absolute;*/
+/*        width: 50px;*/
+/*        background-color: dimgrey;*/
+/*    }*/
+
+/*    .btn-hamburger:before,*/
+/*    .btn-hamburger:after,*/
+/*    .btn-hamburger div {*/
+/*        background: #fff;*/
+/*        content: "";*/
+/*        display: block;*/
+/*        height: 6px;*/
+/*        border-radius: 3px;*/
+/*        margin: 7px 0;*/
+/*        transition: 0.5s;*/
+/*    }*/
+/*    .btn-hamburger:hover:before {*/
+/*        transform: translateY(12px) rotate(135deg);*/
+/*    }*/
+/*    .btn-hamburger:hover:after {*/
+/*        transform: translateY(-12px) rotate(-135deg);*/
+/*    }*/
+/*    .btn-hamburger:hover div {*/
+/*        transform: scale(0);*/
+/*    }*/
+
+
+/*    .sidenav.show {*/
+/*        height: 100%;*/
+/*        width: 50%;*/
+/*        position: absolute;*/
+/*    }*/
+
+/*    .sidenav .navItem .navItem-bottomBtn  {*/
+/*        padding: 3% 3% 3% 8%;*/
+/*        text-decoration: none;*/
+/*        font-size: 1.5em;*/
+/*        color: #3d3838;*/
+/*        display: block;*/
+/*        transition: 0.3s;*/
+
+/*    }*/
+
+/*    .sidenav .subItem{*/
+/*        font-size: 1.3em;*/
+/*    }*/
+/*    !* PDF runterladen in Ipad Quer *!*/
+/*    .navItem-bottomBtn{*/
+/*        padding: 35% 3% 3% 8%;*/
+/*        text-decoration: none;*/
+/*        font-size: 1.5em;*/
+/*        color: #3d3838;*/
+/*        display: block;*/
+/*        transition: 0.3s;*/
+/*    }*/
+/*}*/

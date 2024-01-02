@@ -26,7 +26,10 @@ export default function Navbar(props) {
     let getKlassenZimmer = (
         <>
             {klassenzimmerListe.map((klassenZimmer) => (
-                <div key={klassenZimmer.id} onClick={() => setKlassenzimmerId(klassenZimmer.id)} className="subItem ">
+                <div key={klassenZimmer.id} onClick={() =>{
+                    setKlassenzimmerId(klassenZimmer.id);
+                    setShowMenu(!showMenu);
+                }} className="subItem ">
                     {klassenZimmer.name}
                 </div>
             ))}
@@ -101,12 +104,13 @@ export default function Navbar(props) {
 
     return (
         <>
+            {/* Hide and show hamburger */}
             <div className={"header"}>
-                <button className={"btn-hamburger"} onClick={() => setShowMenu(!showMenu)}></button>
+                <button className={"btn-hamburger"} onClick={() => setShowMenu(!showMenu)}>  {showMenu ? "X" : "☰"} </button>
             </div>
-            <div id="mySidenav" className={`sidenav ${showMenu ? "show" : ""}`}>
+            <div id="mySidenav" className={`sidenav ${showMenu ? "show" : "hide"}`}>
 
-                <div className="navItem" onClick={() => klassenzimmerHinzufuegen()}>Neues Klassenzimmer</div>
+                <div className="navItem" onClick={() => klassenzimmerHinzufuegen()} >Neues Klassenzimmer</div>
                 <div>
                     <div className="navItem" onClick={() => setKlassenzimmerId(-1)}>
                         Meine Klassenzimmer
@@ -121,7 +125,7 @@ export default function Navbar(props) {
                 </div>
 
                 {props.klassenzimmerId > 0 ? (
-                    <div className="navItem" onClick={() => {setKlassenPopup(true)}}>Klassenliste Bearbeiten</div>
+                    <div className="navItem navItemklassen" onClick={() => {setKlassenPopup(true)}}>Klassenliste Bearbeiten</div>
                 ) : (<></>)
                 }
 
@@ -129,7 +133,7 @@ export default function Navbar(props) {
 
                 {props.klassenzimmerId > 0 ? (
                     <>
-                        <div className="navItem"
+                        <div className="navItem navItemklassen"
                              onClick={klassenlisteHochladen}>Klassenliste Hochladen</div>
                         <div className="navItem-bottomBtn" onClick={() => downloadPDF(props.schuelerContent, props.setSchuelerContent)}>PDF Runterladen</div>
                     </>
