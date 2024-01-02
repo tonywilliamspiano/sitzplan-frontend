@@ -39,7 +39,7 @@ import {useKlassenListeContext} from "./KlassenListeContext";
                     <div className="modal-content">
                         <button className="btn-close" onClick={()=> setModal(!modal)}> ❌ </button>
                         <div className="dummy-div"></div>
-                        <h2 className="modal-title">Name auswählen</h2>
+                        <h2 className="modal-title">{schuelerListe.length === 0 ? (<>Keine Schüler vorhanden</>) : (<>Name auswählen</>)}</h2>
                         <div className= "nameListe-Container">
                             {
                                 schuelerListe.filter(hasNoPosition).map((schueler, index) => (
