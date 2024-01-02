@@ -78,13 +78,14 @@ function KlassenListePopup(props) {
                         <button className="btn-close" onClick={() => setModal(!modal)}> ❌</button>
                         <div className="dummy-div"></div>
                         <h2 className="klassenliste-title">Alle Schüler in {props.name}</h2>
-                        <div className="klassenliste">
-                            <form className="namen-container neuer-name">
-                                <textarea
+                        <div className="form-container">
+                            <form className="">
+                                <label className="label labelName"> Schüler Name: </label>
+                                <input className="input"
                                     id="nameTextArea"
                                     name="name"
                                     value={name}
-                                    placeholder="neuen Namen eingeben..."
+                                    placeholder="Neuer Name eingeben..."
                                     onChange={handleChange}
                                     onKeyDown={handleKeyDown}
                                 />
