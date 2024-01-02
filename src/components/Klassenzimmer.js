@@ -15,6 +15,7 @@ export const OTHER_SELECTED = 0;
 export const IS_SELECTED = 1;
 
 export default function Klassenzimmer(props) {
+    const apiUrl = process.env.REACT_APP_URL;
 
     let id = props.id;
     const setKlassenzimmerId = props.setKlassenzimmerId;
@@ -66,7 +67,7 @@ export default function Klassenzimmer(props) {
         } else {
             let schuelerDerGetauschtWird = getSchuelerByPosition(selectedPosition)
 
-            await axios.post("http://localhost:8080/sitzplan/tauschen/" + position, schuelerDerGetauschtWird, {
+            await axios.post(apiUrl + "/sitzplan/tauschen/" + position, schuelerDerGetauschtWird, {
                 headers: {
                     "Content-Type": "application/json"
                 }
@@ -234,11 +235,13 @@ function Lehrkraft() {
 }
 
 function fetchKlassenzimmer(setKlassenzimmer, setUpdate, id) {
+    const apiUrl = process.env.REACT_APP_URL;
+
     if (id < 0) {
         setKlassenzimmer(null);
         return;
     }
-    axios.get("http://localhost:8080/sitzplan/klassenzimmer/" + id)
+    axios.get(apiUrl + "/sitzplan/klassenzimmer/" + id)
         .then(response => {
             setKlassenzimmer(response.data);
             if (setUpdate !== null) {

@@ -4,6 +4,7 @@ import {useState} from "react";
 import axios from "axios";
 
 function ZimmerModal(props) {
+    const apiUrl = process.env.REACT_APP_URL;
 
     let modal = props.modal;
     let setModal = props.setModal;
@@ -17,7 +18,7 @@ function ZimmerModal(props) {
     })
 
     function handleSubmit() {
-        axios.post("http://localhost:8080/sitzplan/klassenzimmer", neuKlassenZimmer, {
+        axios.post(apiUrl + "/sitzplan/klassenzimmer", neuKlassenZimmer, {
             headers: {
                 "Content-Type": "application/json"
             }

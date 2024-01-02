@@ -6,6 +6,7 @@ import {useKlassenListeContext} from "../KlassenListeContext";
 import "./KlassenListePopup.css"
 
 function KlassenListePopup(props) {
+    const apiUrl = process.env.REACT_APP_URL
 
     let modal = props.modal;
     let setModal = props.setModal;
@@ -24,7 +25,7 @@ function KlassenListePopup(props) {
         if (props.klassenzimmerId === -1) {
             return;
         }
-        axios.post("http://localhost:8080/sitzplan/schueler/" + props.klassenzimmerId, schueler)
+        axios.post(apiUrl + "/sitzplan/schueler/" + props.klassenzimmerId, schueler)
             .then((response) => {
                 setKlassenListeReload(klassenListeReload + 1)
                 console.log(schuelerListe)
@@ -48,7 +49,7 @@ function KlassenListePopup(props) {
         if (props.klassenzimmerId === -1) {
             return;
         }
-        axios.get("http://localhost:8080/sitzplan/klassenliste-komplett/" + props.klassenzimmerId)
+        axios.get(apiUrl + "/sitzplan/klassenliste-komplett/" + props.klassenzimmerId)
             .then(respose => {
                 setSchuelerListe(respose.data)
             })
@@ -62,7 +63,7 @@ function KlassenListePopup(props) {
         const userConfirmed = window.confirm('Willst du wirklich ' + schueler.name + ' aus dem Klassenzimmer ' + props.name + ' entfernen?');
 
         if (userConfirmed) {
-            axios.delete("http://localhost:8080/sitzplan/schueler/" + schueler.id)
+            axios.delete(apiUrl + "/sitzplan/schueler/" + schueler.id)
                 .then(() =>
                     setKlassenListeReload(klassenListeReload + 1));
         }

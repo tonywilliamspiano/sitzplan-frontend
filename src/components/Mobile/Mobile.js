@@ -6,6 +6,8 @@ import Modal from "../Modal";
 import axios from "axios";
 
 export default function Mobile(props) {
+    const apiUrl = process.env.REACT_APP_URL;
+
     const {currentStudent, setCurrentStudent} = useCurrentStudent();
     const [kameraView, setKameraView] = useKameraContext();
     const [modal, setModal] = useState(false);
@@ -32,7 +34,7 @@ export default function Mobile(props) {
         if (freierPlatz === -1) {
             freierPlatz = naechsterFreierPlatz();
         }
-        axios.post("http://localhost:8080/sitzplan/positionieren/" + freierPlatz, schueler, {
+        axios.post(apiUrl + "/sitzplan/positionieren/" + freierPlatz, schueler, {
             headers: {
                 "Content-Type": "application/json"
             }
@@ -85,7 +87,7 @@ export default function Mobile(props) {
     }
 
     useEffect(() => {
-        axios.get("http://localhost:8080/sitzplan/meinklassenzimmer")
+        axios.get(apiUrl + "/sitzplan/meinklassenzimmer")
             .then(response => {
                 setKlassenzimmerListe(response.data);
             })
