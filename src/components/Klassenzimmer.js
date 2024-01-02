@@ -223,8 +223,6 @@ function Tisch(props) {
 function Lehrer(props) {
     let lehrerName = props.lehrerName;
 
-    console.log("lehrer name is: " + props.lehrerName)
-
     if (lehrerName === null) {
         lehrerName = "Lehrer"
     }
@@ -273,6 +271,10 @@ export function downloadPDF(schuelerContent, setSchuelerContent) {
 
     const {offsetWidth, offsetHeight} = klassenzimmer;
 
+    console.log(klassenzimmer)
+
+    console.log("Offset width and height are: " + offsetWidth + ", " + offsetHeight)
+
     htmlToImage.toPng(klassenzimmer, {
         width: offsetWidth,
         height: offsetHeight,
@@ -286,7 +288,7 @@ export function downloadPDF(schuelerContent, setSchuelerContent) {
         quality: 0.95
     })
         .then(function (dataUrl) {
-            var link = document.createElement('a');
+            const link = document.createElement('a');
             link.download = 'my-image-name.jpeg';
             const options = {orientation: 'l', format: 'a4'}
             const pdf = new jsPDF(options);

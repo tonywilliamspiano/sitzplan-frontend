@@ -75,7 +75,6 @@ export default function Mobile(props) {
             }
             switchDirections = !switchDirections;
         }
-        console.log("REIHENFOLGE:" + reihenfolge)
 
         for (let i = 0; i < ANZAHL_SCHUELER; i++) {
             let platzIstFrei = true;
@@ -131,10 +130,8 @@ export default function Mobile(props) {
     }, [zimmerView, selectedPosition, props.klassenzimmerId, props.klassenzimmer])
 
     const miniKlassenzimmerBauen = () => {
-        console.log('wird neu gebaut...')
         if (selectedPosition === -1) {
             setSelectedPosition(naechsterFreierPlatz());
-            console.log("Naechsten platz nehmen...")
         }
         const reihen = Array.from(Array(props.klassenzimmer.anzahlDerReihe).keys()).map(x => x + 1);
         const schuelerProReihe = Array.from(Array(props.klassenzimmer.anzahlDerTischeProReihe
