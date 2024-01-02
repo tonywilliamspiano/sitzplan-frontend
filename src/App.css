@@ -52,7 +52,7 @@
   flex-grow: 1;
   flex-wrap: wrap;
   justify-content: center;
-  padding: 1%;
+  padding: 0.5%;
   height: 8.75vw;
   width: 20%;
 }
@@ -65,8 +65,11 @@
   border: 2px solid black;
   flex-wrap: wrap;
   height: 100%;
-  width: 50%;
+  width: 55%;
   box-sizing: border-box;
+  overflow: hidden;
+  word-wrap: break-word;
+  hyphens: auto;
 }
 
 .schuelerContainer {

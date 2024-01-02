@@ -48,37 +48,44 @@ export default function Schueler(props) {
     let schuelerNameStyle = {};
     let schuelerBildStyle = {};
 
-            const myElementRef = useRef(null);
-        const getSize = () => {
+    const myElementRef = useRef(null);
+    const getSize = () => {
 
-            const myElement = myElementRef.current;
+        const myElement = myElementRef.current;
 
-            if (myElement) {
-                const styles = window.getComputedStyle(myElement);
-                const width = parseFloat(styles.width);
-                const height = parseFloat(styles.height);
+        if (myElement) {
+            const styles = window.getComputedStyle(myElement);
+            const width = parseFloat(styles.width);
+            const height = parseFloat(styles.height);
 
-                if (width > (height * 2)) {
-                    schuelerBildStyle.width = "35%";
-                    schuelerNameStyle.width = "50%"
-                }
-                else if (width > height) {
-                    schuelerBildStyle.width = "50%";
-                    schuelerNameStyle.width = "40%"
-                }
+            if (width > (height * 2)) {
+                schuelerBildStyle.width = "35%";
+                schuelerNameStyle.width = "50%"
+            } else if (width > height * 1.5) {
+                schuelerBildStyle.width = "50%";
+                schuelerNameStyle.width = "40%"
+            } else if (width > height) {
+                schuelerBildStyle.width = "50%";
+                schuelerNameStyle.width = "60%";
             }
         }
+    }
     getSize();
 
     const [imageLoaded, setImageLoaded] = useState(true);
-    const handleImageError = () => {     setImageLoaded(false);};
-    const handleImageLoad = () => {     setImageLoaded(true);};
-
+    const handleImageError = () => {
+        setImageLoaded(false);
+    };
+    const handleImageLoad = () => {
+        setImageLoaded(true);
+    };
 
 
     return (
 
-        <div ref={myElementRef} className={`Schueler ${props.isSelected(props.position) === IS_SELECTED ? 'selected' : ''}`} style={props.style}>
+        <div ref={myElementRef}
+             className={`Schueler ${props.isSelected(props.position) === IS_SELECTED ? 'selected' : ''}`}
+             style={props.style}>
             {schueler !== null ? (
                 <div className="schuelerContainer" onClick={() => props.selectPosition(props.position)}>
 
@@ -105,8 +112,7 @@ export default function Schueler(props) {
                     () => {
                         if (props.isSelected(props.position) === NONE_SELECTED) {
                             setModal(true);
-                        }
-                        else {
+                        } else {
                             props.selectPosition(props.position)
                         }
                     }
