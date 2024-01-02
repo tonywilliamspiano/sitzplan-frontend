@@ -63,22 +63,37 @@ function ZimmerModal(props) {
                         <div className="nameListe-Container">
                             <form className="form-container" onSubmit={handleSubmit}>
                                 <label className="label">Klassenzimmer Name :</label>
-                                <input className="input" type={"text"} required={true} minLength={1} name="name" value={neuKlassenZimmer.name}
+                                <input className="name-input" placeholder="Mein Klassenzimmer" type={"text"} required={true} minLength={1} name="name" value={neuKlassenZimmer.name}
                                        onChange={handleInputInfo}/>
 
-                                <label className="label">Anzahl der Reihe :</label>
-                                <input className="input" type={"number"} required={true} min={1} max={5} name="anzahlDerReihe" value={neuKlassenZimmer.anzahlDerReihe}
-                                       onChange={handleInputInfo}/>
+                                <label className="label">Reihen:</label>
+                                <select className="input" name="anzahlDerReihe" value={neuKlassenZimmer.anzahlDerReihe} onChange={handleInputInfo}>
+                                    {[1, 2, 3, 4, 5].map((value) => (
+                                        <option key={value} value={value}>
+                                            {value}
+                                        </option>
+                                    ))}
+                                </select>
 
-                                <label className="label">Anzahl der Tische Pro Reihe :</label>
-                                <input className="input" type={"number"} required={true} min={1} max={5} name="anzahlDerTischeProReihe"
-                                       value={neuKlassenZimmer.anzahlDerTischeProReihe} onChange={handleInputInfo}/>
+                                <label className="label">Tische pro Reihe :</label>
+                                <select className="input" name="anzahlDerTischeProReihe" value={neuKlassenZimmer.anzahlDerTischeProReihe} onChange={handleInputInfo}>
+                                    {[1, 2, 3, 4, 5].map((value) => (
+                                        <option key={value} value={value}>
+                                            {value}
+                                        </option>
+                                    ))}
+                                </select>
 
-                                <label className="label">Anzahl der Schüler Pro Tisch :</label>
-                                <input className="input" type={"number"} required={true} min={1} max={3} name="anzahlDerSchuelerProTisch"
-                                       value={neuKlassenZimmer.anzahlDerSchuelerProTisch} onChange={handleInputInfo}/>
+                                <label className="label">Schüler pro Tisch :</label>
+                                <select className="input" name="anzahlDerSchuelerProTisch" value={neuKlassenZimmer.anzahlDerSchuelerProTisch} onChange={handleInputInfo}>
+                                    {[1, 2, 3].map((value) => (
+                                        <option key={value} value={value}>
+                                            {value}
+                                        </option>
+                                    ))}
+                                </select>
 
-                                <button className="form-submit" type={"submit"}> Submit</button>
+                                <button className="form-submit" type={"submit"}>Klassenzimmer anlegen</button>
                             </form>
                         </div>
                     </div>

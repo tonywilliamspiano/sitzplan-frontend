@@ -10,15 +10,33 @@
 .label {
     text-align: center;
     width: 100%;
+    padding-bottom: 1%;
 }
 
 .input {
     text-align: center;
-    width: 70%;
+    width: 20%;
     margin-bottom: 3%;
+    padding-bottom: 1%;
+    padding-top: 1%;
+    background-color: #fffbfb;
+    font-size: 1em;
+}
+
+.name-input {
+    text-align: center;
+    width: 30%;
+    margin-bottom: 3%;
+    padding-bottom: 1%;
+    padding-top: 1%;
+    background-color: #fffbfb;
+    font-size: 1em;
 }
 
 .form-submit {
+    margin-top: 2%;
+    margin-left: 30%;
+    margin-right: 30%;
     width: 30%;
     font-size: 1.5em;
 }
