@@ -14,7 +14,7 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    border-radius: 0.5em;
+    /*border-radius: 0.5em;*/
 }
 
 /* The navigation menu links */
@@ -29,9 +29,15 @@
 
 }
 
+.navItemklassen{
+    margin-top: 2em;
+    padding: 0;
+}
+
 /* Pdf Runterladen*/
 .navItem-bottomBtn{
     padding: 90% 3% 3% 8%;
+    margin-top: 70%;
     text-decoration: none;
     font-size: 1.5em;
     color: #3d3838;
@@ -41,15 +47,16 @@
 }
 
 /* The navigation menu links */
-.sidenav .subItem {
-    padding: 8px 8px 16px 20%;
-    text-decoration: none;
-    font-size: 1.2em;
-    color: #3d3838;
-    display: block;
-    transition: background-color 0.3s, color 0.3s;
-    /*transition: 0.3s;*/
-}
+/* top | right | bottom | left */
+/*.sidenav .subItem {*/
+/*    padding: 8px 8px 16px 20%;*/
+/*    text-decoration: none;*/
+/*    font-size: 1.2em;*/
+/*    color: #3d3838;*/
+/*    display: block;*/
+/*    transition: background-color 0.3s, color 0.3s;*/
+/*    !*transition: 0.3s;*!*/
+/*}*/
 
 .sidenav .flex-grow {
     flex-grow: 1;
@@ -60,9 +67,25 @@
     padding-bottom: 20%;
 }
 
+.sidenav .subItem{
+    padding-left: 40px;
+    padding-bottom: 0.7%;
+    text-decoration: none;
+    font-size: 1.2em;
+    color: #ecf0f1;
+    display: block;
+    transition: background-color 0.3s, color 0.3s;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    position: relative;
+    overflow: hidden;
+}
+
+.sidenav .subItem::before {
+    content: '-  ';
+}
 /* Additional Styles for Navbar Items */
 .sidenav .navItem,
-.sidenav .subItem,
 .sidenav .navItem-bottomBtn {
     padding: 15px;
     text-decoration: none;
@@ -219,6 +242,7 @@
         text-align: center;
         text-decoration: none;
         display: inline-block;
+        float: left;
         border-radius: 4px;
     }
 
