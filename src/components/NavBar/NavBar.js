@@ -124,7 +124,7 @@ export default function Navbar(props) {
                 </div>
 
                 {props.klassenzimmerId > 0 ? (
-                    <div className="navItem" onClick={() => {setKlassenPopup(true)}}>Klassenliste Bearbeiten</div>
+                    <div className="navItem navItemklassen" onClick={() => {setKlassenPopup(true)}}>Klassenliste Bearbeiten</div>
                 ) : (<></>)
                 }
 
@@ -132,7 +132,7 @@ export default function Navbar(props) {
 
                 {props.klassenzimmerId > 0 ? (
                     <>
-                        <div className="navItem"
+                        <div className="navItem navItemklassen"
                              onClick={klassenlisteHochladen}>Klassenliste Hochladen</div>
                         <div className="navItem-bottomBtn" onClick={() => downloadPDF()}>PDF Runterladen</div>
                     </>

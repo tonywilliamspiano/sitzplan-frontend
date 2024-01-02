@@ -150,3 +150,11 @@
     display: block;
   }
 }
+
+@media only screen and (max-width: 1200px) {
+  .Klassenzimmer{
+    width: 90%;
+
+  }
+
+}

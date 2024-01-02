@@ -254,6 +254,7 @@ export function downloadPDF() {
         console.log("Klassenzimmer ist da.")
     }
     const {offsetWidth, offsetHeight} = klassenzimmer;
+
     htmlToImage.toPng(klassenzimmer, {
         width: offsetWidth,
         height: offsetHeight,
