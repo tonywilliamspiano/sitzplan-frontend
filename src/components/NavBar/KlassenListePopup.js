@@ -78,6 +78,16 @@ function KlassenListePopup(props) {
                         <div className="dummy-div"></div>
                         <h2 className="klassenliste-title">Alle Schüler in {props.name}</h2>
                         <div className="klassenliste">
+                            <form className="namen-container neuer-name">
+                                <textarea
+                                    id="nameTextArea"
+                                    name="name"
+                                    value={name}
+                                    placeholder="neuen Namen eingeben..."
+                                    onChange={handleChange}
+                                    onKeyDown={handleKeyDown}
+                                />
+                            </form>
                             {
                                 schuelerListe.map((schueler, index) => (
                                         <div className="namen-container" key={index}>
@@ -92,16 +102,6 @@ function KlassenListePopup(props) {
                                     )
                                 )
                             }
-                            <form className="neuer-name">
-                                <textarea
-                                    id="nameTextArea"
-                                    name="name"
-                                    value={name}
-                                    placeholder="gib den Name ein...."
-                                    onChange={handleChange}
-                                    onKeyDown={handleKeyDown}
-                                />
-                            </form>
                         </div>
 
                     </div>
