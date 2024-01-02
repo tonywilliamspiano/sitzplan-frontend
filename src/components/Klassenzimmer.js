@@ -15,6 +15,7 @@ export const OTHER_SELECTED = 0;
 export const IS_SELECTED = 1;
 
 export default function Klassenzimmer(props) {
+    const apiUrl = process.env.REACT_APP_URL;
 
     let id = props.id;
     const setKlassenzimmerId = props.setKlassenzimmerId;
@@ -66,7 +67,7 @@ export default function Klassenzimmer(props) {
         } else {
             let schuelerDerGetauschtWird = getSchuelerByPosition(selectedPosition)
 
-            await axios.post("http://localhost:8080/sitzplan/tauschen/" + position, schuelerDerGetauschtWird, {
+            await axios.post(apiUrl + "/sitzplan/tauschen/" + position, schuelerDerGetauschtWird, {
                 headers: {
                     "Content-Type": "application/json"
                 }
@@ -107,6 +108,7 @@ export default function Klassenzimmer(props) {
                     TISCHE={klassenzimmer.anzahlDerTischeProReihe}
                     SCHUELER={klassenzimmer.anzahlDerSchuelerProTisch}
                     klassenzimmerId={props.id}
+                    schuelerContent={props.schuelerContent}
                 >
                 </Reihe>
             );
@@ -126,7 +128,7 @@ export default function Klassenzimmer(props) {
                                     <>
                                         <h2 className="klassenzimmer-titel">{klassenzimmer.raumnummer}</h2>
                                         {reihenKomponente}
-                                        <Lehrkraft></Lehrkraft>
+                                        <Lehrkraft lehrerName={klassenzimmer.lehrerName}></Lehrkraft>
                                     </>
                                 ) : (<div className="nicht-vorhanden">
                                     Kein Klassenzimmer ausgewählt
@@ -168,6 +170,7 @@ function Reihe(props) {
                 TISCHE={props.TISCHE}
                 REIHEN={props.REIHEN}
                 klassenzimmerId={props.klassenzimmerId}
+                schuelerContent={props.schuelerContent}
             >
             </Tisch>
         );
@@ -204,6 +207,7 @@ function Tisch(props) {
                       isSelected={props.isSelected}
                       update={props.update}
                       klassenzimmerId={props.klassenzimmerId}
+                      schuelerContent={props.schuelerContent}
             >
             </Schueler>
         );
@@ -216,26 +220,35 @@ function Tisch(props) {
     )
 }
 
-function Lehrer() {
+function Lehrer(props) {
+    let lehrerName = props.lehrerName;
+
+    console.log("lehrer name is: " + props.lehrerName)
+
+    if (lehrerName === null) {
+        lehrerName = "Lehrer"
+    }
     return (
-        <div className="Lehrer">LehrerName</div>
+        <div className="Lehrer">{lehrerName}</div>
     );
 }
 
-function Lehrkraft() {
+function Lehrkraft(props) {
     return (
         <div className="Lehrkraft">
-            <Lehrer></Lehrer>
+            <Lehrer lehrerName={props.lehrerName}></Lehrer>
         </div>
     );
 }
 
 function fetchKlassenzimmer(setKlassenzimmer, setUpdate, id) {
+    const apiUrl = process.env.REACT_APP_URL;
+
     if (id < 0) {
         setKlassenzimmer(null);
         return;
     }
-    axios.get("http://localhost:8080/sitzplan/klassenzimmer/" + id)
+    axios.get(apiUrl + "/sitzplan/klassenzimmer/" + id)
         .then(response => {
             setKlassenzimmer(response.data);
             if (setUpdate !== null) {
@@ -248,11 +261,16 @@ function fetchKlassenzimmer(setKlassenzimmer, setUpdate, id) {
         });
 }
 
-export function downloadPDF() {
+export function downloadPDF(schuelerContent, setSchuelerContent) {
     const klassenzimmer = document.getElementsByClassName('Klassenzimmer')[0];
+
     if (klassenzimmer) {
         console.log("Klassenzimmer ist da.")
     }
+
+    let tmpSchuelerContent = schuelerContent;
+    setSchuelerContent("");
+
     const {offsetWidth, offsetHeight} = klassenzimmer;
 
     htmlToImage.toPng(klassenzimmer, {
@@ -277,6 +295,7 @@ export function downloadPDF() {
             const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
             pdf.addImage(dataUrl, 'PNG', 0, 0);
             pdf.save("download.pdf");
+            setSchuelerContent(tmpSchuelerContent);
         })
         .catch(function (error) {
             console.error("Error in htmlToPng", error);

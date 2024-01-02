@@ -7,6 +7,7 @@ import KlassenListePopup from "./KlassenListePopup";
 import {useKlassenListeContext} from "../KlassenListeContext";
 
 export default function Navbar(props) {
+    const apiUrl = process.env.REACT_APP_URL;
     let setKlassenzimmerId = props.setKlassenzimmerId;
 
     const [klassenzimmerListe, setKlassenzimmerListe] = useState([]);
@@ -16,7 +17,7 @@ export default function Navbar(props) {
     const [showMenu, setShowMenu] = useState(false);
 
     useEffect(() => {
-        axios.get("http://localhost:8080/sitzplan/meinklassenzimmer")
+        axios.get(apiUrl + "/sitzplan/meinklassenzimmer")
             .then(response => {
                 setKlassenzimmerListe(response.data);
             })
@@ -87,7 +88,7 @@ export default function Navbar(props) {
 
             const schuelerListeDTO = {"schuelerListe" : schuelerListe };
             if (props.klassenzimmerId) {
-                axios.post("http://localhost:8080/sitzplan/schueler-liste/" + props.klassenzimmerId, schuelerListeDTO)
+                axios.post(apiUrl + "/sitzplan/schueler-liste/" + props.klassenzimmerId, schuelerListeDTO)
                     .then((response) => {
                         console.log(response)
                         setKlassenListe(klassenListe + 1);
@@ -134,7 +135,7 @@ export default function Navbar(props) {
                     <>
                         <div className="navItem navItemklassen"
                              onClick={klassenlisteHochladen}>Klassenliste Hochladen</div>
-                        <div className="navItem-bottomBtn" onClick={() => downloadPDF()}>PDF Runterladen</div>
+                        <div className="navItem-bottomBtn" onClick={() => downloadPDF(props.schuelerContent, props.setSchuelerContent)}>PDF Runterladen</div>
                     </>
                 ) : (<></>)
                 }

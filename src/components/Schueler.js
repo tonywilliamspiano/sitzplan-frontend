@@ -7,6 +7,8 @@ import {IS_SELECTED, NONE_SELECTED} from "./Klassenzimmer";
 import {useKlassenListeContext} from "./KlassenListeContext";
 
 export default function Schueler(props) {
+    const apiUrl = process.env.REACT_APP_URL;
+
     const {currentStudent, setCurrentStudent} = useCurrentStudent();
     const [kameraView, setKameraView] = useKameraContext();
     const [modal, setModal] = useState(false);
@@ -29,7 +31,7 @@ export default function Schueler(props) {
     const [name, setName] = useState("")
     const nameAuswaehlen = (schueler) => {
 
-        axios.post("http://localhost:8080/sitzplan/positionieren/" + props.position, schueler, {
+        axios.post(apiUrl + "/sitzplan/positionieren/" + props.position, schueler, {
             headers: {
                 "Content-Type": "application/json"
             }
@@ -82,7 +84,7 @@ export default function Schueler(props) {
 
                     {imageLoaded ? (
                         <img
-                            src={"http://localhost:8080/sitzplan/foto/" + schueler.id}
+                            src={apiUrl + "/sitzplan/foto/" + schueler.id}
                             alt="foto vom schueler"
                             onLoad={handleImageLoad}
                             onError={handleImageError}
@@ -108,7 +110,7 @@ export default function Schueler(props) {
                             props.selectPosition(props.position)
                         }
                     }
-                }>+</div>
+                }>{props.schuelerContent}</div>
             )}
             <Modal modal={modal}
                    setModal={setModal}

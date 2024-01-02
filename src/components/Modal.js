@@ -5,6 +5,8 @@ import axios from "axios";
 import {useKlassenListeContext} from "./KlassenListeContext";
 
  function Modal(props) {
+     const apiUrl = process.env.REACT_APP_URL;
+
      const [klassenListeUpdate, setKlassenListeUpdate] = useKlassenListeContext();
 
      let modal = props.modal;
@@ -20,7 +22,7 @@ import {useKlassenListeContext} from "./KlassenListeContext";
          if (props.klassenzimmerId <= 0 || props.klassenzimmerId === undefined) {
              return;
          }
-         axios.get("http://localhost:8080/sitzplan/klassenliste/" + props.klassenzimmerId)
+         axios.get(apiUrl + "/sitzplan/klassenliste/" + props.klassenzimmerId)
              .then(respose=> {
                  setSchuelerListe(respose.data)
              })

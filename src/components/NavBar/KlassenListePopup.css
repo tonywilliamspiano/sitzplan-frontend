@@ -1,17 +1,18 @@
 
-.neuer-name {
-
-    margin: 5%;
-    margin-right: -5%;
-    align-items: center;
-
-}
-
 .namen-container {
     display: flex;
     flex-wrap: wrap;
     width: 80%;
-    border: solid black;
+    border: 1px solid black;
+    margin-bottom: 5px;
+    box-shadow: 0 0 7px #aba8a8;
+    border-radius: 5%;
+}
+
+.neuer-name {
+    margin-bottom: 3%;
+    border: none;
+    border-radius: 20%;
 }
 
 .klassenliste {
@@ -42,9 +43,10 @@
     overflow-y: auto;
 }
 
-.neuer-name {
-    width: 70%;
+#nameTextArea {
+    width: 100%;
     text-align: center;
+    padding: 1%;
 }
 
 .klassenliste-namen {
@@ -57,6 +59,7 @@
 
 .name-loeschen {
     border: none;
+    cursor: pointer;
 }
 
 .loeschen-btn {

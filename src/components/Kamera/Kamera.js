@@ -5,6 +5,8 @@ import './Kamera.css'
 import {useCurrentStudent} from "../CurrentStudentContext";
 
 export default function Kamera(props) {
+    const apiUrl = process.env.REACT_APP_URL
+
     const [img, setImg] = useState(null);
     const webcamRef = useRef(null);
     const { currentStudent, setCurrentStudent } = useCurrentStudent();
@@ -36,7 +38,7 @@ export default function Kamera(props) {
         formData.append('name', currentStudent.name);
 
         try {
-            const response = await axios.post('http://localhost:8080/sitzplan/foto/' + currentStudent.id, formData, {
+            const response = await axios.post(apiUrl + '/sitzplan/foto/' + currentStudent.id, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },

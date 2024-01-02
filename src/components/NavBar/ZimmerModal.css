@@ -32,6 +32,8 @@
 
 /* Submit button style */
 .form-submit {
+    margin-left: 30%;
+    margin-right: 30%;
     width: 30%;
     font-size: 1.5em;
     padding: 10px;
