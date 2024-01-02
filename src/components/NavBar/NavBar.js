@@ -130,7 +130,7 @@ export default function Navbar(props) {
                     <>
                         <div className="navItem"
                              onClick={klassenlisteHochladen}>Klassenliste Hochladen</div>
-                        <div className="navItem-bottomBtn" onClick={() => downloadPDF()}>PDF Runterladen</div>
+                        <div className="navItem-bottomBtn" onClick={() => downloadPDF(props.schuelerContent, props.setSchuelerContent)}>PDF Runterladen</div>
                     </>
                 ) : (<></>)
                 }

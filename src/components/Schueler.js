@@ -108,7 +108,7 @@ export default function Schueler(props) {
                             props.selectPosition(props.position)
                         }
                     }
-                }>+</div>
+                }>{props.schuelerContent}</div>
             )}
             <Modal modal={modal}
                    setModal={setModal}

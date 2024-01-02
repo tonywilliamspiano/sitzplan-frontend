@@ -107,6 +107,7 @@ export default function Klassenzimmer(props) {
                     TISCHE={klassenzimmer.anzahlDerTischeProReihe}
                     SCHUELER={klassenzimmer.anzahlDerSchuelerProTisch}
                     klassenzimmerId={props.id}
+                    schuelerContent={props.schuelerContent}
                 >
                 </Reihe>
             );
@@ -168,6 +169,7 @@ function Reihe(props) {
                 TISCHE={props.TISCHE}
                 REIHEN={props.REIHEN}
                 klassenzimmerId={props.klassenzimmerId}
+                schuelerContent={props.schuelerContent}
             >
             </Tisch>
         );
@@ -204,6 +206,7 @@ function Tisch(props) {
                       isSelected={props.isSelected}
                       update={props.update}
                       klassenzimmerId={props.klassenzimmerId}
+                      schuelerContent={props.schuelerContent}
             >
             </Schueler>
         );
@@ -248,11 +251,16 @@ function fetchKlassenzimmer(setKlassenzimmer, setUpdate, id) {
         });
 }
 
-export function downloadPDF() {
+export function downloadPDF(schuelerContent, setSchuelerContent) {
     const klassenzimmer = document.getElementsByClassName('Klassenzimmer')[0];
+
     if (klassenzimmer) {
         console.log("Klassenzimmer ist da.")
     }
+
+    let tmpSchuelerContent = schuelerContent;
+    setSchuelerContent("");
+
     const {offsetWidth, offsetHeight} = klassenzimmer;
     htmlToImage.toPng(klassenzimmer, {
         width: offsetWidth,
@@ -276,6 +284,7 @@ export function downloadPDF() {
             const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
             pdf.addImage(dataUrl, 'PNG', 0, 0);
             pdf.save("download.pdf");
+            setSchuelerContent(tmpSchuelerContent);
         })
         .catch(function (error) {
             console.error("Error in htmlToPng", error);
