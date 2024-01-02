@@ -128,7 +128,7 @@ export default function Klassenzimmer(props) {
                                     <>
                                         <h2 className="klassenzimmer-titel">{klassenzimmer.raumnummer}</h2>
                                         {reihenKomponente}
-                                        <Lehrkraft></Lehrkraft>
+                                        <Lehrkraft lehrerName={klassenzimmer.lehrerName}></Lehrkraft>
                                     </>
                                 ) : (<div className="nicht-vorhanden">
                                     Kein Klassenzimmer ausgewählt
@@ -220,16 +220,23 @@ function Tisch(props) {
     )
 }
 
-function Lehrer() {
+function Lehrer(props) {
+    let lehrerName = props.lehrerName;
+
+    console.log("lehrer name is: " + props.lehrerName)
+
+    if (lehrerName === null) {
+        lehrerName = "Lehrer"
+    }
     return (
-        <div className="Lehrer">LehrerName</div>
+        <div className="Lehrer">{lehrerName}</div>
     );
 }
 
-function Lehrkraft() {
+function Lehrkraft(props) {
     return (
         <div className="Lehrkraft">
-            <Lehrer></Lehrer>
+            <Lehrer lehrerName={props.lehrerName}></Lehrer>
         </div>
     );
 }

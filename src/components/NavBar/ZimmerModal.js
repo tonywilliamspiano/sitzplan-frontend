@@ -34,14 +34,15 @@ function ZimmerModal(props) {
             name: "",
             anzahlDerReihe: 0,
             anzahlDerTischeProReihe: 0,
-            anzahlDerSchuelerProTisch: 0
+            anzahlDerSchuelerProTisch: 0,
+            lehrerName: ""
         })
     }
 
     function handleInputInfo(event) {
         let {name, value} = event.target;
 
-        if (name !== "name") {
+        if (name !== "name" && name !== "lehrerName") {
             value = parseInt(value, 10);
         }
         setNeuKlassenZimmer(prevState => ({
@@ -93,6 +94,10 @@ function ZimmerModal(props) {
                                         </option>
                                     ))}
                                 </select>
+
+                                <label className="label">Lehrer Name:</label>
+                                <input className="name-input" placeholder="Mein Klassenzimmer" type={"text"} required={true} minLength={1} name="lehrerName" value={neuKlassenZimmer.lehrerName}
+                                       onChange={handleInputInfo}/>
 
                                 <button className="form-submit" type={"submit"}>Klassenzimmer anlegen</button>
                             </form>
