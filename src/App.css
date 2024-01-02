@@ -22,7 +22,6 @@
   page-break-after: always;
   border: 1px solid black;
   justify-content: center;
-  box-sizing: border-box;
 }
 
 .klassenzimmer-titel {
@@ -158,5 +157,4 @@
     height: 63.64vw;
 
   }
-
 }
