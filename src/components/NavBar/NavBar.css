@@ -7,7 +7,7 @@
     top: 0;
     left: 0;
 
-    background-color: blue; /* Black*/
+    background-color: #5f92cb; /* Black*/
     overflow-x: hidden; /* Disable horizontal scroll */
     padding-top: 2%;
     transition: transform 0.5s ease-in-out;

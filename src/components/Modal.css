@@ -10,6 +10,7 @@ body.active-modal {
     right: 0;
     bottom: 0;
     position: fixed;
+    z-index: 5;
 }
 
 .modal-title {
@@ -31,12 +32,13 @@ body.active-modal {
     padding: 0 28px 80px;
     border-radius: 3px;
     max-width: 1000px;
-    min-width: 300px;
+    min-width: 50%;
     max-height: 80vh;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     overflow-y: auto;
+    z-index: 9999;
 }
 
 .close-modal {

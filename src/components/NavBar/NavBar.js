@@ -116,18 +116,12 @@ export default function Navbar(props) {
                         Meine Klassenzimmer
                     </div>
                     {getKlassenZimmer}
-                    <ZimmerModal modal={zimmerHinzufuegen} setModal={setZimmerHinzufuegen}
-                                 setKlassenzimmerId={setKlassenzimmerId}></ZimmerModal>
-                    <KlassenListePopup modal={klassenPopup} setModal={setKlassenPopup}
-                                       klassenzimmerId={props.klassenzimmerId}
-                                       name={getKlassenzimmerName()}></KlassenListePopup>
-
                 </div>
-
                 {props.klassenzimmerId > 0 ? (
                     <div className="navItem navItemklassen" onClick={() => {setKlassenPopup(true)}}>Klassenliste Bearbeiten</div>
                 ) : (<></>)
                 }
+
 
 
 
@@ -141,6 +135,11 @@ export default function Navbar(props) {
                 }
 
             </div>
+            <ZimmerModal modal={zimmerHinzufuegen} setModal={setZimmerHinzufuegen}
+                         setKlassenzimmerId={setKlassenzimmerId}></ZimmerModal>
+            <KlassenListePopup modal={klassenPopup} setModal={setKlassenPopup}
+                               klassenzimmerId={props.klassenzimmerId}
+                               name={getKlassenzimmerName()}></KlassenListePopup>
         </>
     )
 }

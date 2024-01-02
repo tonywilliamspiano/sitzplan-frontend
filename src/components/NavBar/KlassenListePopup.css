@@ -41,6 +41,7 @@
     justify-content: center;
     max-height: 90vh;
     overflow-y: auto;
+    z-index: 9999;
 }
 
 #nameTextArea {
