@@ -25,7 +25,10 @@ export default function Navbar(props) {
     let getKlassenZimmer = (
         <>
             {klassenzimmerListe.map((klassenZimmer) => (
-                <div key={klassenZimmer.id} onClick={() => setKlassenzimmerId(klassenZimmer.id)} className="subItem ">
+                <div key={klassenZimmer.id} onClick={() =>{
+                    setKlassenzimmerId(klassenZimmer.id);
+                    setShowMenu(!showMenu);
+                }} className="subItem ">
                     {klassenZimmer.name}
                 </div>
             ))}
@@ -101,11 +104,11 @@ export default function Navbar(props) {
     return (
         <>
             <div className={"header"}>
-                <button className={"btn-hamburger"} onClick={() => setShowMenu(!showMenu)}></button>
+                <button className={"btn-hamburger"} onClick={() => setShowMenu(!showMenu)}>  {showMenu ? "X" : "☰"} </button>
             </div>
-            <div id="mySidenav" className={`sidenav ${showMenu ? "show" : ""}`}>
+            <div id="mySidenav" className={`sidenav ${showMenu ? "show" : "hide"}`}>
 
-                <div className="navItem" onClick={() => klassenzimmerHinzufuegen()}>Neues Klassenzimmer</div>
+                <div className="navItem" onClick={() => klassenzimmerHinzufuegen()} >Neues Klassenzimmer</div>
                 <div>
                     <div className="navItem" onClick={() => setKlassenzimmerId(-1)}>
                         Meine Klassenzimmer
