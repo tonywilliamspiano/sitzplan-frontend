@@ -1,10 +1,11 @@
 import './NavBar.css';
 import axios from "axios";
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import ZimmerModal from "./ZimmerModal";
 import {downloadPDF} from "../Klassenzimmer";
 import KlassenListePopup from "./KlassenListePopup";
 import {useKlassenListeContext} from "../KlassenListeContext";
+import {upload} from "@testing-library/user-event/dist/upload";
 
 export default function Navbar(props) {
     const apiUrl = process.env.REACT_APP_URL;
@@ -15,10 +16,10 @@ export default function Navbar(props) {
     const [klassenPopup, setKlassenPopup] = useState(false);
     const [klassenListe, setKlassenListe] = useKlassenListeContext();
     const [showMenu, setShowMenu] = useState(false);
-    // const hideMenu = () => {
-    //     setShowMenu(false);
-    //
-    // };
+    const hideMenu = () => {
+        setShowMenu(false);
+
+    };
     useEffect(() => {
         axios.get(apiUrl + "/sitzplan/meinklassenzimmer")
             .then(response => {
@@ -107,10 +108,14 @@ export default function Navbar(props) {
 
     return (
         <>
+
             {/* Hide and show hamburger */}
-            <div className={"header"}>
+            <div className={"header"} >
+
                 <button className={"btn-hamburger"} onClick={() => setShowMenu(!showMenu)}>  {showMenu ? "X" : "☰"} </button>
+                <span > </span>
             </div>
+
             <div id="mySidenav" className={`sidenav ${showMenu ? "show" : "hide"}` } >
 
                 <div className="navItem" onClick={() => klassenzimmerHinzufuegen()} >Neues Klassenzimmer</div>
