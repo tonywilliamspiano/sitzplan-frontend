@@ -10,13 +10,12 @@
 }
 
 .Klassenzimmer {
-
   /*din-a4 proportions*/
   width: 70vw;
   height: 49.49vw;
   margin-right: 5%;
   margin-left: auto;
-  margin-top: 1%;
+  margin-bottom: 1%;
   display: flex;
   flex-wrap: wrap;
   page-break-after: always;
@@ -87,8 +86,6 @@
 }
 
 .schuelerBild {
-
-  margin-top: 0.25vw;
   max-width: 70%;
 }
 
@@ -115,7 +112,7 @@
 }
 
 .Lehrer {
-  border: 3px solid black;
+  border: 0.2vw solid black;
   margin-right: 10%;
   height: 70%;
   width: 20%;
