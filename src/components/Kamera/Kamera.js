@@ -121,7 +121,7 @@ export default function Kamera(props) {
                 </>
             ) : (
                 <>
-                    <img src={img} className="WebcamComponent" alt="screenshot"/>
+                    <img src={img} className="CamView" alt="screenshot"/>
                     <div className="photoButtonContainer">
                         <button onClick={() => setImg(null)} className="retakeButton">
                             Neues Foto
