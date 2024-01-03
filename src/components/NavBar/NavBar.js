@@ -1,10 +1,11 @@
 import './NavBar.css';
 import axios from "axios";
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import ZimmerModal from "./ZimmerModal";
 import {downloadPDF} from "../Klassenzimmer";
 import KlassenListePopup from "./KlassenListePopup";
 import {useKlassenListeContext} from "../KlassenListeContext";
+import {upload} from "@testing-library/user-event/dist/upload";
 
 export default function Navbar(props) {
     const apiUrl = process.env.REACT_APP_URL;
@@ -126,13 +127,18 @@ export default function Navbar(props) {
                         Meine Klassenzimmer
                     </div>
                     {getKlassenZimmer}
+
                 </div>
+
                 {props.klassenzimmerId > 0 ? (
                     <div className="navItem navItemklassen" onClick={() =>{
                         setShowMenu(false);
                         setKlassenPopup(true)}}>Klassenliste Bearbeiten</div>
                 ) : (<></>)
                 }
+
+
+
                 {props.klassenzimmerId > 0 ? (
                     <>
                         <div className="navItem navItemklassen"

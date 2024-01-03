@@ -182,6 +182,11 @@
     .sidenav {
         height: 0;
         width: 0;
+        margin-top: 30px;
+    }
+    .header {
+        background-color: #dedeec;
+        height: 2em;
         z-index: 999;
 
     }
@@ -194,6 +199,9 @@
     .btn-hamburger {
         display: inline;
         float: left;
+        font-size: 1.2em;
+        padding: 0 15px;
+
     }
 
     .sidenav.show {
@@ -273,7 +281,7 @@
     }
 
 
-    .sidenav .navItem {
+    .sidenav .navItem  {
         padding: 8% 3% 3% 8%;
         text-decoration: none;
         font-size: 1.5em;
@@ -287,11 +295,11 @@
 
     }
 
-    .navItem-bottomBtn {
+     .navItem-bottomBtn{
 
         padding: 90% 3% 3% 8%;
         margin-top: 1em;
-        margin-left: 0.65em;
+         margin-left: 0.65em;
         text-decoration: none;
         font-size: 1.5em;
         color: #3d3838;
