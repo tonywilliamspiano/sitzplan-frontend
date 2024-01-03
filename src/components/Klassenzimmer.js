@@ -186,44 +186,15 @@ function Reihe(props) {
 function Tisch(props) {
     const schuelerKomponenten = []
 
-    const [tischStyle, setTischStyle] = useState({
-        width: (90 / props.TISCHE) + ("%"),
-        height: (30 / props.REIHEN) + "vw"
-    })
+    const tischStyle = {
+        width: Math.floor(90 / props.TISCHE) + ("%"),
+        height: Math.floor(30 / props.REIHEN) + "vw"
+    }
 
-    const [schuelerStyle, setSchuelerStyle] = useState({
-        width: (100 / props.SCHUELER) + ("%"),
+    const schuelerStyle = {
+        width: Math.floor(100 / props.SCHUELER) + ("%"),
         height: tischStyle.height
-    })
-
-    // useEffect(() => {
-    //     const handleResize = () => {
-    //         if (window.innerWidth <= 1200) {
-    //             console.log("SETTING tisch style")
-    //             setTischStyle({
-    //                 ...tischStyle,
-    //                 height: (40 / props.REIHEN) + "vw"
-    //             });
-    //         } else {
-    //             setTischStyle({
-    //                 width: (90 / props.TISCHE) + "%",
-    //                 height: (30 / props.REIHEN) + "vw"
-    //             });
-    //         }
-    //         setSchuelerStyle({
-    //             width: (90 / props.TISCHE) + ("%"),
-    //             height: tischStyle.height
-    //         });
-    //     };
-    //
-    //     // Attach the event listener
-    //     window.addEventListener('resize', handleResize);
-    //
-    //     // Cleanup the event listener on component unmount
-    //     return () => {
-    //         window.removeEventListener('resize', handleResize);
-    //     };
-    // }, [props.TISCHE, props.REIHEN, tischStyle]);
+    }
 
     for (let index = 1; index <= props.SCHUELER; index++) {
         schuelerKomponenten.push(
@@ -288,17 +259,21 @@ function fetchKlassenzimmer(setKlassenzimmer, setUpdate, id) {
 }
 
 export function downloadPDF(schuelerContent, setSchuelerContent) {
+
     const klassenzimmer = document.getElementsByClassName('Klassenzimmer')[0];
 
     if (klassenzimmer) {
         console.log("Klassenzimmer ist da.")
-        klassenzimmer.style.display = "flex";
     }
 
     let tmpSchuelerContent = schuelerContent;
     setSchuelerContent("");
 
     const {offsetWidth, offsetHeight} = klassenzimmer;
+
+    console.log(klassenzimmer)
+
+    console.log("Offset width and height are: " + offsetWidth + ", " + offsetHeight)
 
     htmlToImage.toPng(klassenzimmer, {
         width: offsetWidth,
@@ -323,9 +298,6 @@ export function downloadPDF(schuelerContent, setSchuelerContent) {
             pdf.addImage(dataUrl, 'PNG', 0, 0, pdfWidth, pdfHeight);
             pdf.save("download.pdf");
             setSchuelerContent(tmpSchuelerContent);
-            // if (window.innerWidth <= 400) {
-                klassenzimmer.style.display = "";
-            // }
         })
         .catch(function (error) {
             console.error("Error in htmlToPng", error);
