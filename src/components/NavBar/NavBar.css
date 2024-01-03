@@ -165,13 +165,30 @@
 }
 
 
+.overlay2 {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 10;
+    display: none;
+}
+
 /*Anpassung Ipad Air */
 
 @media screen and (max-width: 1180px) {
     .sidenav {
         height: 0;
         width: 0;
+        z-index: 999;
 
+    }
+
+    .overlay2.show {
+        display: block; /* Anzeigen, wenn die Klasse "show" vorhanden ist */
+        width: 100%;
     }
 
     .btn-hamburger {
@@ -256,7 +273,7 @@
     }
 
 
-    .sidenav .navItem  {
+    .sidenav .navItem {
         padding: 8% 3% 3% 8%;
         text-decoration: none;
         font-size: 1.5em;
@@ -270,11 +287,11 @@
 
     }
 
-     .navItem-bottomBtn{
+    .navItem-bottomBtn {
 
         padding: 90% 3% 3% 8%;
         margin-top: 1em;
-         margin-left: 0.65em;
+        margin-left: 0.65em;
         text-decoration: none;
         font-size: 1.5em;
         color: #3d3838;
