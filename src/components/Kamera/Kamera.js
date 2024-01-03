@@ -42,8 +42,6 @@ export default function Kamera(props) {
     const {currentStudent, setCurrentStudent} = useCurrentStudent();
 
     const videoConstraints = {
-        width: 420,
-        height: 420,
         facingMode: {ideal: 'environment'},
     };
 
@@ -104,7 +102,7 @@ export default function Kamera(props) {
         <div className="webcamContainer">
             {img == null ? (
                 <>
-                    <video ref={videoRef} autoPlay playsInline/>
+                    <video className="CamView" ref={videoRef} autoPlay playsInline/>
                     <canvas ref={canvasRef} style={{display: 'none'}}/>
                     <div className="takePhotoButtonContainer">
                         <button onClick={() => {

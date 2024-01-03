@@ -1,11 +1,15 @@
 .webcamContainer{
     background-color: #282828;
-    height: 100vh;
+    height: 80vh;
+    width: 50vh;
+    overflow: hidden;
+    padding: 1vh;
+    border-radius: 5%;
 }
 
-.WebcamComponent {
+.CamView {
     width: 100%;
-    height: 75vh;
+    height: 75%;
     overflow: hidden;
     position: relative;
     object-fit: cover;
@@ -81,4 +85,23 @@
     width: 100px;
     border-radius: 50%;
     font-size: 1.5em;
+}
+
+/* iPad (all models) portrait and landscape */
+@media only screen
+and (min-device-width: 768px)
+and (max-device-width: 1024px)
+and (-webkit-min-device-pixel-ratio: 1) {
+    .webcamContainer {
+        height: 75vh;
+        border-radius: 5%;
+        padding: 1vh 1vh 2vh;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .webcamContainer {
+        height: 90vh;
+        border-radius: 0;
+    }
 }
