@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/sitzplan-frontend/static/css/main.7bfabc9a.css",
-    "main.js": "/sitzplan-frontend/static/js/main.de8466a3.js",
+    "main.js": "/sitzplan-frontend/static/js/main.f3455ff7.js",
     "static/js/498.8c4aa22c.chunk.js": "/sitzplan-frontend/static/js/498.8c4aa22c.chunk.js",
     "static/js/703.bb581ff2.chunk.js": "/sitzplan-frontend/static/js/703.bb581ff2.chunk.js",
     "static/js/379.9a8a960a.chunk.js": "/sitzplan-frontend/static/js/379.9a8a960a.chunk.js",
     "static/js/787.72cd3fab.chunk.js": "/sitzplan-frontend/static/js/787.72cd3fab.chunk.js",
     "index.html": "/sitzplan-frontend/index.html",
     "main.7bfabc9a.css.map": "/sitzplan-frontend/static/css/main.7bfabc9a.css.map",
-    "main.de8466a3.js.map": "/sitzplan-frontend/static/js/main.de8466a3.js.map",
+    "main.f3455ff7.js.map": "/sitzplan-frontend/static/js/main.f3455ff7.js.map",
     "498.8c4aa22c.chunk.js.map": "/sitzplan-frontend/static/js/498.8c4aa22c.chunk.js.map",
     "703.bb581ff2.chunk.js.map": "/sitzplan-frontend/static/js/703.bb581ff2.chunk.js.map",
     "379.9a8a960a.chunk.js.map": "/sitzplan-frontend/static/js/379.9a8a960a.chunk.js.map",
@@ -16,6 +16,6 @@
   },
   "entrypoints": [
     "static/css/main.7bfabc9a.css",
-    "static/js/main.de8466a3.js"
+    "static/js/main.f3455ff7.js"
   ]
 }
