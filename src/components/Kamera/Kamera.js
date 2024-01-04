@@ -7,6 +7,7 @@ import {useCurrentStudent} from "../CurrentStudentContext";
 export default function Kamera(props) {
     const videoRef = useRef(null);
     const canvasRef = useRef(null);
+    const [img, setImg] = useState(null);
 
     useEffect(() => {
         const enableCamera = async () => {
@@ -33,16 +34,16 @@ export default function Kamera(props) {
                 }
             }
         };
-    }, []);
+    }, [img]);
 
     const apiUrl = process.env.REACT_APP_URL
 
-    const [img, setImg] = useState(null);
-    const webcamRef = useRef(null);
     const {currentStudent, setCurrentStudent} = useCurrentStudent();
 
     const videoConstraints = {
         facingMode: {ideal: 'environment'},
+        height: 300,
+        width: 300
     };
 
     const fotoMachen = useCallback(() => {
@@ -54,12 +55,9 @@ export default function Kamera(props) {
             canvas.width = video.videoWidth;
             canvas.height = video.videoHeight;
 
-            // Draw the current video frame onto the canvas
             const ctx = canvas.getContext('2d');
             ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
 
-            // Convert the canvas content to an image data URL
-            console.log("foto machen!")
 
             const imageDataUrl = canvas.toDataURL('image/png');
             setImg(imageDataUrl);
@@ -67,6 +65,7 @@ export default function Kamera(props) {
     }, [videoRef]);
 
     const fotoSpeichern = async () => {
+
         // Convert the base64 image data to a Blob
         const byteCharacters = atob(img.split(',')[1]);
         const byteNumbers = new Array(byteCharacters.length);
@@ -133,14 +132,6 @@ export default function Kamera(props) {
                 </>
             )
             }
-
-            {/*{img == null && (*/}
-            {/*    <div className="defaultPhotoContainer">*/}
-            {/*        <img  src={process.env.PUBLIC_URL + '/defaultfoto.png'} alt="default" />*/}
-
-            {/*       */}
-            {/*    </div>*/}
-            {/*)}*/}
         </div>
     );
 }

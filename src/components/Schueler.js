@@ -59,7 +59,7 @@ export default function Schueler(props) {
             const height = parseFloat(styles.height);
 
             if (width > (height * 2)) {
-                schuelerBildStyle.width = "35%";
+                schuelerBildStyle.width = "30%";
                 schuelerNameStyle.width = "50%"
             } else if (width > height * 1.5) {
                 schuelerBildStyle.width = "50%";
