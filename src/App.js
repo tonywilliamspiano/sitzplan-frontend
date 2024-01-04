@@ -3,6 +3,7 @@ import Klassenzimmer from "./components/Klassenzimmer";
 import {CurrentStudentProvider} from "./components/CurrentStudentContext";
 import {KameraViewProvider, useKameraContext} from "./components/Kamera/KameraViewContext";
 import NavBar from "./components/NavBar/NavBar"
+import Login from "./components/NavBar/Login"
 import {useState} from "react";
 import {KlassenListeProvider} from "./components/KlassenListeContext";
 
