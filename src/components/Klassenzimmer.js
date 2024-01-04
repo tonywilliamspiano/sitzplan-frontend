@@ -263,17 +263,13 @@ export function downloadPDF(schuelerContent, setSchuelerContent) {
     const klassenzimmer = document.getElementsByClassName('Klassenzimmer')[0];
 
     if (klassenzimmer) {
-        console.log("Klassenzimmer ist da.")
+        klassenzimmer.style.display = "flex";
     }
 
     let tmpSchuelerContent = schuelerContent;
     setSchuelerContent("");
 
     const {offsetWidth, offsetHeight} = klassenzimmer;
-
-    console.log(klassenzimmer)
-
-    console.log("Offset width and height are: " + offsetWidth + ", " + offsetHeight)
 
     htmlToImage.toPng(klassenzimmer, {
         width: offsetWidth,
@@ -298,6 +294,7 @@ export function downloadPDF(schuelerContent, setSchuelerContent) {
             pdf.addImage(dataUrl, 'PNG', 0, 0, pdfWidth, pdfHeight);
             pdf.save("download.pdf");
             setSchuelerContent(tmpSchuelerContent);
+            klassenzimmer.style.display = "";
         })
         .catch(function (error) {
             console.error("Error in htmlToPng", error);
