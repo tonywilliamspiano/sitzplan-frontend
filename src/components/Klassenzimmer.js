@@ -188,12 +188,12 @@ function Tisch(props) {
 
     const tischStyle = {
         width: Math.floor(90 / props.TISCHE) + ("%"),
-        height: Math.floor(30 / props.REIHEN) + "vw"
+        height: Math.floor(35 / props.REIHEN) + "vw"
     }
 
     const schuelerStyle = {
         width: Math.floor(100 / props.SCHUELER) + ("%"),
-        height: tischStyle.height
+        height: "inherit"
     }
 
     for (let index = 1; index <= props.SCHUELER; index++) {

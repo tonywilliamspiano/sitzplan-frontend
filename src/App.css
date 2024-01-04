@@ -1,3 +1,7 @@
+body {
+  background-color: #d8dae0;
+}
+
 .App {
   text-align: center;
   display: flex;
@@ -21,6 +25,8 @@
   page-break-after: always;
   border: 1px solid black;
   justify-content: center;
+  background-color: white;
+  box-shadow: 0 0 2vw whitesmoke;
 }
 
 .klassenzimmer-titel {
@@ -28,8 +34,10 @@
   border: 0.2vw solid darkgray;
   box-shadow: 0 0 1vw darkgray;
   border-radius: 5%;
-  padding: 1%;
+  padding: 0.5%;
   font-size: 2vw;
+  margin-bottom: 1%;
+  margin-top: 1.5%;
 }
 
 .nicht-vorhanden {
