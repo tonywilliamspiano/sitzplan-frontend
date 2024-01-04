@@ -1,9 +1,10 @@
 import React, {useEffect, useState} from "react";
 import axios from "axios";
 
-export default function Login() {
+export default function Login(props) {
     const [benutzername, setBenutzername] = useState();
     const [passwort, setPasswort] = useState();
+    const setIsLoggedIn = props.setIsLoggedIn;
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -14,6 +15,7 @@ export default function Login() {
         axios.post("http://localhost:8080/sitzplan/login", credentials)
             .then((response) => {
                 console.log(response)
+                setIsLoggedIn(true);
             })
     };
 
